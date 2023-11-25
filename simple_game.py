@@ -5,6 +5,10 @@ A01362031
 import random
 
 
+def opening_sequence():
+    pass
+
+
 def scenario_descriptions():
     """
     Produce a list of predefined scenario descriptions for the game board
@@ -21,7 +25,7 @@ def scenario_descriptions():
         "The Lost USB Mines",
         "The Classroom of Endless Lectures",
         "The Firewall Fortress",
-        "The Recursive Room"
+        "The Recursive Room",
     ]
 
 
@@ -86,11 +90,15 @@ def get_user_choice():
     :postcondition: print a prompt to ask for user input, no data is modified
     :return: an integer representing the user's inputted direction
     """
-    user_direction = input("Where would you like to go? "
-                           "Enter either 1 for north, 2 for south, 3: east or 4: west: ")
+    user_direction = input(
+        "Where would you like to go? "
+        "Enter either 1 for north, 2 for south, 3: east or 4: west: "
+    )
 
     while not (user_direction.isdigit() and int(user_direction) in range(1, 5)):
-        print("Invalid entry, please enter either 1 for north, 2 for south, 3: east or 4: west: ")
+        print(
+            "Invalid entry, please enter either 1 for north, 2 for south, 3: east or 4: west: "
+        )
         user_direction = input()
 
     return int(user_direction)
@@ -191,14 +199,18 @@ def guessing_game(character):
     guess = input(f"Enter a number between {lower} and {upper} inclusive: ")
 
     while not (guess.isdigit() and int(guess) in range(1, 6)):
-        print(f"Invalid entry, please enter a number between {lower} and {upper} inclusive: ")
+        print(
+            f"Invalid entry, please enter a number between {lower} and {upper} inclusive: "
+        )
         guess = input()
 
     if int(guess) == secret_number:
         print("You're right! You can go on with your adventure unscathed!")
     else:
         character["Current HP"] -= 1
-        print(f"Wrong number! The number was {secret_number} but you entered {guess}, you just lost 1 HP")
+        print(
+            f"Wrong number! The number was {secret_number} but you entered {guess}, you just lost 1 HP"
+        )
 
 
 def check_if_goal_attained(rows, columns, character):
@@ -218,7 +230,10 @@ def check_if_goal_attained(rows, columns, character):
     >>> check_if_goal_attained(4, 4, {"X-coordinate": 1, "Y-coordinate": 2, "Current HP": 1})
     False
     """
-    if character["X-coordinate"] == rows - 1 and character["Y-coordinate"] == columns - 1:
+    if (
+        character["X-coordinate"] == rows - 1
+        and character["Y-coordinate"] == columns - 1
+    ):
         return True
 
     return False
@@ -249,8 +264,9 @@ def game():
 
     :return: None
     """
-    rows = 3
-    columns = 3
+    opening_sequence()
+    rows = 5
+    columns = 5
     board = make_board(rows, columns)
     character = make_character()
     achieved_goal = False
@@ -278,5 +294,5 @@ def main():
     game()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
