@@ -6,6 +6,39 @@ CONTENT_START_FLAG = "---"
 OPTION_FLAG = "-> "
 
 
+def calculate_word_count(text):
+    stripped_text = text.strip().lower()
+    words_in_text = stripped_text.split(" ")
+
+    return len(words_in_text)
+
+
+def calculate_delay_duration_in_seconds(text):
+    # TODO: calculate base on average reading speed (238 words per minute)
+    WORD_PER_SECOND = 5
+    word_count = calculate_word_count(text)
+    # print(word_count)
+    pause_duration = word_count / WORD_PER_SECOND
+    # print(pause_duration)
+    return pause_duration
+
+
+# only use when it's describing the scene
+def print_with_typewritter_effect(text):
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        if character == "," or character == ".":
+            sleep(1)
+        sleep(0.01)
+
+
+def print_with_delay(text):
+    print_with_typewritter_effect(text)
+    delay_duration = calculate_delay_duration_in_seconds(text)
+    sleep(delay_duration)
+
+
 def prompt_user_options(options, type):
     # options object
 
@@ -101,40 +134,14 @@ def parse_yarn_file(file_path):
 
 
 def render_dialogues(parsed_yarn_dict):
+    # for element in lisst
+    # if strings -> print
+    # if list -> call helper render_options
     pass
 
 
-def calculate_word_count(text):
-    stripped_text = text.strip().lower()
-    words_in_text = stripped_text.split(" ")
-
-    return len(words_in_text)
-
-
-def calculate_delay_duration_in_seconds(text):
-    # TODO: calculate base on average reading speed (238 words per minute)
-    WORD_PER_SECOND = 5
-    word_count = calculate_word_count(text)
-    # print(word_count)
-    pause_duration = word_count / WORD_PER_SECOND
-    # print(pause_duration)
-    return pause_duration
-
-
-# only use when it's describing the scene
-def print_with_typewritter_effect(text):
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        if character == "," or character == ".":
-            sleep(1)
-        sleep(0.01)
-
-
-def print_with_delay(text):
-    print_with_typewritter_effect(text)
-    delay_duration = calculate_delay_duration_in_seconds(text)
-    sleep(delay_duration)
+def render_options(options_list):
+    pass
 
 
 def print_text_file(file_path):
