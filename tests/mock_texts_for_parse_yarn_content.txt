@@ -9,3 +9,21 @@ Your eyes flutter open, met by an eerie, dim light that seems to emanate from no
 -> $Get up and explore
     As your eyes adjust to the dim light, you notice the architecture around you. 
 
+  
+line_list = [
+    "-> Take a deep breath",
+    "    The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries.",
+]
+line_list2 = [
+    "-> Take a deep breath",
+    "    The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries.",
+    "-> Sit up and stretch",
+    "    You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages.",
+]
+line_list3 = [
+    "-> Take a deep breath",
+    "    The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries.",
+    "-> Sit up and stretch",
+    "    You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages.",
+    "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye. ",
+]

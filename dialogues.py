@@ -35,12 +35,9 @@ def get_yarn_properties(property_line_list):
 
 def parse_yarn_content(content_line_list):
     parsed_dialogues = []
-    # for line in lines:
-    # store each top level line directly in list
-    # when see "->", start a while loop, and store lines that have root tab level + 1 extra tab level into an dictionary
-
     options_list = []  # list of options
     options_content = {}
+
     for line in content_line_list:
         if line == "\n":
             continue
@@ -49,13 +46,15 @@ def parse_yarn_content(content_line_list):
         if OPTION_FLAG in line:
             # clear previous options_content dictionary
             if options_content:
+                print("options_content is not empty!!")
                 options_list.append(options_content)
                 options_content = {}
             # initialize option dictionary
             options_content["option"] = line.replace(OPTION_FLAG, "")
             continue
 
-        if line.startswith("\t"):
+        if line.startswith((" ", "\t")):
+            line = line.strip()
             if "content" in options_content:
                 options_content["content"].append(line)
             else:
@@ -63,15 +62,23 @@ def parse_yarn_content(content_line_list):
 
             continue
 
-        if options_list:
+        # on new normal line, check if options related values are stored, if not, store it
+        if options_content:
+            options_list.append(options_content)
+            options_content = {}
             parsed_dialogues.append(options_list)
+            options_list = []
 
         parsed_dialogues.append(line)
 
-    # how to scope a line of texts
-    # get current tab level
-    # while tab level is same
-    # same scope!
+    # after exhausting list, check if options related values are stored, if not, store it
+    if options_content:
+        options_list.append(options_content)
+        options_content = {}
+        parsed_dialogues.append(options_list)
+        options_list = []
+
+    return parsed_dialogues
 
 
 def parse_yarn_file(file_path):
