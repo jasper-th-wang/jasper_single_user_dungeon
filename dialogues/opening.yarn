@@ -1,0 +1,82 @@
+title: Start
+option_type: elimination
+---
+You slowly come to, a chilling sense of unease creeping over you. 
+
+Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. 
+
+-> Take a deep breath
+    The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries.
+-> Sit up and stretch
+    You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages.
+-> $Get up and explore
+    As your eyes adjust to the dim light, you notice the architecture around you. 
+
+Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye. 
+
+Statues loom in the shadows, their features blurred, but their presence feels oppressive, as if they are watching you.
+
+As you stand there, trying to make sense of your surroundings, you realize with a jolt that your memories are missing. 
+
+It's like grasping at smoke; the more you try to remember, the more everything slips away. There's nothing — no name, no past, no hint of who you are or how you got here.
+
+*You suddenly feel a tap on your shoulder*
+
+*Mysterious Person*: "Sorry to startle you..." 
+
+*Mysterious Person*: "It's not often we get newcomers who are so... contemplative"
+
+-> Run away
+    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.
+    Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.
+    "Running won't change your situation," he says, his voice still calm and soothing, a stark contrast to your panting breaths. "But it's understandable. This place can be... overwhelming for newcomers."
+-> $Ask who he is
+    "Who are you?" you ask, your voice tinged with a mix of curiosity and caution.
+
+"I'm Thanatos," he introduces himself with a slight bow. "Some call me the guide of souls, others, the harbinger of death. But please, don't let the titles scare you. I'm really not as ominous as they make me out to be."
+
+$"Guide of souls? Does that mean I'm..."
+
+Thanatos nods sympathetically.
+
+Thanatos: "Yes, I'm afraid you're no longer among the living. This is the underworld, the realm of those who have passed on."
+
+-> $Question Thanatos
+    "I don't remember dying. I don't remember anything," you confess, the words tumbling out in a rush.
+
+"That's not uncommon," Thanatos says with a thoughtful nod. "Memory can be a tricky thing in this realm. Sometimes it takes a while for the fog to lift, for the past to come back to you."
+
+The absence of memory feels like a gaping hole in your very being, a void where your identity should be.
+
+But amidst this void, there's a flicker of something indefinable — a connection to someone, a tether to a life you can no longer remember. 
+
+It's more than just a memory; it's a beacon of warmth in the cold expanse of the Underworld, a glimmer of something deeply human that refuses to be extinguished.
+
+-> Ignore this feeling
+    You try to ignore this fragment of recollection.
+    It is impossible.
+    This memory, vague as it is, represents more than a person; it represents a part of you that's lost, a key to understanding who you were, and perhaps, who you are meant to be.
+-> Confess to Thanatos
+    $"There's someone I need to remember," you say, the urgency clear in your voice.
+     Thanatos's expression remains impassive, almost stoic. "I understand your pain," he begins, his voice steady and unyielding, "but you must understand, the rules of the Underworld are not mine to break. Every soul must follow its destined path, and interference can have unforeseen consequences."
+-> $Plead to Thanatos
+    $"I have to remember. It's like there's a part of me missing, a piece of my soul."
+    Tears brim in your eyes as you speak.
+    $"This person, they mean everything to me, even though I can't remember who they are. They're my anchor, my only connection to who I was." 
+
+Thanatos watches you, his expression softening. For a moment, he seems more human, touched by the depth of your anguish. "Your words, they resonate with a truth that cannot be ignored,"
+
+Thanatos regards you with a look that suggests he's weighing his options, a hint of conflict playing across his otherwise composed features. "Officially," he begins, his voice taking on a conspiratorial tone, "I'm not supposed to let souls wander unguided in the Underworld. There are rules, after all."
+
+"I can't directly help you in your quest for memories," Thanatos admits, "but I can give you a nudge in the right direction."
+
+"Head towards the Asphodel Meadows."
+
+"It's a place where many souls linger, especially those with unfinished business or lingering attachments to the mortal world. If there's a key to unlocking your memories, you might find a hint of it there."
+
+Your heart quickens at the prospect. "Thank you," you say, grateful for even this small act of rebellion on your behalf.
+
+Thanatos smiles, a rare and fleeting thing that softens his daunting appearance. "Be cautious," he warns. "The Underworld is vast and not all its denizens are as accommodating as I am. Keep your wits about you."
+
+With those parting words, Thanatos steps back, fading into the shadows from whence he came, leaving you alone with this newfound direction.
+===

@@ -1,0 +1,11 @@
+You slowly come to, a chilling sense of unease creeping over you. 
+
+Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. 
+
+-> Take a deep breath
+    The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries.
+-> Sit up and stretch
+    You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages.
+-> $Get up and explore
+    As your eyes adjust to the dim light, you notice the architecture around you. 
+
