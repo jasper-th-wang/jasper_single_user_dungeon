@@ -253,8 +253,7 @@ def print_text_file(file_path):
         print("No dialogue text file is found")
     print("test!")
 
-
-def test():
+    # def test():
     mock_list2 = [
         "-> Run away",
         "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",

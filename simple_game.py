@@ -8,8 +8,12 @@ import random
 # TODO: modify character docstrings in different functions according to new stats schemes
 from pprint import pprint
 
+# import dialogues as
+
 
 def opening_sequence():
+    # test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
+    # render_dialogues(test_dialogues)
     pass
 
 
@@ -49,6 +53,8 @@ def render_ascii_map(board, character_coordinates):
         for x in range(max_x_coordinate + 1):
             if x == 0:
                 print("|", end="")
+            else:
+                print(" ", end="")
             grid_symbol = " "
             if (x, y) == character_coordinates:
                 grid_symbol = "@"
@@ -57,7 +63,7 @@ def render_ascii_map(board, character_coordinates):
             # Truncate or pad room name to fit in the cell
             # display_name = (grid_symbol[:15] + '..') if len(grid_symbol) > 15 else grid_symbol.ljust(17)
             print(f" {grid_symbol} ", end="")
-        print(" |")  # Right border of the last cell
+        print("|")  # Right border of the last cell
     print(horizontal_border)  # Bottom border of the last row
 
 
@@ -409,7 +415,7 @@ def test():
         (1, 1): "The Library of Obsolete Languages",
         (1, 2): "The Cafeteria of Constant Cravings",
     }
-    render_ascii_map(test_board2, (1, 2))
+    render_ascii_map(test_board2, (3, 2))
 
 
 test()
