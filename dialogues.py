@@ -4,6 +4,17 @@ from time import sleep
 
 CONTENT_START_FLAG = "---"
 OPTION_FLAG = "-> "
+COMMAND_LINE_COLOR = {
+    "HEADER": "\033[95m",
+    "NPC": "\033[94m",
+    "OKCYAN": "\033[96m",
+    "PLAYER": "\033[92m",
+    "YELLO": "\033[93m",
+    "ENEMY": "\033[91m",
+    "NORMAL": "\033[0m",
+    "BOLD": "\033[1m",
+    "UNDERLINE": "\033[4m",
+}
 
 
 def calculate_word_count(text):
@@ -15,7 +26,7 @@ def calculate_word_count(text):
 
 def calculate_delay_duration_in_seconds(text):
     # TODO: calculate base on average reading speed (238 words per minute)
-    WORD_PER_SECOND = 10
+    WORD_PER_SECOND = 15
     word_count = calculate_word_count(text)
     # print(word_count)
     pause_duration = word_count / WORD_PER_SECOND
@@ -29,12 +40,28 @@ def print_with_typewritter_effect(text):
         sys.stdout.write(character)
         sys.stdout.flush()
         if character == "," or character == ".":
-            sleep(0.3)
+            sleep(0.15)
         sleep(0.01)
     print("\n")
 
 
-def print_with_delay(text):
+def process_text_color(text):
+    # apply color, and remove color determining prefix
+    color_type = "NORMAL"
+
+    if text.startswith("$"):
+        color_type = "PLAYER"
+    elif text.startswith("@"):
+        color_type = "NPC"
+
+    if color_type != "NORMAL":
+        text = text[1:]
+
+    return f"{COMMAND_LINE_COLOR[color_type]}{text}{COMMAND_LINE_COLOR['NORMAL']}"
+
+
+def print_dialogue_line(text):
+    text = process_text_color(text)
     print_with_typewritter_effect(text)
     delay_duration = calculate_delay_duration_in_seconds(text)
     sleep(delay_duration)
@@ -68,7 +95,6 @@ def parse_yarn_content(content_line_list):
         if OPTION_FLAG in line:
             # clear previous options_content dictionary
             if options_content:
-                print("options_content is not empty!!")
                 options_list.append(options_content)
                 options_content = {}
             # initialize option dictionary
@@ -143,7 +169,7 @@ def render_dialogues(parsed_dialogues_dictionary):
     # if list -> call helper prompt_user_options
     for item in parsed_dialogues_list:
         if isinstance(item, str):
-            print_with_delay(item)
+            print_dialogue_line(item)
             continue
         if isinstance(item, list):
             prompt_user_options(item, dialogues_properties["option_type"])
@@ -247,7 +273,7 @@ def prompt_user_options(options_list, type):
 
         # user prompt loop begin
         while not terminating_option_chosen:
-            pprint(options_list)
+            # pprint(options_list)
             # print("terminating index: " + str(terminating_option_index))
             render_options(options_list)
             try:
@@ -261,6 +287,7 @@ def prompt_user_options(options_list, type):
             if chosen_option["terminating"]:
                 terminating_option_chosen = True
 
+            print("\n")
             render_dialogues(
                 {
                     "dialogues": options_list[user_input - 1]["dialogues"],
@@ -283,7 +310,7 @@ def print_text_file(file_path):
     try:
         with open(file_path, "r") as input_file:
             texts = input_file.readlines()
-            print_with_delay(texts)
+            print_dialogue_line(texts)
 
     except OSError:
         print("No dialogue text file is found")
