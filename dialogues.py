@@ -15,7 +15,7 @@ def calculate_word_count(text):
 
 def calculate_delay_duration_in_seconds(text):
     # TODO: calculate base on average reading speed (238 words per minute)
-    WORD_PER_SECOND = 5
+    WORD_PER_SECOND = 10
     word_count = calculate_word_count(text)
     # print(word_count)
     pause_duration = word_count / WORD_PER_SECOND
@@ -29,7 +29,7 @@ def print_with_typewritter_effect(text):
         sys.stdout.write(character)
         sys.stdout.flush()
         if character == "," or character == ".":
-            sleep(1)
+            sleep(0.3)
         sleep(0.01)
     print("\n")
 
@@ -77,7 +77,7 @@ def parse_yarn_content(content_line_list):
 
         if line.startswith((" ", "\t")):
             line = line.strip()
-            if "content" in options_content:
+            if "dialogues" in options_content:
                 options_content["dialogues"].append(line)
             else:
                 options_content["dialogues"] = [line]
@@ -101,6 +101,18 @@ def parse_yarn_content(content_line_list):
         options_list = []
 
     return parsed_dialogues
+
+
+mock_list2 = [
+    "-> Run away",
+    "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
+    "    Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
+    "    'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
+    "-> $Ask who he is",
+    "    'Who are you?' you ask, your voice tinged with a mix of curiosity and caution.",
+]
+
+# pprint(parse_yarn_content(mock_list2))
 
 
 def parse_yarn_file(file_path):
@@ -215,23 +227,28 @@ def get_users_choice(number_of_choices):
 
 def prompt_user_options(options_list, type):
     # options object
-
+    # WARNING: change index to number, index keeps changing as options are popped
     if type == "elimination":
         # find terminating option's index
-        terminating_option_index = 0
+        # terminating_option_index = 0
 
         for option in options_list:
             # remove the $ mark
+            option["terminating"] = False
+
             if option["option"].startswith("$"):
                 option["option"] = option["option"][1:]
+                option["terminating"] = True
                 break
 
-            terminating_option_index += 1
+            # terminating_option_index += 1
 
         terminating_option_chosen = False
 
         # user prompt loop begin
         while not terminating_option_chosen:
+            pprint(options_list)
+            # print("terminating index: " + str(terminating_option_index))
             render_options(options_list)
             try:
                 user_input = get_users_choice(len(options_list))
@@ -239,13 +256,17 @@ def prompt_user_options(options_list, type):
                 print(f"You must enter a number between 1 and {len(options_list)}")
                 continue
 
-            if user_input - 1 == terminating_option_index:
+            chosen_option = options_list[user_input - 1]
+
+            if chosen_option["terminating"]:
                 terminating_option_chosen = True
 
             render_dialogues(
                 {
                     "dialogues": options_list[user_input - 1]["dialogues"],
-                    "properties": None,
+                    "properties": {
+                        "title": "option",
+                    },
                 }
             )
             options_list.pop(user_input - 1)
@@ -256,7 +277,6 @@ def prompt_user_options(options_list, type):
     # TODO:
     # if regular / argument is last remaining_option type:
     # return user choice
-    pass
 
 
 def print_text_file(file_path):
@@ -268,3 +288,7 @@ def print_text_file(file_path):
     except OSError:
         print("No dialogue text file is found")
     print("test!")
+
+
+test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
+render_dialogues(test_dialogues)

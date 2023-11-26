@@ -126,3 +126,33 @@ class TestParseYarnContent(TestCase):
         ]
         actual = parse_yarn_content(line_list)
         self.assertEqual(expected, actual)
+
+    def test_options_with_multiple_lines(self):
+        line_list = [
+            "-> Run away",
+            "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
+            "    Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
+            "    'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
+            "-> $Ask who he is",
+            "    'Who are you?' you ask, your voice tinged with a mix of curiosity and caution.",
+        ]
+        expected = [
+            [
+                {
+                    "option": "Run away",
+                    "dialogues": [
+                        "Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
+                        "Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
+                        "'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
+                    ],
+                },
+                {
+                    "option": "$Ask who he is",
+                    "dialogues": [
+                        "'Who are you?' you ask, your voice tinged with a mix of curiosity and caution."
+                    ],
+                },
+            ]
+        ]
+        actual = parse_yarn_content(line_list)
+        self.assertEqual(expected, actual)
