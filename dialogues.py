@@ -1,11 +1,12 @@
 import sys
+from pprint import pprint
 from time import sleep
 
 CONTENT_START_FLAG = "---"
 OPTION_FLAG = "-> "
 
 
-def prompt_user_options(options):
+def prompt_user_options(options, type):
     # options object
 
     # if elimination type / there are nested options object:
@@ -19,14 +20,12 @@ def prompt_user_options(options):
 def get_yarn_properties(property_line_list):
     dialogues_properties = {}
 
-    # Get Properties
-    index_of_content_start = 0
-
     for line in property_line_list:
         line = line.strip()
+
         if line == CONTENT_START_FLAG:
             break
-        index_of_content_start += 1
+
         property = line.split(": ")
         dialogues_properties[property[0]] = property[1]
 
@@ -82,27 +81,24 @@ def parse_yarn_content(content_line_list):
 
 
 def parse_yarn_file(file_path):
-    CONTENT_START_FLAG = "---"
     with open(file_path, "r") as dialogues:
         lines = dialogues.readlines()
-        # print(lines)
+
         dialogues_properties = get_yarn_properties(lines)
+        index_of_content_start = lines.index(CONTENT_START_FLAG + "\n")
 
-        # print(dialogues_properties)
+        dialogues_content = lines[index_of_content_start + 1 : -1]
+        parsed_dialogues = parse_yarn_content(dialogues_content)
 
-        # WARNING: index is undefined NEEDS to be fixed
-        # dialogues_content = lines[index_of_content_start + 1 : -1]
-        # parsed_dialogues = parse_yarn_content(dialogues_content)
-        # print(dialogues_content)
-
-
-# parse_yarn_file("./dialogues/opening.yarn")
+        return {
+            property: dialogues_properties,
+            dialogues: parsed_dialogues,
+        }
 
 
 def calculate_word_count(text):
     stripped_text = text.strip().lower()
     words_in_text = stripped_text.split(" ")
-    # print(words_in_text)
 
     return len(words_in_text)
 
