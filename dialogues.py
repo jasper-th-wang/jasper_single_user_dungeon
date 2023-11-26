@@ -81,9 +81,13 @@ def parse_yarn_content(content_line_list):
 
 
 def parse_yarn_file(file_path):
-    with open(file_path, "r") as dialogues:
-        lines = dialogues.readlines()
+    try:
+        with open(file_path, "r") as dialogues:
+            lines = dialogues.readlines()
 
+    except OSError:
+        print("No dialogue text file is found")
+    else:
         dialogues_properties = get_yarn_properties(lines)
         index_of_content_start = lines.index(CONTENT_START_FLAG + "\n")
 
@@ -94,6 +98,10 @@ def parse_yarn_file(file_path):
             property: dialogues_properties,
             dialogues: parsed_dialogues,
         }
+
+
+def render_dialogues(parsed_yarn_dict):
+    pass
 
 
 def calculate_word_count(text):
@@ -123,11 +131,10 @@ def print_with_typewritter_effect(text):
         sleep(0.01)
 
 
-def print_with_delay(text_list):
-    for text in text_list:
-        print_with_typewritter_effect(text)
-        delay_duration = calculate_delay_duration_in_seconds(text)
-        sleep(delay_duration)
+def print_with_delay(text):
+    print_with_typewritter_effect(text)
+    delay_duration = calculate_delay_duration_in_seconds(text)
+    sleep(delay_duration)
 
 
 def print_text_file(file_path):
@@ -139,6 +146,3 @@ def print_text_file(file_path):
     except OSError:
         print("No dialogue text file is found")
     print("test!")
-
-
-# print_text_file("test.txt")
