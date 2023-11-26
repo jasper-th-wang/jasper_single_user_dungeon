@@ -27,3 +27,11 @@ line_list3 = [
     "    You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages.",
     "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye. ",
 ]
+mock_yarn_dict = {
+    "properties": {"title": "start", "option_type": "elimination"},
+    "dialogues": [
+        "You slowly come to, a chilling sense of unease creeping over you. ",
+        "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. ",
+    ],
+}
+render_dialogues(mock_yarn_dict)

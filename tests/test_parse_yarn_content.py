@@ -29,7 +29,7 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "content": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
@@ -50,13 +50,13 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "content": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "Sit up and stretch",
-                    "content": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -78,13 +78,13 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "content": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "Sit up and stretch",
-                    "content": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -111,16 +111,18 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "content": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "Sit up and stretch",
-                    "content": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
             ],
             "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
         ]
+        actual = parse_yarn_content(line_list)
+        self.assertEqual(expected, actual)
