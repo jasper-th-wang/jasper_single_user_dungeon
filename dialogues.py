@@ -129,18 +129,6 @@ def parse_yarn_content(content_line_list):
     return parsed_dialogues
 
 
-mock_list2 = [
-    "-> Run away",
-    "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
-    "    Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
-    "    'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
-    "-> $Ask who he is",
-    "    'Who are you?' you ask, your voice tinged with a mix of curiosity and caution.",
-]
-
-# pprint(parse_yarn_content(mock_list2))
-
-
 def parse_yarn_file(file_path):
     try:
         with open(file_path, "r") as dialogues:
@@ -176,16 +164,6 @@ def render_dialogues(parsed_dialogues_dictionary):
             continue
 
 
-mock_yarn_dict = {
-    "properties": {"title": "start", "option_type": "elimination"},
-    "dialogues": [
-        "You slowly come to, a chilling sense of unease creeping over you. ",
-        "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. ",
-    ],
-}
-# render_dialogues(mock_yarn_dict)
-
-
 def render_options(options_list):
     # NOTE: for display options as multiple choice by print
     option_number = 1
@@ -193,47 +171,6 @@ def render_options(options_list):
     for option in options_list:
         print(f"{ option_number }: {option['option']}")
         option_number += 1
-
-
-mock_choices = [
-    {
-        "option": "$Take a deep breath",
-        "dialogues": [
-            "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
-        ],
-    },
-    {
-        "option": "Sit up and stretch",
-        "dialogues": [
-            "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
-        ],
-    },
-]
-
-mock_dialogues_dict = {
-    "properties": {"title": "start", "option_type": "elimination"},
-    "dialogues": [
-        "You slowly come to, a chilling sense of unease creeping over you.",
-        "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once.",
-        [
-            {
-                "option": "Take a deep breath",
-                "dialogues": [
-                    "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
-                ],
-            },
-            {
-                "option": "$Sit up and stretch",
-                "dialogues": [
-                    "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
-                ],
-            },
-        ],
-        "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
-    ],
-}
-
-# render_options(mock_choices)
 
 
 def get_users_choice(number_of_choices):
@@ -317,5 +254,58 @@ def print_text_file(file_path):
     print("test!")
 
 
-test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
-render_dialogues(test_dialogues)
+def test():
+    mock_list2 = [
+        "-> Run away",
+        "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
+        "    Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
+        "    'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
+        "-> $Ask who he is",
+        "    'Who are you?' you ask, your voice tinged with a mix of curiosity and caution.",
+    ]
+    mock_yarn_dict = {
+        "properties": {"title": "start", "option_type": "elimination"},
+        "dialogues": [
+            "You slowly come to, a chilling sense of unease creeping over you. ",
+            "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. ",
+        ],
+    }
+    # render_dialogues(mock_yarn_dict)
+    mock_choices = [
+        {
+            "option": "$Take a deep breath",
+            "dialogues": [
+                "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
+            ],
+        },
+        {
+            "option": "Sit up and stretch",
+            "dialogues": [
+                "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
+            ],
+        },
+    ]
+    mock_dialogues_dict = {
+        "properties": {"title": "start", "option_type": "elimination"},
+        "dialogues": [
+            "You slowly come to, a chilling sense of unease creeping over you.",
+            "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once.",
+            [
+                {
+                    "option": "Take a deep breath",
+                    "dialogues": [
+                        "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
+                    ],
+                },
+                {
+                    "option": "$Sit up and stretch",
+                    "dialogues": [
+                        "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
+                    ],
+                },
+            ],
+            "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
+        ],
+    }
+    test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
+    render_dialogues(test_dialogues)

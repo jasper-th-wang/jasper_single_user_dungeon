@@ -2,6 +2,7 @@
 Jasper Wang
 A01362031
 """
+# TODO: modify character docstrings in different functions according to new stats schemes
 import random
 
 
@@ -65,7 +66,13 @@ def make_character():
     >>> make_character()
     {'X-coordinate': 0, 'Y-coordinate': 0, 'Essence': 5, 'Wisdom': 5}
     """
-    return {"X-coordinate": 0, "Y-coordinate": 0, "Essence": 5, "Wisdom": 5}
+    return {
+        "X-coordinate": 0,
+        "Y-coordinate": 0,
+        "Essence": 100,
+        "Max Essence": 100,
+        "Wisdom": 5,
+    }
 
 
 def describe_current_location(board, character):
@@ -83,7 +90,24 @@ def describe_current_location(board, character):
     print(scenario)
 
 
-def get_users_choice():
+def display_stats(character):
+    print("+-------------------+")
+    print("|    Player Stats   |")
+    print("+-------------------+")
+    print(f"| Essence: {character['Essence']}/{character['Max Essence']} |")
+    print(f"| Wisdom: {character['Wisdom']}        |")
+    print("+-------------------+")
+    print("| Actions:          |")
+    print("| W - Go North      |")
+    print("| A - Go West       |")
+    print("| S - Go South      |")
+    print("| D - Go East       |")
+    print("| ! - See Stats     |")
+    print("+-------------------+")
+
+
+# TODO: add displaying character functionality, change docstring
+def process_users_action(character):
     """
     Print a prompt to ask for the direction the user wish to move towards
 
@@ -105,8 +129,7 @@ def get_users_choice():
             continue
 
         if user_choice == "!":
-            # help print player stats
-            pass
+            display_stats(character)
         else:
             return user_choice
 
@@ -149,6 +172,7 @@ def validate_move(rows, columns, character, direction):
     return False
 
 
+# TODO: Modify control scheme to WASD instead, change docstrings
 def move_character(character, direction):
     """
     Move character's coordinates according to specified direction
@@ -280,7 +304,7 @@ def game():
     achieved_goal = False
     while is_alive(character) and not achieved_goal:
         describe_current_location(board, character)
-        direction = get_users_choice()
+        direction = process_users_action(character)
         valid_move = validate_move(rows, columns, character, direction)
         if valid_move:
             move_character(character, direction)
@@ -302,6 +326,20 @@ def main():
     game()
 
 
+def test():
+    direction = process_users_action(
+        {
+            "X-coordinate": 0,
+            "Y-coordinate": 0,
+            "Essence": 100,
+            "Max Essence": 100,
+            "Wisdom": 5,
+        }
+    )
+    print(direction)
+
+
+test()
 if __name__ == "__main__":
+    pass
     # main()
-    get_users_choice()
