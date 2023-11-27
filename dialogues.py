@@ -1,5 +1,4 @@
 # TODO: rename this module to like rendering utils??
-from pprint import pprint
 
 from constants import TEXT_FLAGS
 from render_text import print_text_line
@@ -18,8 +17,7 @@ def parse_yarn_properties(property_line_list):
 
         property = line.split(": ")
         dialogues_properties[property[0]] = property[1]
-    # HACK: to remove
-    pprint(dialogues_properties)
+
     return dialogues_properties
 
 
@@ -129,8 +127,6 @@ def play_options_interactions(options_list, type):
     if type == "multiple_choice":
         while True:
             render_options_menu(options_list)
-            # HACK:
-            pprint(options_list)
 
             try:
                 user_input = get_users_choice(len(options_list))
@@ -188,7 +184,7 @@ def play_options_interactions(options_list, type):
             print("\n")
             render_dialogues(
                 {
-                    "dialogues": options_list[user_input - 1]["test_dialogues"],
+                    "dialogues": options_list[user_input - 1]["dialogues"],
                     "properties": {
                         "title": "option",
                     },
@@ -202,64 +198,3 @@ def play_options_interactions(options_list, type):
     # TODO:
     # if regular / argument is last remaining_option type:
     # return user choice
-
-
-def test():
-    mock_list2 = [
-        "-> Run away",
-        "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
-        "    Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
-        "    'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
-        "-> $Ask who he is",
-        "    'Who are you?' you ask, your voice tinged with a mix of curiosity and caution.",
-    ]
-    mock_yarn_dict = {
-        "properties": {"title": "start", "option_type": "elimination"},
-        "dialogues": [
-            "You slowly come to, a chilling sense of unease creeping over you. ",
-            "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. ",
-        ],
-    }
-    # render_dialogues(mock_yarn_dict)
-    mock_choices = [
-        {
-            "option": "$Take a deep breath",
-            "dialogues": [
-                "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
-            ],
-        },
-        {
-            "option": "Sit up and stretch",
-            "dialogues": [
-                "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
-            ],
-        },
-    ]
-    mock_dialogues_dict = {
-        "properties": {"title": "start", "option_type": "elimination"},
-        "dialogues": [
-            "You slowly come to, a chilling sense of unease creeping over you.",
-            "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once.",
-            [
-                {
-                    "option": "Take a deep breath",
-                    "dialogues": [
-                        "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
-                    ],
-                },
-                {
-                    "option": "$Sit up and stretch",
-                    "dialogues": [
-                        "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
-                    ],
-                },
-            ],
-            "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
-        ],
-    }
-    # dialogues = parse_yarn_file("./test_dialogues/opening.yarn")
-    # render_dialogues(dialogues)
-    play_dialogues_from_file("./dialogues/the_girl.txt")
-
-
-test()
