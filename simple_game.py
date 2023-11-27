@@ -8,16 +8,16 @@ import random
 # TODO: modify character docstrings in different functions according to new stats schemes
 from pprint import pprint
 
-# import dialogues as
+from dialogues import play_dialogues_from_file, print_text_line
 
 
+# WARNING: sourcing test file for now
 def opening_sequence():
-    # test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
-    # render_dialogues(test_dialogues)
-    pass
+    play_dialogues_from_file("./tests/opening_test.yarn")
 
 
-def scenario_descriptions():
+# HACK: mock function
+def mock_scenario_descriptions():
     """
     Produce a list of predefined scenario descriptions for the game board
 
@@ -55,11 +55,12 @@ def render_ascii_map(board, character_coordinates):
                 print("|", end="")
             else:
                 print(" ", end="")
+
             grid_symbol = " "
+            if isinstance(board[(x, y)], dict):
+                grid_symbol = "!"
             if (x, y) == character_coordinates:
                 grid_symbol = "@"
-            if board[(x, y)][0] == "npc":
-                grid_symbol = "!"
             # Truncate or pad room name to fit in the cell
             # display_name = (grid_symbol[:15] + '..') if len(grid_symbol) > 15 else grid_symbol.ljust(17)
             print(f" {grid_symbol} ", end="")
@@ -67,7 +68,8 @@ def render_ascii_map(board, character_coordinates):
     print(horizontal_border)  # Bottom border of the last row
 
 
-def display_current_location(board, character):
+# TODO: change docstrings
+def render_current_location(board, character):
     """
     Describe the current location by printing it on the screen
 
@@ -79,12 +81,16 @@ def display_current_location(board, character):
     :return: None
     """
     character_coordinates = (character["X-coordinate"], character["Y-coordinate"])
-    render_ascii_map(board, character_coordinates)
     scenario = board[character_coordinates]
-    print(scenario)
+    # HACK: need fix
+    if isinstance(scenario, dict):
+        play_dialogues_from_file(scenario["dialogue_file_path"])
+
+    render_ascii_map(board, character_coordinates)
+    print_text_line(scenario)
 
 
-def make_board(rows, columns):
+def make_board(level_info):
     """
     Make a game board with specified numbers of rows and columns with scenarios associated with each coordinates
 
@@ -95,19 +101,26 @@ def make_board(rows, columns):
     :postcondition: Create a game board based on the inputted rows and columns, and predefined scenarios
     :return: a dictionary with tuples as keys representing coordinates, and strings as values representing scenarios
     """
-    # NOTE: will take in a map_info dictionary to render a map dictionary with key: Coordinates, value: (place or npc, description or npc)
+    # NOTE: will take in a map_elements dictionary to render a map dictionary with key: Coordinates, value: (place or npc, description or npc)
     # if rows < 2 or columns < 2:
     #     return None
+    rows = level_info["rows"]
+    columns = level_info["columns"]
+    scenarios = level_info["area_descriptions"]
+    npcs = level_info["npcs"]
 
     coordinates = []
     for column in range(columns):
         for row in range(rows):
             coordinates.append((column, row))
 
-    scenarios = scenario_descriptions()
     board = {}
     for coordinate in coordinates:
         board[coordinate] = scenarios[random.randint(0, len(scenarios) - 1)]
+
+    for npc in npcs:
+        npc_coordinates = tuple(npc["coordinates"])
+        board[npc_coordinates] = npc
 
     return board
 
@@ -127,6 +140,7 @@ def make_character():
         "Essence": 100,
         "Max Essence": 100,
         "Wisdom": 5,
+        "Anger": 5,
         "Quest": None,
     }
 
@@ -156,24 +170,23 @@ def process_users_action(character):
     :postcondition: print a prompt to ask for user input, no data is modified
     :return: an integer representing the user's inputted direction
     """
-    AVAILABLE_ACTIONS = "WASD!"
-    # MOVE_ACTIONS = "WASD"
+    AVAILABLE_ACTIONS = "WASDwasd!"
 
     while True:
         user_choice = input(
-            "What would you like to do? (Type ! to see stats and available actions.)"
+            "What would you like to do? (Type ! to see stats and available actions.): "
         )
 
         if len(user_choice) != 1 or user_choice not in AVAILABLE_ACTIONS:
             print(
-                f"Invalid entry, please enter one of the following letters or characters: {', '.join(AVAILABLE_ACTIONS)}"
+                f"Invalid entry, please enter one of the following letters or characters: {', '.join('WASD!')}"
             )
             continue
 
         if user_choice == "!":
             display_stats(character)
         else:
-            return user_choice
+            return user_choice.upper()
 
 
 # TODO: Modify control scheme to WASD instead, change docstrings
@@ -258,6 +271,7 @@ def check_for_foes():
     return False
 
 
+# TODO: Change docstrings
 def guessing_game(character):
     """
     Start a game number guessing game where user has to guess the randomly generated number between 1 and 5
@@ -267,27 +281,48 @@ def guessing_game(character):
     :postcondition: 1 HP is deducted from character if user guesses incorrectly, no data is modified otherwise
     :return: None
     """
+    print_text_line("!>>> !!! ALERT: MONSTER ENCOUNTER !!! <<<")
+    # with K as kill
+    # if user use guess: they gain wisdom
+    # if user use kill, they gain anger
+
+    # if character wisdom is high, range becomes lower
     lower = 1
     upper = 5
-    secret_number = random.randint(lower, upper)
-    guess = input(f"Enter a number between {lower} and {upper} inclusive: ")
 
-    while not (guess.isdigit() and int(guess) in range(1, 6)):
-        print(
-            f"Invalid entry, please enter a number between {lower} and {upper} inclusive: "
+    if character["Wisdom"] > 30:
+        upper = 3
+
+    secret_number = random.randint(lower, upper)
+    guess = input(
+        f"Enter a number between {lower} and {upper} inclusive to deterred the monster, or type 'K' to kill the monster: "
+    )
+
+    if guess == "K":
+        print_text_line(
+            "You killed the monster ruthlessly. Though you are unharmed, you feel an anger inside brewing."
+        )
+        print_text_line("!You gained 5 Anger")
+        character["Anger"] += 5
+        return
+
+    while not (guess.isdigit() and int(guess) in range(1, upper + 1)):
+        print_text_line(
+            f"!Invalid entry, please enter a number between {lower} and {upper} inclusive: "
         )
         guess = input()
 
     if int(guess) == secret_number:
-        print("You're right! You can go on with your adventure unscathed!")
+        print_text_line("You succesfully deterred the monster!")
+        print_text_line("$You gained 5 Wisdom!")
+        character["Wisdom"] += 5
     else:
-        character["Essence"] -= 1
-        print(
-            f"Wrong number! The number was {secret_number} but you entered {guess}, you just lost 1 HP"
-        )
+        character["Essence"] -= 5
+        print_text_line(f"You failed, the monster attacked you and ran away.")
+        print_text_line("!You just lost 5 Essence Point")
 
 
-def check_if_goal_attained(rows, columns, character):
+def check_if_goal_attained(character):
     """
     Determine whether character has reached the goal coordinate
 
@@ -304,10 +339,13 @@ def check_if_goal_attained(rows, columns, character):
     >>> check_if_goal_attained(4, 4, {"X-coordinate": 1, "Y-coordinate": 2, "Essence": 1})
     False
     """
-    if (
-        character["X-coordinate"] == rows - 1
-        and character["Y-coordinate"] == columns - 1
-    ):
+    # TODO: Implement so that it will check character's Quest property, if "complete" then goal attained
+    # if (
+    #     character["X-coordinate"] == rows - 1
+    #     and character["Y-coordinate"] == columns - 1
+    # ):
+    #     return True
+    if character["Quest"] == "Complete":
         return True
 
     return False
@@ -336,7 +374,7 @@ def get_game_level_info(level):
     with open(f"./levels/level{level}.json", "r") as input_object:
         level_info = json.load(input_object)
 
-    pprint(level_info)
+    # pprint(level_info)
     return level_info
 
 
@@ -353,22 +391,25 @@ def play_game_level(level, character):
     rows = level_info["rows"]
     columns = level_info["columns"]
 
-    board = make_board(rows, columns)
+    board = make_board(level_info)
     achieved_goal = False
 
+    print_text_line(level_info.get("entrance_description", ""))
+
     while is_alive(character) and not achieved_goal:
-        display_current_location(board, character)
+        render_current_location(board, character)
         direction = process_users_action(character)
         valid_move = validate_move(rows, columns, character, direction)
         if valid_move:
             move_character(character, direction)
-            display_current_location(board, character)
+            # display_current_location(board, character)
             there_is_a_challenger = check_for_foes()
             if there_is_a_challenger:
                 guessing_game(character)
-            achieved_goal = check_if_goal_attained(rows, columns, character)
+            achieved_goal = check_if_goal_attained(character)
         else:
-            print("You cannot go here!")
+            color_flag = "!"
+            print_text_line(f"{color_flag}You cannot go here!")
 
     if not is_alive(character):
         print("Sorry, you died.")
@@ -406,20 +447,27 @@ def test():
     # )
     # print(direction)
     # get_game_level_info(1)
-    test_board2 = make_board(5, 5)
-    test_board = {
-        (0, 0): "The Server Room Labyrinth",
-        (0, 1): "The Echo Hall of Helpdesk Calls",
-        (0, 2): "The Printer Paper Jam Dungeon",
-        (1, 0): "The Recursive Room",
-        (1, 1): "The Library of Obsolete Languages",
-        (1, 2): "The Cafeteria of Constant Cravings",
-    }
-    render_ascii_map(test_board2, (3, 2))
+    test_character = make_character()
+    # test_board2 = make_board(5, 5)
+    # test_board = {
+    #     (0, 0): "The Server Room Labyrinth",
+    #     (0, 1): "The Echo Hall of Helpdesk Calls",
+    #     (0, 2): "The Printer Paper Jam Dungeon",
+    #     (1, 0): "The Recursive Room",
+    #     (1, 1): "The Library of Obsolete Languages",
+    #     (1, 2): "The Cafeteria of Constant Cravings",
+    # }
+    # render_ascii_map(test_board2, (3, 2))
+    # display_current_location(test_board2, test_character)
+    # test_level = get_game_level_info(1)
+    # test_board3 = make_board(test_level)
+    # display_current_location(test_board3, test_character)
+    # print(test_board3)
+    # play_game_level(1, test_character)
 
 
-test()
+# test()
 
 if __name__ == "__main__":
+    main()
     pass
-    # main()

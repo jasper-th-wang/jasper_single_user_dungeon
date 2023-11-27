@@ -1,3 +1,4 @@
+# TODO: rename this module to like rendering utils??
 import sys
 from pprint import pprint
 from time import sleep
@@ -9,7 +10,7 @@ COMMAND_LINE_COLOR = {
     "NPC": "\033[94m",
     "OKCYAN": "\033[96m",
     "PLAYER": "\033[92m",
-    "YELLO": "\033[93m",
+    "YELLOW": "\033[93m",
     "ENEMY": "\033[91m",
     "NORMAL": "\033[0m",
     "BOLD": "\033[1m",
@@ -53,6 +54,8 @@ def process_text_color(text):
         color_type = "PLAYER"
     elif text.startswith("@"):
         color_type = "NPC"
+    elif text.startswith("!"):
+        color_type = "YELLOW"
 
     if color_type != "NORMAL":
         text = text[1:]
@@ -60,14 +63,14 @@ def process_text_color(text):
     return f"{COMMAND_LINE_COLOR[color_type]}{text}{COMMAND_LINE_COLOR['NORMAL']}"
 
 
-def print_dialogue_line(text):
+def print_text_line(text):
     text = process_text_color(text)
     print_with_typewritter_effect(text)
     delay_duration = calculate_delay_duration_in_seconds(text)
     sleep(delay_duration)
 
 
-def get_yarn_properties(property_line_list):
+def parse_yarn_properties(property_line_list):
     dialogues_properties = {}
 
     for line in property_line_list:
@@ -78,7 +81,8 @@ def get_yarn_properties(property_line_list):
 
         property = line.split(": ")
         dialogues_properties[property[0]] = property[1]
-
+    # HACK: to remove
+    pprint(dialogues_properties)
     return dialogues_properties
 
 
@@ -137,7 +141,7 @@ def parse_yarn_file(file_path):
     except OSError:
         print("No dialogue text file is found")
     else:
-        dialogues_properties = get_yarn_properties(lines)
+        dialogues_properties = parse_yarn_properties(lines)
         index_of_content_start = lines.index(CONTENT_START_FLAG + "\n")
 
         dialogues_content = lines[index_of_content_start + 1 : -1]
@@ -157,11 +161,16 @@ def render_dialogues(parsed_dialogues_dictionary):
     # if list -> call helper prompt_user_options
     for item in parsed_dialogues_list:
         if isinstance(item, str):
-            print_dialogue_line(item)
+            print_text_line(item)
             continue
         if isinstance(item, list):
             prompt_user_options(item, dialogues_properties["option_type"])
             continue
+
+
+def play_dialogues_from_file(file_path):
+    parsed_dialogues = parse_yarn_file(file_path)
+    render_dialogues(parsed_dialogues)
 
 
 def render_options(options_list):
@@ -247,13 +256,14 @@ def print_text_file(file_path):
     try:
         with open(file_path, "r") as input_file:
             texts = input_file.readlines()
-            print_dialogue_line(texts)
+            print_text_line(texts)
 
     except OSError:
         print("No dialogue text file is found")
     print("test!")
 
-    # def test():
+
+def test():
     mock_list2 = [
         "-> Run away",
         "    Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
@@ -308,3 +318,6 @@ def print_text_file(file_path):
     }
     test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
     render_dialogues(test_dialogues)
+
+
+# test()
