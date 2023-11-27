@@ -167,8 +167,6 @@ def play_options_interactions(options_list, type):
 
         # user prompt loop begin
         while not terminating_option_chosen:
-            # pprint(options_list)
-            # print("terminating index: " + str(terminating_option_index))
             render_options_menu(options_list)
             try:
                 user_input = get_users_choice(len(options_list))
