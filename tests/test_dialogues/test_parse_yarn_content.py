@@ -29,7 +29,7 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "test_dialogues": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
@@ -50,13 +50,13 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "test_dialogues": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "Sit up and stretch",
-                    "test_dialogues": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -78,13 +78,13 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "test_dialogues": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "Sit up and stretch",
-                    "test_dialogues": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -111,13 +111,13 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Take a deep breath",
-                    "test_dialogues": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "Sit up and stretch",
-                    "test_dialogues": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -140,7 +140,7 @@ class TestParseYarnContent(TestCase):
             [
                 {
                     "option": "Run away",
-                    "test_dialogues": [
+                    "dialogues": [
                         "Without a second thought, you turn and dash away, your feet pounding against the cold, stone ground.",
                         "Then, just as you think you've lost him, you round a corner and come face-to-face with the same figure, standing calmly as if he'd been waiting for you all along.",
                         "'Running won't change your situation,' he says, his voice still calm and soothing, a stark contrast to your panting breaths. 'But it's understandable. This place can be... overwhelming for newcomers.'",
@@ -148,7 +148,7 @@ class TestParseYarnContent(TestCase):
                 },
                 {
                     "option": "$Ask who he is",
-                    "test_dialogues": [
+                    "dialogues": [
                         "'Who are you?' you ask, your voice tinged with a mix of curiosity and caution."
                     ],
                 },

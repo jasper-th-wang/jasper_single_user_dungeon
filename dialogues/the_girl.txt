@@ -31,7 +31,11 @@ She points to the water.
 
 @"The swamp holds many secrets, reflections of what once was. Sometimes, looking into the past can reveal truths, but be warned, not all truths are pleasant."
 
-You lean over the murky water, peering into its depths, hoping for a glimpse into your forgotten past. The surface is still, almost glass-like, reflecting a distorted image of yourself. You're so focused on looking for memories that you don't immediately notice the girl's reaction.
+You lean over the murky water, peering into its depths, hoping for a glimpse into your forgotten past.
+
+The surface is still, almost glass-like, reflecting a distorted image of yourself. 
+
+You're so focused on looking for memories that you don't immediately notice the girl's reaction.
 
 But then you hear a sharp intake of breath. Startled, you look up to see the girl staring at you, her eyes wide with a mix of fear and recognition. Her previous calm demeanor has vanished, replaced by an evident shock.
 

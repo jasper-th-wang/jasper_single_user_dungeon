@@ -258,7 +258,7 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
 
 
-def check_for_foes():
+def check_for_monsters():
     """
     Determine whether a foe is present
 
@@ -273,7 +273,7 @@ def check_for_foes():
 
 
 # TODO: Change docstrings
-def guessing_game(character):
+def play_monster_encounter(character):
     """
     Start a test_game number guessing test_game where user has to guess the randomly generated number between 1 and 5
 
@@ -404,9 +404,9 @@ def play_game_level(level, character):
         if valid_move:
             move_character(character, direction)
             # display_current_location(board, character)
-            there_is_a_challenger = check_for_foes()
+            there_is_a_challenger = check_for_monsters()
             if there_is_a_challenger:
-                guessing_game(character)
+                play_monster_encounter(character)
             achieved_goal = check_if_goal_attained(character)
         else:
             color_flag = "!"

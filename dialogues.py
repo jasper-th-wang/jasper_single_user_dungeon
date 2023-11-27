@@ -3,6 +3,7 @@ from pprint import pprint
 
 from constants import TEXT_FLAGS
 from render_text import print_text_line
+from utils import get_users_choice
 
 
 def parse_yarn_properties(property_line_list):
@@ -44,14 +45,15 @@ def parse_yarn_content(content_line_list):
 
         if line.startswith((" ", "\t")):
             line = line.strip()
-            if "test_dialogues" in options_content:
-                options_content["test_dialogues"].append(line)
+            if "dialogues" in options_content:
+                options_content["dialogues"].append(line)
             else:
-                options_content["test_dialogues"] = [line]
+                options_content["dialogues"] = [line]
 
             continue
 
-        # on new normal line, check if options related values are stored, if not, store it
+        # on new normal line, check if options related values are stored, if
+        # not, store it
         if options_content:
             options_list.append(options_content)
             options_content = {}
@@ -60,7 +62,8 @@ def parse_yarn_content(content_line_list):
 
         parsed_dialogues.append(line)
 
-    # after exhausting list, check if options related values are stored, if not, store it
+    # after exhausting list, check if options related values are stored, if
+    # not, store it
     if options_content:
         options_list.append(options_content)
         options_content = {}
@@ -87,13 +90,13 @@ def parse_yarn_file(file_path):
 
         return {
             "properties": dialogues_properties,
-            "test_dialogues": parsed_dialogues,
+            "dialogues": parsed_dialogues,
         }
 
 
 def render_dialogues(parsed_dialogues_dictionary):
     dialogues_properties = parsed_dialogues_dictionary["properties"]
-    parsed_dialogues_list = parsed_dialogues_dictionary["test_dialogues"]
+    parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
     # for element in lisst
     # if strings -> print
     # if list -> call helper prompt_user_options
@@ -120,21 +123,6 @@ def render_options_menu(options_list):
         option_number += 1
 
 
-def get_users_choice(number_of_choices):
-    """
-    Print a prompt to get the desired choice number from user
-
-    :raises ValueError:
-    :return: a positive integer representing the user's inputted value
-    """
-    user_input = int(input("Enter your choice: "))
-
-    if user_input not in range(1, number_of_choices + 1):
-        raise ValueError(f"User input has to be between 1 and {number_of_choices}")
-
-    return user_input
-
-
 # HACK: might need to break it down
 def play_options_interactions(options_list, type):
     # options object
@@ -152,7 +140,7 @@ def play_options_interactions(options_list, type):
 
             render_dialogues(
                 {
-                    "test_dialogues": options_list[user_input - 1]["test_dialogues"],
+                    "dialogues": options_list[user_input - 1]["dialogues"],
                     "properties": {
                         "title": "option",
                     },
@@ -162,7 +150,8 @@ def play_options_interactions(options_list, type):
         return None
         # TODO: Implement stats change after dialouge
 
-    # WARNING: change index to number, index keeps changing as options are popped
+    # WARNING: change index to number, index keeps changing as options are
+    # popped
     if type == "elimination":
         # find terminating option's index
         # terminating_option_index = 0
@@ -199,7 +188,7 @@ def play_options_interactions(options_list, type):
             print("\n")
             render_dialogues(
                 {
-                    "test_dialogues": options_list[user_input - 1]["test_dialogues"],
+                    "dialogues": options_list[user_input - 1]["test_dialogues"],
                     "properties": {
                         "title": "option",
                     },
@@ -226,7 +215,7 @@ def test():
     ]
     mock_yarn_dict = {
         "properties": {"title": "start", "option_type": "elimination"},
-        "test_dialogues": [
+        "dialogues": [
             "You slowly come to, a chilling sense of unease creeping over you. ",
             "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. ",
         ],
@@ -235,32 +224,32 @@ def test():
     mock_choices = [
         {
             "option": "$Take a deep breath",
-            "test_dialogues": [
+            "dialogues": [
                 "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
             ],
         },
         {
             "option": "Sit up and stretch",
-            "test_dialogues": [
+            "dialogues": [
                 "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
             ],
         },
     ]
     mock_dialogues_dict = {
         "properties": {"title": "start", "option_type": "elimination"},
-        "test_dialogues": [
+        "dialogues": [
             "You slowly come to, a chilling sense of unease creeping over you.",
             "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once.",
             [
                 {
                     "option": "Take a deep breath",
-                    "test_dialogues": [
+                    "dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "$Sit up and stretch",
-                    "test_dialogues": [
+                    "dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -268,9 +257,9 @@ def test():
             "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
         ],
     }
-    # test_dialogues = parse_yarn_file("./test_dialogues/opening.yarn")
-    # render_dialogues(test_dialogues)
+    # dialogues = parse_yarn_file("./test_dialogues/opening.yarn")
+    # render_dialogues(dialogues)
     play_dialogues_from_file("./dialogues/the_girl.txt")
 
 
-# test()
+test()
