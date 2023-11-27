@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from simple_game import describe_current_location
+from game import describe_current_location
 
 
 class Test(TestCase):

@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from simple_game import process_users_action
+from game import process_users_action
 
 
 class Test(TestCase):

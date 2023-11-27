@@ -1,8 +1,8 @@
-def TEXT_FLAG():
+def TEXT_FLAGS():
     return {"CONTENT_START_FLAG": "---", "OPTION_FLAG": "-> "}
 
 
-def TEXT_COLOR():
+def TEXT_COLORS():
     return {
         "HEADER": "\033[95m",
         "NPC": "\033[94m",

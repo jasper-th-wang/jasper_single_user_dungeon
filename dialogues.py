@@ -1,13 +1,13 @@
 # TODO: rename this module to like rendering utils??
 from pprint import pprint
 
-from constants import TEXT_FLAG
+from constants import TEXT_FLAGS
 from render_text import print_text_line
 
 
 def parse_yarn_properties(property_line_list):
     dialogues_properties = {}
-    CONTENT_START_FLAG = TEXT_FLAG()["CONTENT_START_FLAG"]
+    CONTENT_START_FLAG = TEXT_FLAGS()["CONTENT_START_FLAG"]
 
     for line in property_line_list:
         line = line.strip()
@@ -23,7 +23,7 @@ def parse_yarn_properties(property_line_list):
 
 
 def parse_yarn_content(content_line_list):
-    OPTION_FLAG = TEXT_FLAG()["OPTION_FLAG"]
+    OPTION_FLAG = TEXT_FLAGS()["OPTION_FLAG"]
     parsed_dialogues = []
     options_list = []  # list of options
     options_content = {}
@@ -44,10 +44,10 @@ def parse_yarn_content(content_line_list):
 
         if line.startswith((" ", "\t")):
             line = line.strip()
-            if "dialogues" in options_content:
-                options_content["dialogues"].append(line)
+            if "test_dialogues" in options_content:
+                options_content["test_dialogues"].append(line)
             else:
-                options_content["dialogues"] = [line]
+                options_content["test_dialogues"] = [line]
 
             continue
 
@@ -71,7 +71,7 @@ def parse_yarn_content(content_line_list):
 
 
 def parse_yarn_file(file_path):
-    CONTENT_START_FLAG = TEXT_FLAG()["CONTENT_START_FLAG"]
+    CONTENT_START_FLAG = TEXT_FLAGS()["CONTENT_START_FLAG"]
     try:
         with open(file_path, "r") as dialogues:
             lines = dialogues.readlines()
@@ -87,13 +87,13 @@ def parse_yarn_file(file_path):
 
         return {
             "properties": dialogues_properties,
-            "dialogues": parsed_dialogues,
+            "test_dialogues": parsed_dialogues,
         }
 
 
 def render_dialogues(parsed_dialogues_dictionary):
     dialogues_properties = parsed_dialogues_dictionary["properties"]
-    parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
+    parsed_dialogues_list = parsed_dialogues_dictionary["test_dialogues"]
     # for element in lisst
     # if strings -> print
     # if list -> call helper prompt_user_options
@@ -152,7 +152,7 @@ def play_options_interactions(options_list, type):
 
             render_dialogues(
                 {
-                    "dialogues": options_list[user_input - 1]["dialogues"],
+                    "test_dialogues": options_list[user_input - 1]["test_dialogues"],
                     "properties": {
                         "title": "option",
                     },
@@ -199,7 +199,7 @@ def play_options_interactions(options_list, type):
             print("\n")
             render_dialogues(
                 {
-                    "dialogues": options_list[user_input - 1]["dialogues"],
+                    "test_dialogues": options_list[user_input - 1]["test_dialogues"],
                     "properties": {
                         "title": "option",
                     },
@@ -226,7 +226,7 @@ def test():
     ]
     mock_yarn_dict = {
         "properties": {"title": "start", "option_type": "elimination"},
-        "dialogues": [
+        "test_dialogues": [
             "You slowly come to, a chilling sense of unease creeping over you. ",
             "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once. ",
         ],
@@ -235,32 +235,32 @@ def test():
     mock_choices = [
         {
             "option": "$Take a deep breath",
-            "dialogues": [
+            "test_dialogues": [
                 "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
             ],
         },
         {
             "option": "Sit up and stretch",
-            "dialogues": [
+            "test_dialogues": [
                 "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
             ],
         },
     ]
     mock_dialogues_dict = {
         "properties": {"title": "start", "option_type": "elimination"},
-        "dialogues": [
+        "test_dialogues": [
             "You slowly come to, a chilling sense of unease creeping over you.",
             "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once.",
             [
                 {
                     "option": "Take a deep breath",
-                    "dialogues": [
+                    "test_dialogues": [
                         "The air is thick, tinged with a mustiness that feels ancient, as if it has been stagnant for centuries."
                     ],
                 },
                 {
                     "option": "$Sit up and stretch",
-                    "dialogues": [
+                    "test_dialogues": [
                         "You sit up, your hands brushing against a cold, damp ground that seems to be made of stone, yet oddly smooth, like polished marble left neglected for ages."
                     ],
                 },
@@ -268,7 +268,7 @@ def test():
             "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
         ],
     }
-    # test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
+    # test_dialogues = parse_yarn_file("./test_dialogues/opening.yarn")
     # render_dialogues(test_dialogues)
     play_dialogues_from_file("./dialogues/the_girl.txt")
 

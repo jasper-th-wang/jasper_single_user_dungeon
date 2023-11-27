@@ -1,5 +1,5 @@
 from unittest import TestCase
-from simple_game import scenario_descriptions
+from game import scenario_descriptions
 
 
 class Test(TestCase):

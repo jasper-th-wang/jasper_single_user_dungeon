@@ -1,5 +1,5 @@
 from unittest import TestCase
-from simple_game import check_if_goal_attained
+from game import check_if_goal_attained
 
 
 class Test(TestCase):

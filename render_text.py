@@ -1,7 +1,7 @@
 import sys
 from time import sleep
 
-from constants import TEXT_COLOR
+from constants import TEXT_COLORS
 
 
 def calculate_word_count(text):
@@ -17,6 +17,10 @@ def calculate_delay_duration_in_seconds(text):
     word_count = calculate_word_count(text)
     # print(word_count)
     pause_duration = word_count / WORD_PER_SECOND
+
+    # Cap max duration to 2 seconds
+    if pause_duration > 2:
+        pause_duration = 2
     # print(pause_duration)
     return pause_duration
 
@@ -34,7 +38,7 @@ def print_with_typewritter_effect(text):
 
 def process_text_color(text):
     # apply color, and remove color determining prefix
-    COMMAND_LINE_COLOR = TEXT_COLOR()
+    COMMAND_LINE_COLOR = TEXT_COLORS()
     color_type = "NORMAL"
 
     if text.startswith("$"):

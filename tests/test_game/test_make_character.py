@@ -1,5 +1,5 @@
 from unittest import TestCase
-from simple_game import make_character
+from game import make_character
 
 
 class Test(TestCase):
