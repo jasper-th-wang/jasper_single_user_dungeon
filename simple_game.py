@@ -8,12 +8,13 @@ import random
 # TODO: modify character docstrings in different functions according to new stats schemes
 from pprint import pprint
 
-from dialogues import play_dialogues_from_file, print_text_line
+from dialogues import play_dialogues_from_file
+from render_text import print_text_line
 
 
 # WARNING: sourcing test file for now
 def opening_sequence():
-    play_dialogues_from_file("./tests/opening_test.yarn")
+    play_dialogues_from_file("./dialogues/opening.txt")
 
 
 # HACK: mock function
@@ -140,7 +141,7 @@ def make_character():
         "Essence": 100,
         "Max Essence": 100,
         "Wisdom": 5,
-        "Anger": 5,
+        "Fury": 5,
         "Quest": None,
     }
 
@@ -302,8 +303,8 @@ def guessing_game(character):
         print_text_line(
             "You killed the monster ruthlessly. Though you are unharmed, you feel an anger inside brewing."
         )
-        print_text_line("!You gained 5 Anger")
-        character["Anger"] += 5
+        print_text_line("!You gained 5 Fury")
+        character["Fury"] += 5
         return
 
     while not (guess.isdigit() and int(guess) in range(1, upper + 1)):

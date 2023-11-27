@@ -1,77 +1,13 @@
 # TODO: rename this module to like rendering utils??
-import sys
 from pprint import pprint
-from time import sleep
 
-CONTENT_START_FLAG = "---"
-OPTION_FLAG = "-> "
-COMMAND_LINE_COLOR = {
-    "HEADER": "\033[95m",
-    "NPC": "\033[94m",
-    "OKCYAN": "\033[96m",
-    "PLAYER": "\033[92m",
-    "YELLOW": "\033[93m",
-    "ENEMY": "\033[91m",
-    "NORMAL": "\033[0m",
-    "BOLD": "\033[1m",
-    "UNDERLINE": "\033[4m",
-}
-
-
-def calculate_word_count(text):
-    stripped_text = text.strip().lower()
-    words_in_text = stripped_text.split(" ")
-
-    return len(words_in_text)
-
-
-def calculate_delay_duration_in_seconds(text):
-    # TODO: calculate base on average reading speed (238 words per minute)
-    WORD_PER_SECOND = 15
-    word_count = calculate_word_count(text)
-    # print(word_count)
-    pause_duration = word_count / WORD_PER_SECOND
-    # print(pause_duration)
-    return pause_duration
-
-
-# only use when it's describing the scene
-def print_with_typewritter_effect(text):
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        if character == "," or character == ".":
-            sleep(0.15)
-        sleep(0.01)
-    print("\n")
-
-
-def process_text_color(text):
-    # apply color, and remove color determining prefix
-    color_type = "NORMAL"
-
-    if text.startswith("$"):
-        color_type = "PLAYER"
-    elif text.startswith("@"):
-        color_type = "NPC"
-    elif text.startswith("!"):
-        color_type = "YELLOW"
-
-    if color_type != "NORMAL":
-        text = text[1:]
-
-    return f"{COMMAND_LINE_COLOR[color_type]}{text}{COMMAND_LINE_COLOR['NORMAL']}"
-
-
-def print_text_line(text):
-    text = process_text_color(text)
-    print_with_typewritter_effect(text)
-    delay_duration = calculate_delay_duration_in_seconds(text)
-    sleep(delay_duration)
+from constants import TEXT_FLAG
+from render_text import print_text_line
 
 
 def parse_yarn_properties(property_line_list):
     dialogues_properties = {}
+    CONTENT_START_FLAG = TEXT_FLAG()["CONTENT_START_FLAG"]
 
     for line in property_line_list:
         line = line.strip()
@@ -87,6 +23,7 @@ def parse_yarn_properties(property_line_list):
 
 
 def parse_yarn_content(content_line_list):
+    OPTION_FLAG = TEXT_FLAG()["OPTION_FLAG"]
     parsed_dialogues = []
     options_list = []  # list of options
     options_content = {}
@@ -134,6 +71,7 @@ def parse_yarn_content(content_line_list):
 
 
 def parse_yarn_file(file_path):
+    CONTENT_START_FLAG = TEXT_FLAG()["CONTENT_START_FLAG"]
     try:
         with open(file_path, "r") as dialogues:
             lines = dialogues.readlines()
@@ -164,7 +102,7 @@ def render_dialogues(parsed_dialogues_dictionary):
             print_text_line(item)
             continue
         if isinstance(item, list):
-            prompt_user_options(item, dialogues_properties["option_type"])
+            play_options_interactions(item, dialogues_properties["option_type"])
             continue
 
 
@@ -173,7 +111,7 @@ def play_dialogues_from_file(file_path):
     render_dialogues(parsed_dialogues)
 
 
-def render_options(options_list):
+def render_options_menu(options_list):
     # NOTE: for display options as multiple choice by print
     option_number = 1
 
@@ -197,8 +135,33 @@ def get_users_choice(number_of_choices):
     return user_input
 
 
-def prompt_user_options(options_list, type):
+# HACK: might need to break it down
+def play_options_interactions(options_list, type):
     # options object
+    if type == "multiple_choice":
+        while True:
+            render_options_menu(options_list)
+            # HACK:
+            pprint(options_list)
+
+            try:
+                user_input = get_users_choice(len(options_list))
+            except ValueError:
+                print(f"You must enter a number between 1 and {len(options_list)}")
+                continue
+
+            render_dialogues(
+                {
+                    "dialogues": options_list[user_input - 1]["dialogues"],
+                    "properties": {
+                        "title": "option",
+                    },
+                }
+            )
+            break
+        return None
+        # TODO: Implement stats change after dialouge
+
     # WARNING: change index to number, index keeps changing as options are popped
     if type == "elimination":
         # find terminating option's index
@@ -221,7 +184,7 @@ def prompt_user_options(options_list, type):
         while not terminating_option_chosen:
             # pprint(options_list)
             # print("terminating index: " + str(terminating_option_index))
-            render_options(options_list)
+            render_options_menu(options_list)
             try:
                 user_input = get_users_choice(len(options_list))
             except ValueError:
@@ -250,17 +213,6 @@ def prompt_user_options(options_list, type):
     # TODO:
     # if regular / argument is last remaining_option type:
     # return user choice
-
-
-def print_text_file(file_path):
-    try:
-        with open(file_path, "r") as input_file:
-            texts = input_file.readlines()
-            print_text_line(texts)
-
-    except OSError:
-        print("No dialogue text file is found")
-    print("test!")
 
 
 def test():
@@ -316,8 +268,9 @@ def test():
             "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
         ],
     }
-    test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
-    render_dialogues(test_dialogues)
+    # test_dialogues = parse_yarn_file("./dialogues/opening.yarn")
+    # render_dialogues(test_dialogues)
+    play_dialogues_from_file("./dialogues/the_girl.txt")
 
 
 # test()
