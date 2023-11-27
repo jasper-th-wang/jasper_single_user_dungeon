@@ -1,0 +1,45 @@
+{
+  "level_name": "the Swamp",
+  "quest": "Find Asphodel Meadows",
+  "entrance_description": "As you venture forward, the environment shifts and morphs around you, leading you to a vast, foggy swamp. The air is thick and damp, clinging to your skin like a cold, wet blanket. Each step you take is met with the squelch of the marshy ground beneath your feet.",
+  "enemeies": ["wa", "lolo", "hehe"],
+  "npcs": [
+    {
+      "name": "girl sitting by the river",
+      "dialogue_file_path": "./dialogues/the_girl.txt",
+      "coordinates": [4, 4]
+    }
+  ],
+  "monsters": [],
+  "rows": 5,
+  "columns": 5,
+  "area_descriptions": [
+    "A thick mist hangs over the swamp, obscuring the distant trees and casting ghostly shadows.",
+    "The swamp is eerily quiet, with only the occasional distant sound of water dripping.",
+    "The still, dark water of the swamp acts like a mirror, reflecting the fog and the twisted shapes of the surrounding trees.",
+    "The ground is soft and marshy, squishing underfoot with each step you take.",
+    "Twisted, gnarled trees loom overhead, their branches like skeletal hands reaching out through the mist.",
+    "The air feels heavy with a sense of sorrow and loss, as if the swamp itself is mourning.",
+    "A soft breeze whispers through the reeds, creating a hushed, rustling sound.",
+    "You feel as though you're being watched, though no one else is visible in the fog.",
+    "Shadows move and shift in the corner of your eye, but when you turn to look, there's nothing there.",
+    "The sound of your own voice seems to echo strangely in the swamp, making you feel more alone.",
+    "The light here seems perpetual twilight, neither fully day nor night.",
+    "Occasional fireflies flicker in the distance, their light ephemeral and ghostly.",
+    "Small ripples disturb the water's surface, though you see no cause for them.",
+    "Weeping willows line the swamp, their drooping branches like trails of tears.",
+    "Stones covered in slick moss jut out of the water, slippery and treacherous.",
+    "The occasional croak of a frog reverberates through the silence, a reminder of life in the desolation.",
+    "The fog feels almost tangible, clinging to your skin and clothes.",
+    "Faint sunlight struggles to pierce the fog, casting a dim, otherworldly glow.",
+    "A chill hangs in the air, penetrating and persistent.",
+    "Barely visible footprints in the mud lead to the water’s edge, then disappear.",
+    "Dragonflies dart above the water, their iridescent wings catching the weak light.",
+    "Rotting logs lie half-submerged in the water, homes to unseen creatures.",
+    "The colors of the swamp are muted and subdued, as if washed out by time.",
+    "Everything feels damp and slightly cold to the touch.",
+    "The roots of the trees intertwine, creating a complex network above and below the water.",
+    "The water is dark and opaque, hinting at unknown depths beneath the surface.",
+    "The occasional call of a lone bird cuts through the silence, eerie and haunting."
+  ]
+}

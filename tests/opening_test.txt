@@ -1,0 +1,5 @@
+title: Start
+option_type: elimination
+---
+You slowly come to, a chilling sense of unease creeping over you. 
+===
