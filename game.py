@@ -307,7 +307,7 @@ def is_alive(character):
 
 
 def get_game_level_info(level):
-    with open(f"./levels/level{level}.json", "r") as input_object:
+    with open(f"./assets/levels/level{level}.json", "r") as input_object:
         level_info = json.load(input_object)
 
     # pprint(level_info)
