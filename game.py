@@ -14,7 +14,7 @@ from render_text import print_text_line
 
 # WARNING: sourcing test file for now
 def opening_sequence():
-    play_dialogues_from_file("./dialogues/opening.txt")
+    play_dialogues_from_file("assets/dialogues/opening.txt")
 
 
 # HACK: mock function

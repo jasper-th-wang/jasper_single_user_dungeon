@@ -15,8 +15,8 @@ def parse_yarn_properties(property_line_list):
         if line == CONTENT_START_FLAG:
             break
 
-        property = line.split(": ")
-        dialogues_properties[property[0]] = property[1]
+        yarn_property = line.split(": ")
+        dialogues_properties[yarn_property[0]] = yarn_property[1]
 
     return dialogues_properties
 

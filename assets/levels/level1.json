@@ -6,7 +6,7 @@
   "npcs": [
     {
       "name": "girl sitting by the river",
-      "dialogue_file_path": "./dialogues/the_girl.txt",
+      "dialogue_file_path": "./assets/dialogues/the_girl.txt",
       "coordinates": [4, 4]
     }
   ],
