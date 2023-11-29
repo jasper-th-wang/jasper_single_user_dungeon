@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from dialogues import create_dialogue_lines_and_options_list
+from dialogues import build_renderable_dialogue_list
 
 # from unittest.mock import patch
 
@@ -16,7 +16,7 @@ class TestParseYarnContent(TestCase):
             "Your eyes flutter open, met by an eerie, dim light that seems to emanate from nowhere and everywhere all at once.",
         ]
 
-        actual = create_dialogue_lines_and_options_list(line_list)
+        actual = build_renderable_dialogue_list(line_list)
 
         self.assertEqual(expected, actual)
 
@@ -36,7 +36,7 @@ class TestParseYarnContent(TestCase):
             ]
         ]
 
-        actual = create_dialogue_lines_and_options_list(line_list)
+        actual = build_renderable_dialogue_list(line_list)
         self.assertEqual(expected, actual)
 
     def test_two_options_with_one_line_content(self):
@@ -63,7 +63,7 @@ class TestParseYarnContent(TestCase):
             ]
         ]
 
-        actual = create_dialogue_lines_and_options_list(line_list)
+        actual = build_renderable_dialogue_list(line_list)
         self.assertEqual(expected, actual)
 
     def test_two_options_followed_by_normal_line(self):
@@ -92,7 +92,7 @@ class TestParseYarnContent(TestCase):
             "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
         ]
 
-        actual = create_dialogue_lines_and_options_list(line_list)
+        actual = build_renderable_dialogue_list(line_list)
         self.assertEqual(expected, actual)
 
     def test_options_between_normal_lines(self):
@@ -124,7 +124,7 @@ class TestParseYarnContent(TestCase):
             ],
             "Tall, imposing columns rise to a ceiling lost in darkness, carved with intricate designs that seem to shift and move in the corner of your eye.",
         ]
-        actual = create_dialogue_lines_and_options_list(line_list)
+        actual = build_renderable_dialogue_list(line_list)
         self.assertEqual(expected, actual)
 
     def test_options_with_multiple_lines(self):
@@ -154,5 +154,5 @@ class TestParseYarnContent(TestCase):
                 },
             ]
         ]
-        actual = create_dialogue_lines_and_options_list(line_list)
+        actual = build_renderable_dialogue_list(line_list)
         self.assertEqual(expected, actual)
