@@ -2,11 +2,11 @@
 import copy
 
 from constants import TEXT_FLAGS
+from dialogue_options import play_options_interactions
 from render_text import print_text_line
-from utils import get_users_choice
 
 
-def parse_dialogue_file_properties(property_line_list):
+def get_dialogue_file_properties(property_line_list):
     dialogues_properties = {}
     CONTENT_START_FLAG = TEXT_FLAGS()["CONTENT_START_FLAG"]
 
@@ -100,7 +100,7 @@ def parse_dialogue_file(file_path):
     except OSError:
         print("No dialogue text file is found")
     else:
-        dialogues_properties = parse_dialogue_file_properties(lines)
+        dialogues_properties = get_dialogue_file_properties(lines)
         index_of_content_start = lines.index(CONTENT_START_FLAG + "\n")
 
         dialogues_content = lines[index_of_content_start + 1: -1]
@@ -113,11 +113,15 @@ def parse_dialogue_file(file_path):
 
 
 def render_dialogues(parsed_dialogues_dictionary):
+    """
+    Render lines one by one
+
+    :param parsed_dialogues_dictionary:
+    :return:
+    """
     dialogues_properties = parsed_dialogues_dictionary["properties"]
     parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
-    # for element in lisst
-    # if strings -> print
-    # if list -> call helper prompt_user_options
+
     for item in parsed_dialogues_list:
         if isinstance(item, str):
             print_text_line(item)
@@ -131,90 +135,4 @@ def play_dialogues_from_file(file_path):
     parsed_dialogues = parse_dialogue_file(file_path)
     render_dialogues(parsed_dialogues)
 
-
-def render_options_menu(options_list):
-    # NOTE: for display options as multiple choice by print
-    option_number = 1
-
-    for option in options_list:
-        print(f"{option_number}: {option['option']}")
-        option_number += 1
-
-
-def play_elimination(options_list):
-    # find terminating option's index
-    # terminating_option_index = 0
-
-    for option in options_list:
-        option["terminating"] = False
-
-        if option["option"].startswith("$"):
-            # remove the $ mark
-            option["option"] = option["option"][1:]
-            option["terminating"] = True
-            break
-
-        # terminating_option_index += 1
-
-    terminating_option_chosen = False
-
-    # user prompt loop begin
-    while not terminating_option_chosen:
-        render_options_menu(options_list)
-        try:
-            user_input = get_users_choice(len(options_list))
-        except ValueError:
-            print(f"You must enter a number between 1 and {len(options_list)}")
-            continue
-
-        chosen_option = options_list[user_input - 1]
-
-        if chosen_option["terminating"]:
-            terminating_option_chosen = True
-
-        print("\n")
-        render_dialogues(
-            {
-                "dialogues": options_list[user_input - 1]["dialogues"],
-                "properties": {
-                    "title": "option",
-                },
-            }
-        )
-        options_list.pop(user_input - 1)
-
-
-def play_multiple_choice(options_list):
-    while True:
-        render_options_menu(options_list)
-
-        try:
-            user_input = get_users_choice(len(options_list))
-        except ValueError:
-            print(f"You must enter a number between 1 and {len(options_list)}")
-            continue
-
-        render_dialogues(
-            {
-                "dialogues": options_list[user_input - 1]["dialogues"],
-                "properties": {
-                    "title": "option",
-                },
-            }
-        )
-        break
-
-
 # HACK: might need to break it down
-def play_options_interactions(options_list, type):
-    # options object
-    if type == "multiple_choice":
-        play_multiple_choice(options_list)
-        # TODO: Implement stats change after dialouge
-    elif type == "elimination":
-        play_elimination(options_list)
-        # TODO: may implement returning stats or wisdom points
-
-    # TODO:
-    # if regular / argument is last remaining_option type:
-    # return user choice
