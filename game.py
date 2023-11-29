@@ -358,7 +358,8 @@ def play_game_level(level, character):
 
 def game():
     MAX_LEVEL = 3
-    opening_sequence()
+    # HACK: commented out
+    # opening_sequence()
     character = make_character()
     for level in range(1, MAX_LEVEL + 1):
         character = play_game_level(level, character)

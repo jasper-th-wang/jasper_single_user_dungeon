@@ -5,7 +5,7 @@ from render_text import print_text_line
 from utils import get_users_choice
 
 
-def parse_yarn_properties(property_line_list):
+def parse_dialogue_file_properties(property_line_list):
     dialogues_properties = {}
     CONTENT_START_FLAG = TEXT_FLAGS()["CONTENT_START_FLAG"]
 
@@ -21,19 +21,20 @@ def parse_yarn_properties(property_line_list):
     return dialogues_properties
 
 
-def parse_yarn_content(content_line_list):
+def create_dialogue_lines_and_options_list(dialogue_content):
+    dialogue_lines_list = []
     OPTION_FLAG = TEXT_FLAGS()["OPTION_FLAG"]
-    parsed_dialogues = []
     options_list = []  # list of options
     options_content = {}
 
-    for line in content_line_list:
+    for line in dialogue_content:
         if line == "\n":
             continue
 
         line = line.rstrip()
+
         if OPTION_FLAG in line:
-            # clear previous options_content dictionary
+            # store and clear previous options_content dictionary
             if options_content:
                 options_list.append(options_content)
                 options_content = {}
@@ -55,23 +56,29 @@ def parse_yarn_content(content_line_list):
         if options_content:
             options_list.append(options_content)
             options_content = {}
-            parsed_dialogues.append(options_list)
+            dialogue_lines_list.append(options_list)
             options_list = []
 
-        parsed_dialogues.append(line)
+        dialogue_lines_list.append(line)
 
     # after exhausting list, check if options related values are stored, if
     # not, store it
     if options_content:
         options_list.append(options_content)
         options_content = {}
-        parsed_dialogues.append(options_list)
+        dialogue_lines_list.append(options_list)
         options_list = []
 
-    return parsed_dialogues
+    return dialogue_lines_list
 
 
-def parse_yarn_file(file_path):
+def parse_dialogue_file(file_path):
+    """
+    Read and convert dialogue text files to dialogue dictionary for rendering
+
+    :param file_path: strings representing path to a dialogue file
+    :return: a dictionary representing information about a dialogue
+    """
     CONTENT_START_FLAG = TEXT_FLAGS()["CONTENT_START_FLAG"]
     try:
         with open(file_path, "r") as dialogues:
@@ -80,11 +87,11 @@ def parse_yarn_file(file_path):
     except OSError:
         print("No dialogue text file is found")
     else:
-        dialogues_properties = parse_yarn_properties(lines)
+        dialogues_properties = parse_dialogue_file_properties(lines)
         index_of_content_start = lines.index(CONTENT_START_FLAG + "\n")
 
         dialogues_content = lines[index_of_content_start + 1 : -1]
-        parsed_dialogues = parse_yarn_content(dialogues_content)
+        parsed_dialogues = create_dialogue_lines_and_options_list(dialogues_content)
 
         return {
             "properties": dialogues_properties,
@@ -108,7 +115,7 @@ def render_dialogues(parsed_dialogues_dictionary):
 
 
 def play_dialogues_from_file(file_path):
-    parsed_dialogues = parse_yarn_file(file_path)
+    parsed_dialogues = parse_dialogue_file(file_path)
     render_dialogues(parsed_dialogues)
 
 
