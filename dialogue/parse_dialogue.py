@@ -1,12 +1,12 @@
 # TODO: rename this module to like rendering utils??
 import copy
 
-import utils.constants
+from utils import constants
 
 
 def get_dialogue_file_properties(property_line_list):
     dialogues_properties = {}
-    CONTENT_START_FLAG = utils.constants.TEXT_FLAGS()["CONTENT_START_FLAG"]
+    CONTENT_START_FLAG = constants.TEXT_FLAGS()["CONTENT_START_FLAG"]
 
     for line in property_line_list:
         line = line.strip()
@@ -36,7 +36,7 @@ def add_dialogue_line_to_option(line, option):
 
 
 def initialize_option(line, option, list_of_options):
-    OPTION_FLAG = utils.constants.TEXT_FLAGS()["OPTION_FLAG"]
+    OPTION_FLAG = constants.TEXT_FLAGS()["OPTION_FLAG"]
     # if an option already exists, store and clear that dictionary
     if option:
         # TODO: maybe need to use deepcopy?
@@ -50,7 +50,7 @@ def initialize_option(line, option, list_of_options):
 # TODO: function way too big
 def build_renderable_dialogue_list(dialogue_content):
     dialogue_lines_list = []
-    OPTION_FLAG = utils.constants.TEXT_FLAGS()["OPTION_FLAG"]
+    OPTION_FLAG = constants.TEXT_FLAGS()["OPTION_FLAG"]
     list_of_options = []  # list of option
     option = {}
 
@@ -90,7 +90,7 @@ def parse_dialogue_file(file_path):
     :param file_path: strings representing path to a dialogue file
     :return: a dictionary representing information about a dialogue
     """
-    CONTENT_START_FLAG = utils.constants.TEXT_FLAGS()["CONTENT_START_FLAG"]
+    CONTENT_START_FLAG = constants.TEXT_FLAGS()["CONTENT_START_FLAG"]
     try:
         with open(file_path, "r") as dialogues:
             lines = dialogues.readlines()

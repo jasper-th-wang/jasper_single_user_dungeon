@@ -3,8 +3,8 @@ ADD A DOCSTRING
 """
 import random
 
-import dialogue.render_dialogue
-import utils.render_text
+from dialogue import render_dialogue
+from utils import render_text
 
 
 def get_board_dimensions(board):
@@ -53,10 +53,10 @@ def render_current_location(board, character):
     scenario = board[character_coordinates]
     # HACK: need fix
     if isinstance(scenario, dict):
-        dialogue.render_dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
+        render_dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
 
     render_ascii_map(board, character_coordinates)
-    utils.render_text.print_text_line(scenario)
+    render_text.print_text_line(scenario)
 
 
 def make_board(level_info):

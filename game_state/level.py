@@ -1,10 +1,11 @@
 import json
 
-import enviroment.board
+from enviroment import board
+from game_state import character
+from interaction import monster_interaction
+from utils import render_text
+# TODO: refactor process user action
 from interaction.handle_input import process_users_action
-import game_state.character
-import interaction.monster_interaction
-import utils.render_text
 
 
 def get_game_level_info(level):
@@ -15,7 +16,7 @@ def get_game_level_info(level):
     return level_info
 
 
-def play_level(level, character):
+def play_level(level, game_character):
     """
     Initialize the test_game
 
@@ -27,30 +28,30 @@ def play_level(level, character):
     rows = level_info["rows"]
     columns = level_info["columns"]
 
-    board = enviroment.board.make_board(level_info)
+    game_board = board.make_board(level_info)
     achieved_goal = False
 
-    utils.render_text.print_text_line(level_info.get("entrance_description", ""))
+    render_text.print_text_line(level_info.get("entrance_description", ""))
 
-    while game_state.character.is_alive(character) and not achieved_goal:
-        enviroment.board.render_current_location(board, character)
-        direction = process_users_action(character)
-        valid_move = enviroment.board.validate_move(rows, columns, character, direction)
+    while character.is_alive(game_character) and not achieved_goal:
+        board.render_current_location(game_board, game_character)
+        direction = process_users_action(game_character)
+        valid_move = board.validate_move(rows, columns, game_character, direction)
         if valid_move:
-            game_state.character.move_character(character, direction)
+            character.move_character(game_character, direction)
             # display_current_location(board, character)
-            there_is_a_challenger = interaction.monster_interaction.check_for_monsters()
+            there_is_a_challenger = monster_interaction.check_for_monsters()
             if there_is_a_challenger:
-                interaction.monster_interaction.play_monster_encounter(character)
-            achieved_goal = game_state.character.check_if_goal_attained(character)
+                monster_interaction.play_monster_encounter(game_character)
+            achieved_goal = character.check_if_goal_attained(game_character)
         else:
             color_flag = "!"
-            utils.render_text.print_text_line(f"{color_flag}You cannot go here!")
+            render_text.print_text_line(f"{color_flag}You cannot go here!")
 
-    if not game_state.character.is_alive(character):
+    if not character.is_alive(game_character):
         print("Sorry, you died.")
         return
     else:
         print("Congrats! You reached the end!")
         # TODO: character = STAT BOOST HELPER(character)
-        return character
+        return game_character

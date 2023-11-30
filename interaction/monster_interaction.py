@@ -1,6 +1,6 @@
 import random
 
-import utils.render_text
+from utils import render_text
 
 
 def check_for_monsters():
@@ -27,7 +27,7 @@ def play_monster_encounter(character):
     :postcondition: 1 HP is deducted from character if user guesses incorrectly, no data is modified otherwise
     :return: None
     """
-    utils.render_text.print_text_line("!>>> !!! ALERT: MONSTER ENCOUNTER !!! <<<")
+    render_text.print_text_line("!>>> !!! ALERT: MONSTER ENCOUNTER !!! <<<")
     # with K as kill
     # if user use guess: they gain wisdom
     # if user use kill, they gain anger
@@ -45,24 +45,24 @@ def play_monster_encounter(character):
     )
 
     if guess == "K":
-        utils.render_text.print_text_line(
+        render_text.print_text_line(
             "You killed the monster ruthlessly. Though you are unharmed, you feel an anger inside brewing."
         )
-        utils.render_text.print_text_line("!You gained 5 Fury")
+        render_text.print_text_line("!You gained 5 Fury")
         character["Fury"] += 5
         return
 
     while not (guess.isdigit() and int(guess) in range(1, upper + 1)):
-        utils.render_text.print_text_line(
+        render_text.print_text_line(
             f"!Invalid entry, please enter a number between {lower} and {upper} inclusive: "
         )
         guess = input()
 
     if int(guess) == secret_number:
-        utils.render_text.print_text_line("You succesfully deterred the monster!")
-        utils.render_text.print_text_line("$You gained 5 Wisdom!")
+        render_text.print_text_line("You succesfully deterred the monster!")
+        render_text.print_text_line("$You gained 5 Wisdom!")
         character["Wisdom"] += 5
     else:
         character["Essence"] -= 5
-        utils.render_text.print_text_line(f"You failed, the monster attacked you and ran away.")
-        utils.render_text.print_text_line("!You just lost 5 Essence Point")
+        render_text.print_text_line(f"You failed, the monster attacked you and ran away.")
+        render_text.print_text_line("!You just lost 5 Essence Point")

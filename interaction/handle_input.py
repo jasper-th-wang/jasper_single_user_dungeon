@@ -1,6 +1,5 @@
 # TODO: 3 functions are doing the same thing, consolidate
-import game_state.character
-
+from game_state import character
 
 def get_users_choice(number_of_choices):
     """
@@ -17,7 +16,7 @@ def get_users_choice(number_of_choices):
     return user_input
 
 
-def process_users_action(character):
+def process_users_action(game_character):
     """
     Print a prompt to ask for the direction the user wish to move towards
 
@@ -38,6 +37,6 @@ def process_users_action(character):
             continue
 
         if user_choice == "!":
-            game_state.character.display_stats(character)
+            character.display_stats(game_character)
         else:
             return user_choice.upper()
