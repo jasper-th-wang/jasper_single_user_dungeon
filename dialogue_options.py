@@ -1,15 +1,9 @@
 """
+TODO: Circular Calling need fixing
 ADD A DOCSTRING
 """
-from dialogues import render_dialogues
+from dialogues import render_dialogues as render_dialogues_dictionary
 from utils import get_users_choice
-
-
-def main():
-    pass
- 
-if __name__ == "__main__":
-    main()
 
 
 def render_options_menu(options_list):
@@ -53,7 +47,7 @@ def play_elimination(options_list):
             terminating_option_chosen = True
 
         print("\n")
-        render_dialogues(
+        render_dialogues_dictionary(
             {
                 "dialogues": options_list[user_input - 1]["dialogues"],
                 "properties": {
@@ -74,7 +68,7 @@ def play_multiple_choice(options_list):
             print(f"You must enter a number between 1 and {len(options_list)}")
             continue
 
-        render_dialogues(
+        render_dialogues_dictionary(
             {
                 "dialogues": options_list[user_input - 1]["dialogues"],
                 "properties": {
