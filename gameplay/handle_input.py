@@ -1,6 +1,7 @@
 # TODO: 3 functions are doing the same thing, consolidate
 from gameplay import character
 
+
 def get_users_choice(number_of_choices):
     """
     Print a prompt to get the desired choice number from user

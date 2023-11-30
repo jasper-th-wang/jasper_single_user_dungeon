@@ -1,7 +1,7 @@
 import json
 import random
 
-from gameplay import character, board, monster_interaction, render_text
+from gameplay import character, board, monster, render_text
 # TODO: refactor process user action
 from gameplay.handle_input import process_users_action
 
@@ -40,7 +40,7 @@ def play_level(level, game_character):
             # display_current_location(board, character)
             there_is_a_challenger = check_for_monsters()
             if there_is_a_challenger:
-                monster_interaction.play_monster_encounter(game_character)
+                monster.play_monster_encounter(game_character)
             achieved_goal = character.check_if_goal_attained(game_character)
         else:
             color_flag = "!"
