@@ -2,8 +2,8 @@
 TODO: Circular Calling need fixing
 ADD A DOCSTRING
 """
-from dialogue.render_dialogue import render_dialogues as render_dialogues_dictionary
-from utils.handle_input import get_users_choice
+import dialogue.render_dialogue
+from interaction.handle_input import get_users_choice
 
 
 def render_options_menu(options_list):
@@ -47,7 +47,7 @@ def play_elimination(options_list):
             terminating_option_chosen = True
 
         print("\n")
-        render_dialogues_dictionary(
+        dialogue.render_dialogue.render_dialogues(
             {
                 "dialogues": options_list[user_input - 1]["dialogues"],
                 "properties": {
@@ -68,7 +68,7 @@ def play_multiple_choice(options_list):
             print(f"You must enter a number between 1 and {len(options_list)}")
             continue
 
-        render_dialogues_dictionary(
+        dialogue.render_dialogue.render_dialogues(
             {
                 "dialogues": options_list[user_input - 1]["dialogues"],
                 "properties": {
