@@ -7,7 +7,14 @@ from gameplay import handle_input
 
 
 def render_options_menu(options_list):
-    # NOTE: for display options as multiple choice by print
+    """
+    Print an options menu during player options interaction
+
+    :param options_list: a list containing one or more option dictionaries
+    :precondition: options_list must not be empty
+    :postcondition: an options menu is generated, no data is modified
+    :return: None
+    """
     option_number = 1
 
     for option in options_list:
@@ -16,26 +23,30 @@ def render_options_menu(options_list):
 
 
 def play_elimination(options_list):
-    # find terminating option's index
-    # terminating_option_index = 0
+    """
+    Play elimination options interactions where player must choose terminating option to end the interaction
 
-    for option in options_list:
-        option["terminating"] = False
+    :param options_list: a list containing one or more option dictionaries
+    :return:
+    """
+    # TODO: extract this to its own helper
+    # find terminating option's index by finding option that contain "$" prefix
+    # for option in options_list:
+    #     # initialize all options' "terminating" property to False
+    #     option["terminating"] = False
+    #
+    #     # if there are "$" prefix,
+    #     # remove "$" character in its "option" property,and set "terminating" to True
+    #     if option["option"].startswith("$"):
+    #         option["option"] = option["option"][1:]
+    #         option["terminating"] = True
+    #         break
 
-        if option["option"].startswith("$"):
-            # remove the $ mark
-            option["option"] = option["option"][1:]
-            option["terminating"] = True
-            break
-
-        # terminating_option_index += 1
-
+    # Initialize terminating condition to False
     terminating_option_chosen = False
-
     # user prompt loop begin
     while not terminating_option_chosen:
         render_options_menu(options_list)
-        # TODO: duplicate code
 
         print("Enter your choice: ")
         user_input = handle_input.get_valid_user_input(len(options_list))

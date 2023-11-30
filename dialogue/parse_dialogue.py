@@ -46,6 +46,12 @@ def initialize_option(line, option, list_of_options):
     # initialize option dictionary
     option["option"] = line.replace(OPTION_FLAG, "")
 
+    if option["option"].startswith("$"):
+        option["option"] = option["option"][1:]
+        option["terminating"] = True
+    else:
+        option["terminating"] = False
+
 
 # TODO: function way too big
 def build_renderable_dialogue_list(dialogue_content):
