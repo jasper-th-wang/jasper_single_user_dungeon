@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from dialogues import build_renderable_dialogue_list
+from dialogue.parse_dialogue import build_renderable_dialogue_list
 
 # from unittest.mock import patch
 

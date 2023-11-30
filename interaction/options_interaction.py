@@ -2,8 +2,8 @@
 TODO: Circular Calling need fixing
 ADD A DOCSTRING
 """
-from dialogues import render_dialogues as render_dialogues_dictionary
-from utils import get_users_choice
+from dialogue.render_dialogue import render_dialogues as render_dialogues_dictionary
+from utils.handle_input import get_users_choice
 
 
 def render_options_menu(options_list):

@@ -1,9 +1,7 @@
 # TODO: rename this module to like rendering utils??
 import copy
 
-from constants import TEXT_FLAGS
-from dialogue_options import play_options_interactions
-from render_text import print_text_line
+from utils.constants import TEXT_FLAGS
 
 
 def get_dialogue_file_properties(property_line_list):
@@ -110,29 +108,5 @@ def parse_dialogue_file(file_path):
             "properties": dialogues_properties,
             "dialogues": renderable_dialogues,
         }
-
-
-def render_dialogues(parsed_dialogues_dictionary):
-    """
-    Render lines one by one
-
-    :param parsed_dialogues_dictionary:
-    :return:
-    """
-    dialogues_properties = parsed_dialogues_dictionary["properties"]
-    parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
-
-    for item in parsed_dialogues_list:
-        if isinstance(item, str):
-            print_text_line(item)
-            continue
-        if isinstance(item, list):
-            play_options_interactions(item, dialogues_properties["option_type"])
-            continue
-
-
-def play_dialogues_from_file(file_path):
-    parsed_dialogues = parse_dialogue_file(file_path)
-    render_dialogues(parsed_dialogues)
 
 # HACK: might need to break it down

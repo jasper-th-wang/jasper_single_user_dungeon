@@ -5,9 +5,9 @@ A01362031
 import json
 import random
 
-from dialogues import play_dialogues_from_file
-from monster import check_for_monsters, play_monster_encounter
-from render_text import print_text_line
+from dialogue.render_dialogue import play_dialogues_from_file
+from interaction.monster_interaction import check_for_monsters, play_monster_encounter
+from utils.render_text import print_text_line
 
 # TODO: modify character docstrings in different functions according to new stats schemes
 

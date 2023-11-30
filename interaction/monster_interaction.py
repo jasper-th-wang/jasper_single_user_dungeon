@@ -1,6 +1,6 @@
 import random
 
-from render_text import print_text_line
+from utils.render_text import print_text_line
 
 
 def check_for_monsters():
