@@ -3,7 +3,7 @@ TODO: Circular Calling need fixing
 ADD A DOCSTRING
 """
 import dialogue.render_dialogue
-from interaction.handle_input import get_users_choice
+import interaction.handle_input
 
 
 def render_options_menu(options_list):
@@ -36,7 +36,7 @@ def play_elimination(options_list):
     while not terminating_option_chosen:
         render_options_menu(options_list)
         try:
-            user_input = get_users_choice(len(options_list))
+            user_input = interaction.handle_input.get_users_choice(len(options_list))
         except ValueError:
             print(f"You must enter a number between 1 and {len(options_list)}")
             continue
@@ -63,7 +63,7 @@ def play_multiple_choice(options_list):
         render_options_menu(options_list)
 
         try:
-            user_input = get_users_choice(len(options_list))
+            user_input = interaction.handle_input.get_users_choice(len(options_list))
         except ValueError:
             print(f"You must enter a number between 1 and {len(options_list)}")
             continue

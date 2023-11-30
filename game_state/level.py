@@ -1,10 +1,10 @@
 import json
 
 import enviroment.board
-from game import process_users_action
-from game_state.character import move_character, check_if_goal_attained, is_alive
-from interaction.monster_interaction import check_for_monsters, play_monster_encounter
-from utils.render_text import print_text_line
+from interaction.handle_input import process_users_action
+import game_state.character
+import interaction.monster_interaction
+import utils.render_text
 
 
 def get_game_level_info(level):
@@ -15,7 +15,7 @@ def get_game_level_info(level):
     return level_info
 
 
-def play_game_level(level, character):
+def play_level(level, character):
     """
     Initialize the test_game
 
@@ -30,24 +30,24 @@ def play_game_level(level, character):
     board = enviroment.board.make_board(level_info)
     achieved_goal = False
 
-    print_text_line(level_info.get("entrance_description", ""))
+    utils.render_text.print_text_line(level_info.get("entrance_description", ""))
 
-    while is_alive(character) and not achieved_goal:
+    while game_state.character.is_alive(character) and not achieved_goal:
         enviroment.board.render_current_location(board, character)
         direction = process_users_action(character)
         valid_move = enviroment.board.validate_move(rows, columns, character, direction)
         if valid_move:
-            move_character(character, direction)
+            game_state.character.move_character(character, direction)
             # display_current_location(board, character)
-            there_is_a_challenger = check_for_monsters()
+            there_is_a_challenger = interaction.monster_interaction.check_for_monsters()
             if there_is_a_challenger:
-                play_monster_encounter(character)
-            achieved_goal = check_if_goal_attained(character)
+                interaction.monster_interaction.play_monster_encounter(character)
+            achieved_goal = game_state.character.check_if_goal_attained(character)
         else:
             color_flag = "!"
-            print_text_line(f"{color_flag}You cannot go here!")
+            utils.render_text.print_text_line(f"{color_flag}You cannot go here!")
 
-    if not is_alive(character):
+    if not game_state.character.is_alive(character):
         print("Sorry, you died.")
         return
     else:
