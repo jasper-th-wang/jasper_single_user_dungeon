@@ -3,19 +3,25 @@ from gameplay import character
 from gameplay.render_text import print_text_line
 
 
-def validate_integer_input(user_input, number_of_choices):
-    return number_of_choices and user_input.isdigit() and 1 <= int(user_input) <= number_of_choices
-
-
-def validate_character_input(user_input, valid_characters):
+def process_users_action(game_character):
     """
-    return uppercase
+    Print a prompt to ask for the direction the user wish to move towards
 
-    :param user_input:
-    :param valid_characters:
-    :return:
+    :postcondition: print a prompt to ask for user input, no data is modified
+    :return: an integer representing the user's inputted direction
     """
-    return valid_characters and user_input.upper() in valid_characters.upper()
+    AVAILABLE_ACTIONS = "WASD!"
+
+    while True:
+        print(
+            "What would you like to do? (Type ! to see stats and available actions.)"
+        )
+        user_choice = get_valid_user_input(valid_characters=AVAILABLE_ACTIONS)
+
+        if user_choice == "!":
+            character.display_stats(game_character)
+        else:
+            return user_choice
 
 
 def get_valid_user_input(number_of_choices=None, valid_characters=None):
@@ -50,22 +56,16 @@ def get_valid_user_input(number_of_choices=None, valid_characters=None):
             raise ValueError("No choices or valid characters given for validation")
 
 
-def process_users_action(game_character):
+def validate_integer_input(user_input, number_of_choices):
+    return number_of_choices and user_input.isdigit() and 1 <= int(user_input) <= number_of_choices
+
+
+def validate_character_input(user_input, valid_characters):
     """
-    Print a prompt to ask for the direction the user wish to move towards
+    return uppercase
 
-    :postcondition: print a prompt to ask for user input, no data is modified
-    :return: an integer representing the user's inputted direction
+    :param user_input:
+    :param valid_characters:
+    :return:
     """
-    AVAILABLE_ACTIONS = "WASD!"
-
-    while True:
-        print(
-            "What would you like to do? (Type ! to see stats and available actions.)"
-        )
-        user_choice = get_valid_user_input(valid_characters=AVAILABLE_ACTIONS)
-
-        if user_choice == "!":
-            character.display_stats(game_character)
-        else:
-            return user_choice
+    return valid_characters and user_input.upper() in valid_characters.upper()
