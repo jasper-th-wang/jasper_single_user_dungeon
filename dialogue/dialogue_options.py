@@ -12,8 +12,7 @@ def render_options_menu(options_list):
 
     :param options_list: a list containing one or more option dictionaries
     :precondition: options_list must not be empty
-    :postcondition: an options menu is generated, no data is modified
-    :return: None
+    :postcondition: an options menu is printed to the screen, no data is modified
     """
     option_number = 1
 
@@ -27,7 +26,8 @@ def play_elimination(options_list):
     Play elimination options interactions where player must choose terminating option to end the interaction
 
     :param options_list: a list containing one or more option dictionaries
-    :return:
+    :precondition: options_list must not be empty
+    :postcondition:
     """
     # Initialize terminating condition to False
     terminating_option_chosen = False
