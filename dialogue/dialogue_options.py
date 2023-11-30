@@ -36,11 +36,9 @@ def play_elimination(options_list):
     while not terminating_option_chosen:
         render_options_menu(options_list)
         # TODO: duplicate code
-        try:
-            user_input = handle_input.get_users_choice(len(options_list))
-        except ValueError:
-            print(f"You must enter a number between 1 and {len(options_list)}")
-            continue
+
+        print("Enter your choice: ")
+        user_input = handle_input.get_valid_user_input(len(options_list))
 
         chosen_option = options_list[user_input - 1]
 
@@ -63,11 +61,8 @@ def play_multiple_choice(options_list):
     while True:
         render_options_menu(options_list)
 
-        try:
-            user_input = handle_input.get_users_choice(len(options_list))
-        except ValueError:
-            print(f"You must enter a number between 1 and {len(options_list)}")
-            continue
+        print("Enter your choice: ")
+        user_input = handle_input.get_valid_user_input(len(options_list))
 
         render_dialogue.render_dialogues(
             {

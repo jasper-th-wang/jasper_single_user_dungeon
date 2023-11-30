@@ -1,8 +1,10 @@
 import random
 
 from gameplay import render_text
+from gameplay.handle_input import get_valid_user_input
 
 
+# TODO: Need improvement
 def determine_upper_bound(wisdom_points):
     if wisdom_points > 30:
         return 3
@@ -10,6 +12,8 @@ def determine_upper_bound(wisdom_points):
         return 2
     elif wisdom_points > 100:
         return 1
+    else:
+        return 5
 
 
 # TODO: Change docstrings
@@ -32,9 +36,12 @@ def play_monster_encounter(character):
     upper = determine_upper_bound(character['Wisdom'])
 
     secret_number = random.randint(lower, upper)
-    guess = input(
+
+    print(
         f"Enter a number between {lower} and {upper} inclusive to deterred the monster, or type 'K' to kill the monster: "
     )
+
+    guess = get_valid_user_input(upper, ["K", "k"])
 
     if guess == "K" or guess == "k":
         render_text.print_text_line(
@@ -43,12 +50,6 @@ def play_monster_encounter(character):
         render_text.print_text_line("!You gained 5 Fury")
         character["Fury"] += 5
         return
-
-    while not (guess.isdigit() and int(guess) in range(1, upper + 1)):
-        render_text.print_text_line(
-            f"!Invalid entry, please enter a number between {lower} and {upper} inclusive: "
-        )
-        guess = input()
 
     if int(guess) == secret_number:
         render_text.print_text_line("You succesfully deterred the monster!")
