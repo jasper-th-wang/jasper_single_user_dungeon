@@ -1,6 +1,5 @@
-from dialogue import parse_dialogue
-from interaction import options_interaction
-from utils import render_text
+from dialogue import parse_dialogue, dialogue_options
+from gameplay import render_text
 
 
 def render_dialogues(parsed_dialogues_dictionary):
@@ -18,7 +17,7 @@ def render_dialogues(parsed_dialogues_dictionary):
             render_text.print_text_line(item)
             continue
         if isinstance(item, list):
-            options_interaction.play_options_interactions(item, dialogues_properties["option_type"])
+            dialogue_options.play_options_interactions(item, dialogues_properties["option_type"])
             continue
 
 

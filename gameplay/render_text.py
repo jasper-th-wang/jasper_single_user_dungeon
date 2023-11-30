@@ -1,7 +1,7 @@
 import sys
 from time import sleep
 
-from utils.constants import TEXT_COLORS
+from gameplay.constants import TEXT_COLORS
 
 
 def calculate_word_count(text):

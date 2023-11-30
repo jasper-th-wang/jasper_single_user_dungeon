@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game_state.character import is_alive
+from gameplay.character import is_alive
 
 
 class Test(TestCase):

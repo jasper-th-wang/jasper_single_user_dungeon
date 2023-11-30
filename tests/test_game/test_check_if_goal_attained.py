@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game_state.character import check_if_goal_attained
+from gameplay.character import check_if_goal_attained
 
 
 class Test(TestCase):

@@ -1,20 +1,6 @@
 import random
 
-from utils import render_text
-
-
-def check_for_monsters():
-    """
-    Determine whether a foe is present
-
-    :postcondition: determine if a foe is present by comparing equality between 0 with generated random integer
-    :return: a Boolean value of True if foe is present, False otherwise
-    """
-    random_number = random.randint(0, 3)
-    if random_number == 0:
-        return True
-
-    return False
+from gameplay import render_text
 
 
 # TODO: Change docstrings

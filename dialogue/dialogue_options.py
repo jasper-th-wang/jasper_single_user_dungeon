@@ -3,7 +3,7 @@ TODO: Circular Calling need fixing
 ADD A DOCSTRING
 """
 from dialogue import render_dialogue
-from interaction import handle_input
+from gameplay import handle_input
 
 
 def render_options_menu(options_list):

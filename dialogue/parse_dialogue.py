@@ -1,7 +1,7 @@
 # TODO: rename this module to like rendering utils??
 import copy
 
-from utils import constants
+from gameplay import constants
 
 
 def get_dialogue_file_properties(property_line_list):

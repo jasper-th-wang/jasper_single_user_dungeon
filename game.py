@@ -4,8 +4,8 @@ A01362031
 """
 
 import dialogue.render_dialogue
-import game_state.character
-from game_state.level import play_level
+import gameplay.character
+from gameplay.level import play_level
 
 
 # TODO: modify character docstrings in different functions according to new stats schemes
@@ -53,7 +53,7 @@ def game():
     MAX_LEVEL = 3
     # HACK: commented out
     opening_sequence()
-    character = game_state.character.make_character()
+    character = gameplay.character.make_character()
     for level in range(1, MAX_LEVEL + 1):
         character = play_level(level, character)
         # TODO: What?

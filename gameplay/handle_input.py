@@ -1,5 +1,5 @@
 # TODO: 3 functions are doing the same thing, consolidate
-from game_state import character
+from gameplay import character
 
 def get_users_choice(number_of_choices):
     """

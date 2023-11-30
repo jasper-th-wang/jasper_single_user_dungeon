@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game_state.character import move_character
+from gameplay.character import move_character
 
 
 class Test(TestCase):

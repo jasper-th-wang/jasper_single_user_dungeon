@@ -4,7 +4,7 @@ ADD A DOCSTRING
 import random
 
 from dialogue import render_dialogue
-from utils import render_text
+from gameplay import render_text
 
 
 def get_board_dimensions(board):
@@ -51,12 +51,13 @@ def render_current_location(board, character):
     """
     character_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     scenario = board[character_coordinates]
-    # HACK: need fix
-    if isinstance(scenario, dict):
-        render_dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
+    there_is_a_npc = check_for_npc(scenario)
 
-    render_ascii_map(board, character_coordinates)
-    render_text.print_text_line(scenario)
+    if not there_is_a_npc:
+        render_ascii_map(board, character_coordinates)
+        render_text.print_text_line(scenario)
+    else:
+        return
 
 
 def make_board(level_info):
@@ -128,4 +129,12 @@ def validate_move(rows, columns, character, direction):
     if 0 <= coordinate < boundary:
         return True
 
+    return False
+
+
+def check_for_npc(scenario):
+    # HACK: need fix
+    if isinstance(scenario, dict):
+        render_dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
+        return True
     return False

@@ -1,11 +1,9 @@
 import json
+import random
 
-from enviroment import board
-from game_state import character
-from interaction import monster_interaction
-from utils import render_text
+from gameplay import character, board, monster_interaction, render_text
 # TODO: refactor process user action
-from interaction.handle_input import process_users_action
+from gameplay.handle_input import process_users_action
 
 
 def get_game_level_info(level):
@@ -40,7 +38,7 @@ def play_level(level, game_character):
         if valid_move:
             character.move_character(game_character, direction)
             # display_current_location(board, character)
-            there_is_a_challenger = monster_interaction.check_for_monsters()
+            there_is_a_challenger = check_for_monsters()
             if there_is_a_challenger:
                 monster_interaction.play_monster_encounter(game_character)
             achieved_goal = character.check_if_goal_attained(game_character)
@@ -55,3 +53,17 @@ def play_level(level, game_character):
         print("Congrats! You reached the end!")
         # TODO: character = STAT BOOST HELPER(character)
         return game_character
+
+
+def check_for_monsters():
+    """
+    Determine whether a foe is present
+
+    :postcondition: determine if a foe is present by comparing equality between 0 with generated random integer
+    :return: a Boolean value of True if foe is present, False otherwise
+    """
+    random_number = random.randint(0, 3)
+    if random_number == 0:
+        return True
+
+    return False
