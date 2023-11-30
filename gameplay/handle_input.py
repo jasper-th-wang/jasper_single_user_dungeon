@@ -55,12 +55,6 @@ def process_users_action(game_character):
         )
         user_choice = get_valid_user_input(valid_characters=AVAILABLE_ACTIONS)
 
-        # if len(user_choice) != 1 or user_choice not in AVAILABLE_ACTIONS:
-        #     print(
-        #         f"Invalid entry, please enter one of the following letters or characters: {', '.join('WASD!')}"
-        #     )
-        #     continue
-
         if user_choice == "!":
             character.display_stats(game_character)
         else:

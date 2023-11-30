@@ -29,19 +29,6 @@ def play_elimination(options_list):
     :param options_list: a list containing one or more option dictionaries
     :return:
     """
-    # TODO: extract this to its own helper
-    # find terminating option's index by finding option that contain "$" prefix
-    # for option in options_list:
-    #     # initialize all options' "terminating" property to False
-    #     option["terminating"] = False
-    #
-    #     # if there are "$" prefix,
-    #     # remove "$" character in its "option" property,and set "terminating" to True
-    #     if option["option"].startswith("$"):
-    #         option["option"] = option["option"][1:]
-    #         option["terminating"] = True
-    #         break
-
     # Initialize terminating condition to False
     terminating_option_chosen = False
     # user prompt loop begin

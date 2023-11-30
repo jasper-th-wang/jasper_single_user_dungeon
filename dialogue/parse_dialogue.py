@@ -114,5 +114,3 @@ def parse_dialogue_file(file_path):
             "properties": dialogues_properties,
             "dialogues": renderable_dialogues,
         }
-
-# HACK: might need to break it down
