@@ -1,6 +1,6 @@
-from dialogue.parse_dialogue import parse_dialogue_file
-from interaction.options_interaction import play_options_interactions
-from utils.render_text import print_text_line
+import dialogue.parse_dialogue
+import interaction.options_interaction
+import utils.render_text
 
 
 def render_dialogues(parsed_dialogues_dictionary):
@@ -15,13 +15,13 @@ def render_dialogues(parsed_dialogues_dictionary):
 
     for item in parsed_dialogues_list:
         if isinstance(item, str):
-            print_text_line(item)
+            utils.render_text.print_text_line(item)
             continue
         if isinstance(item, list):
-            play_options_interactions(item, dialogues_properties["option_type"])
+            interaction.options_interaction.play_options_interactions(item, dialogues_properties["option_type"])
             continue
 
 
 def play_dialogues_from_file(file_path):
-    parsed_dialogues = parse_dialogue_file(file_path)
+    parsed_dialogues = dialogue.parse_dialogue.parse_dialogue_file(file_path)
     render_dialogues(parsed_dialogues)

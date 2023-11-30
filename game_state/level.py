@@ -1,7 +1,8 @@
 import json
 
-from enviroment.board import make_board, render_current_location, validate_move
-from game import is_alive, process_users_action, move_character, check_if_goal_attained
+import enviroment.board
+from game import process_users_action
+from game_state.character import move_character, check_if_goal_attained, is_alive
 from interaction.monster_interaction import check_for_monsters, play_monster_encounter
 from utils.render_text import print_text_line
 
@@ -26,15 +27,15 @@ def play_game_level(level, character):
     rows = level_info["rows"]
     columns = level_info["columns"]
 
-    board = make_board(level_info)
+    board = enviroment.board.make_board(level_info)
     achieved_goal = False
 
     print_text_line(level_info.get("entrance_description", ""))
 
     while is_alive(character) and not achieved_goal:
-        render_current_location(board, character)
+        enviroment.board.render_current_location(board, character)
         direction = process_users_action(character)
-        valid_move = validate_move(rows, columns, character, direction)
+        valid_move = enviroment.board.validate_move(rows, columns, character, direction)
         if valid_move:
             move_character(character, direction)
             # display_current_location(board, character)
