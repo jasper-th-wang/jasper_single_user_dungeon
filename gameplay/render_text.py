@@ -19,9 +19,7 @@ def calculate_delay_duration_in_seconds(text):
     pause_duration = word_count / WORD_PER_SECOND
 
     # Cap max duration to 2 seconds
-    if pause_duration > 2:
-        pause_duration = 2
-    # print(pause_duration)
+    pause_duration = min(pause_duration, 2)
     return pause_duration
 
 
@@ -30,7 +28,7 @@ def print_with_typewritter_effect(text):
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
-        if character == "," or character == ".":
+        if character in [",", "."]:
             sleep(0.15)
         sleep(0.01)
     print("\n")

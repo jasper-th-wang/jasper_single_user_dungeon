@@ -34,12 +34,10 @@ def play_level(level, game_character):
     while character.is_alive(game_character) and not achieved_goal:
         board.render_current_location(game_board, game_character)
         direction = process_users_action(game_character)
-        valid_move = board.validate_move(rows, columns, game_character, direction)
-        if valid_move:
+        if board.validate_move(rows, columns, game_character, direction):
             character.move_character(game_character, direction)
             # display_current_location(board, character)
-            there_is_a_challenger = check_for_monsters()
-            if there_is_a_challenger:
+            if check_for_monsters():
                 monster.play_monster_encounter(game_character)
             achieved_goal = character.check_if_goal_attained(game_character)
         else:
@@ -63,7 +61,4 @@ def check_for_monsters():
     :return: a Boolean value of True if foe is present, False otherwise
     """
     random_number = random.randint(0, 3)
-    if random_number == 0:
-        return True
-
-    return False
+    return random_number == 0
