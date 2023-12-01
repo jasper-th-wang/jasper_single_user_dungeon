@@ -31,11 +31,8 @@ def play_elimination(options_list):
     # user prompt loop begin
     while True:
         render_options_menu(options_list)
-
         user_input = handle_input.get_valid_user_input(len(options_list))
-
         chosen_option = options_list[user_input - 1]
-
         if chosen_option["terminating"]:
             break
 
@@ -53,9 +50,7 @@ def play_elimination(options_list):
 def play_multiple_choice(options_list):
     while True:
         render_options_menu(options_list)
-
         user_input = handle_input.get_valid_user_input(len(options_list))
-
         render_dialogue.render_dialogues(
             {
                 "dialogues": options_list[user_input - 1]["dialogues"],
