@@ -20,58 +20,28 @@ def get_dialogue_file_properties(property_line_list):
     return dialogues_properties
 
 
-def add_options_to_dialogue_line_list(option, list_of_options, dialogue_lines_list):
-    list_of_options.append(copy.copy(option))
-    option.clear()
-    dialogue_lines_list.append(copy.copy(list_of_options))
-    list_of_options.clear()
-
-
-def add_dialogue_line_to_option(line, option):
-    line = line.strip()
-    option.setdefault("dialogues", []).append(line)
-
-
-def initialize_option(line, option, list_of_options):
-    OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]
-    # if an option already exists, store and clear that dictionary
-    if option:
-        # TODO: maybe need to use deepcopy?
-        list_of_options.append(copy.copy(option))
-        option.clear()
-    # initialize option dictionary
-    option["option"] = line.replace(OPTION_FLAG, "")
-    # if prefixed with $, option is terminating
-    option["terminating"] = option["option"].startswith("$")
-    option["option"] = option["option"][1:] if option["terminating"] else option["option"]
-
-
 # TODO: function way too big
 def build_renderable_dialogue_list(dialogue_content):
     dialogue_lines_list = []
     OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]
     list_of_options = []  # list of option
-    option = {}
-
     for line in dialogue_content:
         if line == "\n":
             continue
         line = line.rstrip()
         if OPTION_FLAG in line:
-            initialize_option(line, option, list_of_options)
-            continue
-        if line.startswith((" ", "\t")):
-            add_dialogue_line_to_option(line, option)
-            continue
-        # on new normal line, check if option related values exist in option dictionary
-        # if yes, store it into list_of_options, then store into dialogue_lines_list
-        if option:
-            add_options_to_dialogue_line_list(option, list_of_options, dialogue_lines_list)
-        dialogue_lines_list.append(line)
-    # after exhausting list, check if option related values are stored, if
-    # not, store it
-    if option:
-        add_options_to_dialogue_line_list(option, list_of_options, dialogue_lines_list)
+            option = {"option": line.replace(OPTION_FLAG, "")}
+            option["terminating"] = option["option"].startswith("$")
+            option["option"] = option["option"][1:] if option["terminating"] else option["option"]
+            list_of_options.append(option)
+        elif line.startswith((" ", "\t")):
+            line = line.strip()
+            list_of_options[-1].setdefault("dialogues", []).append(line)
+        elif list_of_options:
+            dialogue_lines_list.append(list_of_options)
+            list_of_options = []
+        else:
+            dialogue_lines_list.append(line)
 
     return dialogue_lines_list
 
