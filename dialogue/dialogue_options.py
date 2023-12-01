@@ -14,11 +14,8 @@ def render_options_menu(options_list):
     :precondition: options_list must not be empty
     :postcondition: an options menu is printed to the screen, no data is modified
     """
-    option_number = 1
-
-    for option in options_list:
+    for option_number, option in enumerate(options_list, start=1):
         print(f"{option_number}: {option['option']}")
-        option_number += 1
 
 
 def play_elimination(options_list):
@@ -32,21 +29,20 @@ def play_elimination(options_list):
     # Initialize terminating condition to False
     terminating_option_chosen = False
     # user prompt loop begin
-    while not terminating_option_chosen:
+    while True:
         render_options_menu(options_list)
 
-        print("Enter your choice: ")
+        print("Enter your choice: ", end="\n")
         user_input = handle_input.get_valid_user_input(len(options_list))
 
         chosen_option = options_list[user_input - 1]
 
         if chosen_option["terminating"]:
-            terminating_option_chosen = True
+            break
 
-        print("\n")
         render_dialogue.render_dialogues(
             {
-                "dialogues": options_list[user_input - 1]["dialogues"],
+                "dialogues": chosen_option["dialogues"],
                 "properties": {
                     "title": "option",
                 },

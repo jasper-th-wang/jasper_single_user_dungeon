@@ -38,7 +38,7 @@ def print_with_typewritter_effect(text):
 
 def process_text_color(text):
     # apply color, and remove color determining prefix
-    COMMAND_LINE_COLOR = TEXT_COLORS()
+    COMMAND_LINE_COLOR = TEXT_COLORS
     color_type = "NORMAL"
 
     if text.startswith("$"):
