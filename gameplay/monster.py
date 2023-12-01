@@ -6,18 +6,19 @@ from gameplay.handle_input import get_valid_user_input
 FURY_INCREMENT = 5
 WISDOM_INCREMENT = 5
 ESSENCE_DECREMENT = 5
-KILL_MONSTER_OPTION = 'K'
+KILL_MONSTER_OPTION = "K"
 
 
 def play_monster_encounter(character):
     render_text.print_text_line("!>>> !!! ALERT: MONSTER ENCOUNTER !!! <<<")
 
     lower = 1
-    upper = determine_upper_bound(character['Wisdom'])
+    upper = determine_upper_bound(character["Wisdom"])
     secret_number = random.randint(lower, upper)
 
     print(
-        f"Enter a number between {lower} and {upper} inclusive to deter the monster, or type '{KILL_MONSTER_OPTION}' to kill the monster")
+        f"Enter a number between {lower} and {upper} inclusive to deter the monster, or type '{KILL_MONSTER_OPTION}' to kill the monster"
+    )
 
     guess = get_valid_user_input(upper, KILL_MONSTER_OPTION)
 
@@ -45,7 +46,8 @@ def determine_upper_bound(wisdom_points):
 
 def kill_monster(character):
     render_text.print_text_line(
-        "You killed the monster ruthlessly. Though you are unharmed, you feel an anger inside brewing.")
+        "You killed the monster ruthlessly. Though you are unharmed, you feel an anger inside brewing."
+    )
     render_text.print_text_line(f"!You gained {FURY_INCREMENT} Fury")
     character["Fury"] += FURY_INCREMENT
 
@@ -60,4 +62,3 @@ def fail_to_deter_monster(character):
     character["Essence"] -= ESSENCE_DECREMENT
     render_text.print_text_line("You failed, the monster attacked you and ran away.")
     render_text.print_text_line(f"!You just lost {ESSENCE_DECREMENT} Essence Point")
-

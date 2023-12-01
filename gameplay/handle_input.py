@@ -1,5 +1,4 @@
 from gameplay import character
-from gameplay.render_text import print_text_line
 
 
 def process_users_action(game_character):
@@ -13,9 +12,7 @@ def process_users_action(game_character):
     AVAILABLE_ACTIONS = "WASD!"
 
     while True:
-        print(
-            "What would you like to do? (Type ! to see stats and available actions.)"
-        )
+        print("What would you like to do? (Type ! to see stats and available actions.)")
         user_choice = get_valid_user_input(valid_characters=AVAILABLE_ACTIONS)
 
         if user_choice == "!":
@@ -44,13 +41,13 @@ def get_valid_user_input(number_of_choices=None, valid_characters=None):
             return user_input.upper()
 
         if number_of_choices:
-            print_text_line(
-                f"!Invalid entry, please enter a number between 1 and {number_of_choices} inclusive"
+            print(
+                f"Invalid entry, please enter a number between 1 and {number_of_choices} inclusive"
             )
 
         if valid_characters:
-            print_text_line(
-                f"!Invalid entry, please enter one of the following letters or characters: {', '.join(valid_characters)}"
+            print(
+                f"Invalid entry, please enter one of the following letters or characters: {', '.join(valid_characters)}"
             )
 
         if not (number_of_choices or valid_characters):
@@ -65,7 +62,11 @@ def validate_integer_input(user_input, number_of_choices):
     :param number_of_choices: The upper bound of the range for validation.
     :return: True if the user input is a valid positive integer within the range, False otherwise.
     """
-    return number_of_choices and user_input.isdigit() and 1 <= int(user_input) <= number_of_choices
+    return (
+        number_of_choices
+        and user_input.isdigit()
+        and 1 <= int(user_input) <= number_of_choices
+    )
 
 
 def validate_character_input(user_input, valid_characters):
