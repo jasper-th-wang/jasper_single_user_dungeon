@@ -51,13 +51,10 @@ def render_current_location(board, character):
     """
     character_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     scenario = board[character_coordinates]
-    there_is_a_npc = check_for_npc(scenario)
-
-    if not there_is_a_npc:
-        render_ascii_map(board, character_coordinates)
-        render_text.print_text_line(scenario)
-    else:
+    if there_is_a_npc := check_for_npc(scenario):
         return
+    render_ascii_map(board, character_coordinates)
+    render_text.print_text_line(scenario)
 
 
 def make_board(level_info):
@@ -81,13 +78,11 @@ def make_board(level_info):
 
     coordinates = []
     for column in range(columns):
-        for row in range(rows):
-            coordinates.append((column, row))
-
-    board = {}
-    for coordinate in coordinates:
-        board[coordinate] = scenarios[random.randint(0, len(scenarios) - 1)]
-
+        coordinates.extend((column, row) for row in range(rows))
+    board = {
+        coordinate: scenarios[random.randint(0, len(scenarios) - 1)]
+        for coordinate in coordinates
+    }
     for npc in npcs:
         npc_coordinates = tuple(npc["coordinates"])
         board[npc_coordinates] = npc
@@ -126,10 +121,7 @@ def validate_move(rows, columns, character, direction):
         boundary = columns
         coordinate = character["X-coordinate"] - 1
 
-    if 0 <= coordinate < boundary:
-        return True
-
-    return False
+    return 0 <= coordinate < boundary
 
 
 def check_for_npc(scenario):
