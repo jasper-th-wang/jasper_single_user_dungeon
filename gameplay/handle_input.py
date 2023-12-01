@@ -1,14 +1,14 @@
-# TODO: 3 functions are doing the same thing, consolidate
 from gameplay import character
 from gameplay.render_text import print_text_line
 
 
 def process_users_action(game_character):
     """
-    Print a prompt to ask for the direction the user wish to move towards
+    Process the user's action in the game.
 
+    :param game_character: The game character.
     :postcondition: print a prompt to ask for user input, no data is modified
-    :return: an integer representing the user's inputted direction
+    :return: an integer representing the user's inputted action.
     """
     AVAILABLE_ACTIONS = "WASD!"
 
@@ -26,11 +26,12 @@ def process_users_action(game_character):
 
 def get_valid_user_input(number_of_choices=None, valid_characters=None):
     """
-    Print a prompt to get the desired choice number from user
-    return uppercase
+    Get valid user input based on the specified constraints.
 
-    :raises ValueError:
-    :return: a positive integer representing the user's inputted value
+    :param number_of_choices: The upper bound of the range for validating integer input.
+    :param valid_characters: A string representing the set of valid characters to compare against.
+    :return: The valid user input as an integer or uppercase string.
+    :raises ValueError: If no choices or valid characters are given for validation.
     """
     while True:
         user_input = input("Enter here: ")
@@ -57,15 +58,22 @@ def get_valid_user_input(number_of_choices=None, valid_characters=None):
 
 
 def validate_integer_input(user_input, number_of_choices):
+    """
+    Validate the user input as a positive integer within the specified range.
+
+    :param user_input: The user input to be validated.
+    :param number_of_choices: The upper bound of the range for validation.
+    :return: True if the user input is a valid positive integer within the range, False otherwise.
+    """
     return number_of_choices and user_input.isdigit() and 1 <= int(user_input) <= number_of_choices
 
 
 def validate_character_input(user_input, valid_characters):
     """
-    return uppercase
+    Validate the user input against a set of valid characters.
 
-    :param user_input:
-    :param valid_characters:
-    :return:
+    :param user_input: The user input to be validated.
+    :param valid_characters: A string representing the set of valid characters to compare against.
+    :return: True if the user input is in the set of valid characters, False otherwise.
     """
     return valid_characters and user_input.upper() in valid_characters.upper()
