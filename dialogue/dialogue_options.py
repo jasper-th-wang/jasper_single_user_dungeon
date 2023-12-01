@@ -32,7 +32,6 @@ def play_elimination(options_list):
     while True:
         render_options_menu(options_list)
 
-        print("Enter your choice: ", end="\n")
         user_input = handle_input.get_valid_user_input(len(options_list))
 
         chosen_option = options_list[user_input - 1]
@@ -55,7 +54,6 @@ def play_multiple_choice(options_list):
     while True:
         render_options_menu(options_list)
 
-        print("Enter your choice: ")
         user_input = handle_input.get_valid_user_input(len(options_list))
 
         render_dialogue.render_dialogues(

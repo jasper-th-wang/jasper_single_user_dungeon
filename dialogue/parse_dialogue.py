@@ -29,10 +29,7 @@ def add_options_to_dialogue_line_list(option, list_of_options, dialogue_lines_li
 
 def add_dialogue_line_to_option(line, option):
     line = line.strip()
-    if "dialogues" in option:
-        option["dialogues"].append(line)
-    else:
-        option["dialogues"] = [line]
+    option.setdefault("dialogues", []).append(line)
 
 
 def initialize_option(line, option, list_of_options):
@@ -42,15 +39,11 @@ def initialize_option(line, option, list_of_options):
         # TODO: maybe need to use deepcopy?
         list_of_options.append(copy.copy(option))
         option.clear()
-
     # initialize option dictionary
     option["option"] = line.replace(OPTION_FLAG, "")
-
-    if option["option"].startswith("$"):
-        option["option"] = option["option"][1:]
-        option["terminating"] = True
-    else:
-        option["terminating"] = False
+    # if prefixed with $, option is terminating
+    option["terminating"] = option["option"].startswith("$")
+    option["option"] = option["option"][1:] if option["terminating"] else option["option"]
 
 
 # TODO: function way too big
@@ -63,24 +56,18 @@ def build_renderable_dialogue_list(dialogue_content):
     for line in dialogue_content:
         if line == "\n":
             continue
-
         line = line.rstrip()
-
         if OPTION_FLAG in line:
             initialize_option(line, option, list_of_options)
             continue
-
         if line.startswith((" ", "\t")):
             add_dialogue_line_to_option(line, option)
             continue
-
-        # on new normal line, check if option related values are stored, if
-        # not, store it
+        # on new normal line, check if option related values exist in option dictionary
+        # if yes, store it into list_of_options, then store into dialogue_lines_list
         if option:
             add_options_to_dialogue_line_list(option, list_of_options, dialogue_lines_list)
-
         dialogue_lines_list.append(line)
-
     # after exhausting list, check if option related values are stored, if
     # not, store it
     if option:
