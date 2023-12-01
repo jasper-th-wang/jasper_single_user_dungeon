@@ -26,9 +26,6 @@ def play_elimination(options_list):
     :precondition: options_list must not be empty
     :postcondition:
     """
-    # Initialize terminating condition to False
-    terminating_option_chosen = False
-    # user prompt loop begin
     while True:
         render_options_menu(options_list)
         user_input = handle_input.get_valid_user_input(len(options_list))
