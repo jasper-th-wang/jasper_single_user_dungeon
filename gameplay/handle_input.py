@@ -33,6 +33,9 @@ def get_valid_user_input(number_of_choices=None, valid_characters=None):
     while True:
         user_input = input("Enter here: ")
 
+        if not user_input:
+            print("Invalid entry, you must enter something!")
+            continue
         # Check for single digit integer
         if validate_integer_input(user_input, number_of_choices):
             return int(user_input)

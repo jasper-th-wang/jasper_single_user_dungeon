@@ -30,8 +30,6 @@ def play_elimination(options_list):
         render_options_menu(options_list)
         user_input = handle_input.get_valid_user_input(len(options_list))
         chosen_option = options_list[user_input - 1]
-        if chosen_option["terminating"]:
-            break
 
         narrative.dialogue.render_dialogues(
             {
@@ -41,6 +39,8 @@ def play_elimination(options_list):
                 },
             }
         )
+        if chosen_option["terminating"]:
+            break
         options_list.pop(user_input - 1)
 
 

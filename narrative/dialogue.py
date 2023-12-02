@@ -1,6 +1,9 @@
 # TODO: rename this module to like rendering utils??
-from narrative import options
+import itertools
+from pprint import pprint
+
 from gameplay import constants, render_text
+from narrative import options
 
 OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]
 CONTENT_START_FLAG = constants.TEXT_FLAGS["CONTENT_START_FLAG"]
@@ -37,6 +40,14 @@ def parse_dialogue_file(file_path):
         }
 
 
+def get_dialogue_file_properties(lines):
+    properties_lines = lines[:lines.index(CONTENT_START_FLAG)]
+    return {
+        prop.strip().split(": ", 1)[0]: prop.strip().split(": ", 1)[1] for prop in properties_lines if
+        prop != CONTENT_START_FLAG
+    }
+
+
 def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     """
     Render lines one by one
@@ -47,45 +58,49 @@ def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     dialogues_properties = parsed_dialogues_dictionary["properties"]
     parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
 
-    for item in parsed_dialogues_list:
-        if isinstance(item, str):
-            render_text.print_text_line(item)
+    for dialogue_item in parsed_dialogues_list:
+        if isinstance(dialogue_item, str):
+            render_text.print_text_line(dialogue_item)
             continue
-        if isinstance(item, list):
-            options.play_options_interactions(item, dialogues_properties["option_type"])
+        if isinstance(dialogue_item, list):
+            options.play_options_interactions(dialogue_item, dialogues_properties["option_type"])
             continue
 
 
 def build_renderable_dialogue_list(dialogue_content):
-    dialogue_lines_list = []
+    def check_dialogue_type(dialogue_item):
+        if OPTION_FLAG in dialogue_item or dialogue_item.startswith((" ", "\t")):
+            return "options"
+        return "dialogue_line"
+
+    grouped_dialogue_items = itertools.groupby(dialogue_content, key=check_dialogue_type)
+
+    renderable_dialogue_list = []
+    for dialogue_type, dialogue_group in grouped_dialogue_items:
+        if dialogue_type == "dialogue_line":
+            renderable_dialogue_list.extend(dialogue_group)
+        elif dialogue_type == "options":
+            renderable_dialogue_list.append(create_renderable_options(dialogue_group))
+
+    return renderable_dialogue_list
+
+
+def create_renderable_options(options_line):
+    def initialize_each_option(options_list, option_line):
+        option_name = option_line.replace(OPTION_FLAG, "")
+        terminating = option_name.startswith("$")
+        option_name = option_name[1:] if terminating else option_name
+        option = {"option": option_name, "terminating": terminating}
+        options_list.append(option)
+
+    def append_to_last_option(options_list, option_line):
+        options_list[-1].setdefault("dialogues", []).append(option_line.lstrip())
+
     list_of_options = []
-
-    # dialogue_content = [line for line in dialogue_content if line != "\n"]
-    for line in dialogue_content:
+    for line in options_line:
         if OPTION_FLAG in line:
-            list_of_options.append(process_option(line))
+            initialize_each_option(list_of_options, line)
         elif line.startswith((" ", "\t")):
-            line = line.strip()
-            list_of_options[-1].setdefault("dialogues", []).append(line)
-        else:
-            if list_of_options:
-                dialogue_lines_list.append(list_of_options)
-                list_of_options = []
-            dialogue_lines_list.append(line)
+            append_to_last_option(list_of_options, line)
 
-    return dialogue_lines_list
-
-
-def get_dialogue_file_properties(lines):
-    properties_lines = lines[:lines.index(CONTENT_START_FLAG)]
-    return {
-        prop.strip().split(": ", 1)[0]: prop.strip().split(": ", 1)[1] for prop in properties_lines if
-        prop != CONTENT_START_FLAG
-    }
-
-
-def process_option(line):
-    option = line.replace(OPTION_FLAG, "")
-    terminating = option.startswith("$")
-    option = option[1:] if terminating else option
-    return {"option": option, "terminating": terminating}
+    return list_of_options
