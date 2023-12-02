@@ -2,7 +2,7 @@ from dialogue import parse_dialogue, dialogue_options
 from gameplay import render_text
 
 
-def render_dialogues(parsed_dialogues_dictionary):
+def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     """
     Render lines one by one
 
