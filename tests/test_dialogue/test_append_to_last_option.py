@@ -6,7 +6,7 @@ from unittest import TestCase
 from narrative.dialogue import append_to_last_option
 
 
-class Test(TestCase):
+class TestAppendToLastOption(TestCase):
     def test_appends_string_to_dialogues_list_with_single_option(self):
         options_list = [{"option": "Option 1"}]
         expected = [{"option": "Option 1", "dialogues": ["New Dialogue"]}]
