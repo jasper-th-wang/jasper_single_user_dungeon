@@ -105,4 +105,6 @@ def initialize_each_option(options_list, option_line):
 
 
 def append_to_last_option(options_list, option_line):
+    if not options_list:
+        raise ValueError("Option list is empty, there is no option to append dialogue to.")
     options_list[-1].setdefault("dialogues", []).append(option_line.lstrip())
