@@ -29,17 +29,15 @@ def play_elimination(options_list):
     while True:
         render_options_menu(options_list)
         user_input = handle_input.get_valid_user_input(len(options_list))
-        chosen_option = options_list[user_input - 1]
-
         narrative.dialogue.render_dialogues(
             {
-                "dialogues": chosen_option["dialogues"],
+                "dialogues": options_list[user_input - 1]["dialogues"],
                 "properties": {
                     "title": "option",
                 },
             }
         )
-        if chosen_option["terminating"]:
+        if options_list[user_input - 1]["terminating"]:
             break
         options_list.pop(user_input - 1)
 

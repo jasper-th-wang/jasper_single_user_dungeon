@@ -85,9 +85,9 @@ def build_renderable_dialogue_list(dialogue_content):
     return renderable_dialogue_list
 
 
-def create_renderable_options(options_line):
+def create_renderable_options(option_lines):
     list_of_options = []
-    for line in options_line:
+    for line in option_lines:
         if OPTION_FLAG in line:
             initialize_each_option(list_of_options, line)
         elif line.startswith((" ", "\t")):
@@ -115,7 +115,7 @@ def initialize_each_option(options_list, option_line):
     option_name = option_line.replace(OPTION_FLAG, "")
     terminating = option_name.startswith("$")
     option_name = option_name[1:] if terminating else option_name
-    option = {"option": option_name, "terminating": terminating}
+    option = {"option": option_name, "terminating": terminating, "dialogues": []}
     options_list.append(option)
 
 
@@ -139,4 +139,4 @@ def append_to_last_option(options_list, option_line):
     """
     if not options_list:
         raise ValueError("Option list is empty, there is no option to append dialogue to.")
-    options_list[-1].setdefault("dialogues", []).append(option_line.lstrip())
+    options_list[-1].get("dialogues", []).append(option_line.lstrip())
