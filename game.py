@@ -2,7 +2,7 @@
 Jasper Wang
 A01362031
 """
-
+import dialogue.parse_dialogue
 import dialogue.render_dialogue
 import gameplay.character
 from gameplay.level import play_level
@@ -13,7 +13,7 @@ from gameplay.level import play_level
 
 # WARNING: sourcing test file for now
 def opening_sequence():
-    dialogue.render_dialogue.play_dialogues_from_file("assets/dialogues/opening.txt")
+    dialogue.parse_dialogue.play_dialogues_from_file("assets/dialogues/opening.txt")
 
 
 # HACK: mock function
