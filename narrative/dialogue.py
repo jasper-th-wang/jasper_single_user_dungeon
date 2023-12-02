@@ -79,7 +79,10 @@ def build_renderable_dialogue_list(dialogue_content):
         if dialogue_type == "dialogue_line":
             renderable_dialogue_list.extend(dialogue_group)
         elif dialogue_type == "options":
-            renderable_dialogue_list.append(create_renderable_options(dialogue_group))
+            try:
+                renderable_dialogue_list.append(create_renderable_options(dialogue_group))
+            except ValueError as e:
+                print(e)
 
     return renderable_dialogue_list
 
@@ -122,6 +125,8 @@ def initialize_each_option(options_list, option_line):
     [{'option': 'Go to the next room', 'terminating': False, 'dialogues': []}]
      """
     option_name = option_line.replace(OPTION_FLAG, "")
+    if not option_name:
+        raise ValueError("Option cannot be empty.")
     terminating = option_name.startswith("$")
     option_name = option_name[1:] if terminating else option_name
     option = {"option": option_name, "terminating": terminating, "dialogues": []}
