@@ -1,6 +1,5 @@
 # TODO: rename this module to like rendering utils??
 import itertools
-from pprint import pprint
 
 from gameplay import constants, render_text
 from narrative import options
@@ -86,6 +85,17 @@ def build_renderable_dialogue_list(dialogue_content):
 
 
 def create_renderable_options(option_lines):
+    """
+    Takes a list of option lines and processes them to create a list of renderable options.
+
+    :param option_lines: A list of strings representing option lines.
+    :return: A list of renderable options.
+    >>> demo_option_lines = [ "-> Option 1", "    Dialogue line 1", "-> Option 2", "    Dialogue line 2" ]
+    >>> expected = [{'option': 'Option 1', 'terminating': False, 'dialogues': ['Dialogue line 1']},
+    ... {'option': 'Option 2','terminating': False, 'dialogues': ['Dialogue line 2']}]
+    >>> create_renderable_options(demo_option_lines) == expected
+    True
+    """
     list_of_options = []
     for line in option_lines:
         if OPTION_FLAG in line:
@@ -105,12 +115,11 @@ def initialize_each_option(options_list, option_line):
     >>> demo_options1 = []
     >>> initialize_each_option(demo_options1, "$Exit")
     >>> demo_options1
-    [{'option': 'Exit', 'terminating': True}]
-
+    [{'option': 'Exit', 'terminating': True, 'dialogues': []}]
     >>> demo_options_2 = []
     >>> initialize_each_option(demo_options_2, "Go to the next room")
     >>> demo_options_2
-    [{'option': 'Go to the next room', 'terminating': False}]
+    [{'option': 'Go to the next room', 'terminating': False, 'dialogues': []}]
      """
     option_name = option_line.replace(OPTION_FLAG, "")
     terminating = option_name.startswith("$")
@@ -126,15 +135,15 @@ def append_to_last_option(options_list, option_line):
     :param options_list: A list of dictionaries representing options.
     :param option_line: A string representing the dialogue line to append.
     :raises ValueError: If the options list is empty.
-    >>> demo_options1 = [{'option': 'Option 1', 'dialogues': ['Yo']}, {'option': 'Option 2'}]
-    >>> append_to_last_option(demo_options1, "Hello!")
+    >>> demo_options1 = [{'option': 'Option 1', 'dialogues': ['Yo']}, {'option': 'Option 2', 'dialogues': []}]
+    >>> append_to_last_option(demo_options1, "  Hello!")
     >>> demo_options1
-    [{'text': 'Option 1', 'dialogues': ['Yo']}, {'text': 'Option 2', 'dialogues': ['Hello!']}]
+    [{'option': 'Option 1', 'dialogues': ['Yo']}, {'option': 'Option 2', 'dialogues': ['Hello!']}]
 
-    >>> demo_options2 = [{'text': 'Option 1', 'dialogues': ['Yo']}, {'text': 'Option 2', 'dialogues': ['Hello!']}]
-    >>> append_to_last_option(demo_options2, "How are you?")
+    >>> demo_options2 = [{'option': 'Option 1', 'dialogues': ['Yo']}, {'option': 'Option 2', 'dialogues': ['Hello!']}]
+    >>> append_to_last_option(demo_options2, "  How are you?")
     >>> demo_options2
-    [{'text': 'Option 1', 'dialogues': ['Yo']}, {'text': 'Option 2', 'dialogues': ['Hello!', 'How are you?']}]
+    [{'option': 'Option 1', 'dialogues': ['Yo']}, {'option': 'Option 2', 'dialogues': ['Hello!', 'How are you?']}]
 
     """
     if not options_list:
