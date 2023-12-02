@@ -4,7 +4,7 @@ ADD A DOCSTRING
 import io
 from unittest import TestCase
 from unittest.mock import patch
-from dialogue.dialogue_options import render_options_menu
+from narrative.options import render_options_menu
 
 
 class TestRenderOptionsMenu(TestCase):

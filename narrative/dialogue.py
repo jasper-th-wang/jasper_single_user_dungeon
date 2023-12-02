@@ -1,7 +1,5 @@
 # TODO: rename this module to like rendering utils??
-import copy
-
-from dialogue import dialogue_options
+from narrative import options
 from gameplay import constants, render_text
 
 OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]
@@ -11,7 +9,6 @@ CONTENT_START_FLAG = constants.TEXT_FLAGS["CONTENT_START_FLAG"]
 def play_dialogues_from_file(file_path):
     parsed_dialogues = parse_dialogue_file(file_path)
     render_dialogues(parsed_dialogues)
-
 
 
 def parse_dialogue_file(file_path):
@@ -55,8 +52,9 @@ def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
             render_text.print_text_line(item)
             continue
         if isinstance(item, list):
-            dialogue_options.play_options_interactions(item, dialogues_properties["option_type"])
+            options.play_options_interactions(item, dialogues_properties["option_type"])
             continue
+
 
 def build_renderable_dialogue_list(dialogue_content):
     dialogue_lines_list = []
@@ -91,5 +89,3 @@ def process_option(line):
     terminating = option.startswith("$")
     option = option[1:] if terminating else option
     return {"option": option, "terminating": terminating}
-
-

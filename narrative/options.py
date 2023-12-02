@@ -2,8 +2,7 @@
 TODO: Circular Calling need fixing
 ADD A DOCSTRING
 """
-import dialogue.parse_dialogue
-from dialogue import render_dialogue
+import narrative.dialogue
 from gameplay import handle_input
 
 
@@ -34,7 +33,7 @@ def play_elimination(options_list):
         if chosen_option["terminating"]:
             break
 
-        dialogue.parse_dialogue.render_dialogues(
+        narrative.dialogue.render_dialogues(
             {
                 "dialogues": chosen_option["dialogues"],
                 "properties": {
@@ -49,7 +48,7 @@ def play_multiple_choice(options_list):
     while True:
         render_options_menu(options_list)
         user_input = handle_input.get_valid_user_input(len(options_list))
-        dialogue.parse_dialogue.render_dialogues(
+        narrative.dialogue.render_dialogues(
             {
                 "dialogues": options_list[user_input - 1]["dialogues"],
                 "properties": {

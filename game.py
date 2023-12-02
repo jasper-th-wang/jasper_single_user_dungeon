@@ -2,8 +2,7 @@
 Jasper Wang
 A01362031
 """
-import dialogue.parse_dialogue
-import dialogue.render_dialogue
+import narrative.dialogue
 import gameplay.character
 from gameplay.level import play_level
 
@@ -13,7 +12,7 @@ from gameplay.level import play_level
 
 # WARNING: sourcing test file for now
 def opening_sequence():
-    dialogue.parse_dialogue.play_dialogues_from_file("assets/dialogues/opening.txt")
+    narrative.dialogue.play_dialogues_from_file("assets/dialogues/opening.txt")
 
 
 # HACK: mock function
@@ -57,7 +56,7 @@ def game():
     for level in range(1, MAX_LEVEL + 1):
         character = play_level(level, character)
         # TODO: What?
-        if character == None:
+        if character is None:
             return
 
 

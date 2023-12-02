@@ -3,8 +3,7 @@ ADD A DOCSTRING
 """
 import random
 
-import dialogue.parse_dialogue
-from dialogue import render_dialogue
+import narrative.dialogue
 from gameplay import render_text
 
 
@@ -94,4 +93,4 @@ def validate_move(rows, columns, character, direction):
 
 def play_dialogues_if_scenario_is_npc(scenario):
     if isinstance(scenario, dict):
-        dialogue.parse_dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
+        narrative.dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
