@@ -86,16 +86,6 @@ def build_renderable_dialogue_list(dialogue_content):
 
 
 def create_renderable_options(options_line):
-    def initialize_each_option(options_list, option_line):
-        option_name = option_line.replace(OPTION_FLAG, "")
-        terminating = option_name.startswith("$")
-        option_name = option_name[1:] if terminating else option_name
-        option = {"option": option_name, "terminating": terminating}
-        options_list.append(option)
-
-    def append_to_last_option(options_list, option_line):
-        options_list[-1].setdefault("dialogues", []).append(option_line.lstrip())
-
     list_of_options = []
     for line in options_line:
         if OPTION_FLAG in line:
@@ -104,3 +94,15 @@ def create_renderable_options(options_line):
             append_to_last_option(list_of_options, line)
 
     return list_of_options
+
+
+def initialize_each_option(options_list, option_line):
+    option_name = option_line.replace(OPTION_FLAG, "")
+    terminating = option_name.startswith("$")
+    option_name = option_name[1:] if terminating else option_name
+    option = {"option": option_name, "terminating": terminating}
+    options_list.append(option)
+
+
+def append_to_last_option(options_list, option_line):
+    options_list[-1].setdefault("dialogues", []).append(option_line.lstrip())
