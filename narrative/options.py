@@ -18,14 +18,7 @@ def render_options_menu(options_list):
         print(f"{option_number}: {option['option']}")
 
 
-def play_elimination(options_list):
-    """
-    Play elimination options interactions where player must choose terminating option to end the interaction
-
-    :param options_list: a list containing one or more option dictionaries
-    :precondition: options_list must not be empty
-    :postcondition:
-    """
+def play_options_interactions(options_list, options_type):
     while True:
         render_options_menu(options_list)
         user_input = handle_input.get_valid_user_input(len(options_list))
@@ -37,35 +30,14 @@ def play_elimination(options_list):
                 },
             }
         )
+        if options_type == "multiple_choice":
+            break
         if options_list[user_input - 1]["terminating"]:
             break
         options_list.pop(user_input - 1)
 
-
-def play_multiple_choice(options_list):
-    while True:
-        render_options_menu(options_list)
-        user_input = handle_input.get_valid_user_input(len(options_list))
-        narrative.dialogue.render_dialogues(
-            {
-                "dialogues": options_list[user_input - 1]["dialogues"],
-                "properties": {
-                    "title": "option",
-                },
-            }
-        )
-        break
-
-
-def play_options_interactions(options_list, options_type):
-    # options object
-    if options_type == "multiple_choice":
-        play_multiple_choice(options_list)
-        # TODO: Implement stats change after dialogue
-    elif options_type == "elimination":
-        play_elimination(options_list)
-        # TODO: may implement returning stats or wisdom points
-
+    # TODO: Implement stats change after dialogue
+    # TODO: may implement returning stats or wisdom points
     # TODO:
     # if regular / argument is last remaining_option type:
     # return user choice
