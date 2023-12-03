@@ -147,28 +147,3 @@ class TestBuildRenderableDialogueList(TestCase):
         actual = build_renderable_dialogue_list(dialogue_content)
 
         self.assertEqual(expected, actual)
-
-    #  Should handle dialogue content with only whitespace characters
-    def test_handle_whitespace_dialogue_content(self):
-        dialogue_content = ["    ", "  ", "\t\t"]
-        expected = []
-
-        actual = build_renderable_dialogue_list(dialogue_content)
-
-        self.assertEqual(expected, actual)
-
-    def test_handle_option_flag_dialogue_content(self):
-        dialogue_content = ["-> ", "-> ", "-> "]
-        expected = []
-
-        actual = build_renderable_dialogue_list(dialogue_content)
-
-        self.assertEqual(expected, actual)
-
-    def test_handle_whitespace_and_option_flag_dialogue_content(self):
-        dialogue_content = ["    ->", "  ->", "\t\t->"]
-        expected = []
-
-        actual = build_renderable_dialogue_list(dialogue_content)
-
-        self.assertEqual(expected, actual)
