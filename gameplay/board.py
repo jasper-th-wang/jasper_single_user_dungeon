@@ -8,6 +8,12 @@ from gameplay import render_text
 
 
 def get_board_dimensions(board):
+    if not isinstance(board, dict):
+        raise ValueError("Invalid input: board must be a dictionary")
+    if not board:
+        raise ValueError("Invalid input: board cannot be empty")
+    if not any(isinstance(coord, tuple) and len(coord) == 2 for coord in board.keys()):
+        raise ValueError("Invalid input: board keys must be coordinate tuples")
     max_x_coordinate = max(coord[0] for coord in board.keys())
     max_y_coordinate = max(coord[1] for coord in board.keys())
     return max_x_coordinate, max_y_coordinate
@@ -21,6 +27,7 @@ def render_ascii_map(board, character_coordinates):
     for y in range(max_y_coordinate + 1):
         for x in range(max_x_coordinate + 1):
             print("|" if x == 0 else " ", end="")
+            # ! indicates npc location, @ indicates player location, if neither is present, print blank space
             grid_symbol = "!" if isinstance(board[(x, y)], dict) else "@" if (x, y) == character_coordinates else " "
             print(f" {grid_symbol} ", end="")
         print("|")  # Right border of the last cell
@@ -50,14 +57,16 @@ def make_board(level_info):
     rows = level_info["rows"]
     columns = level_info["columns"]
     scenarios = level_info["area_descriptions"]
-    npcs = level_info["npcs"]
+    all_npcs_in_level = level_info["npcs"]
 
     board = {
         (col, row): scenarios[random.randint(0, len(scenarios) - 1)]
-        for col in range(columns) for row in range(rows)
+        for col in range(columns)
+        for row in range(rows)
+    } | {
+        tuple(each_npc["coordinates"]): each_npc
+        for each_npc in all_npcs_in_level
     }
-    board |= {tuple(npc["coordinates"]): npc for npc in npcs}
-
     return board
 
 
@@ -93,4 +102,4 @@ def validate_move(rows, columns, character, direction):
 
 def play_dialogues_if_scenario_is_npc(scenario):
     if isinstance(scenario, dict):
-        narrative.dialogue.play_dialogues_from_file(scenario["dialogue_file_path"])
+        narrative.dialogue.play_dialogues_from_file_path(scenario["dialogue_file_path"])

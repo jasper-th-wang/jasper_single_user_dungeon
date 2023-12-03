@@ -1,5 +1,5 @@
 """
-TODO: Circular Calling need fixing
+TODO: Make elimination and multiple choice into same function
 ADD A DOCSTRING
 """
 import narrative.dialogue

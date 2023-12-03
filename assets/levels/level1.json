@@ -2,7 +2,6 @@
   "level_name": "the Swamp",
   "quest": "Find Asphodel Meadows",
   "entrance_description": "As you venture forward, the environment shifts and morphs around you, leading you to a vast, foggy swamp. The air is thick and damp, clinging to your skin like a cold, wet blanket. Each step you take is met with the squelch of the marshy ground beneath your feet.",
-  "enemeies": ["wa", "lolo", "hehe"],
   "npcs": [
     {
       "name": "girl sitting by the river",

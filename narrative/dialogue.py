@@ -1,6 +1,6 @@
-# TODO: rename this module to like rendering utils??
 import itertools
 
+from typing import TextIO
 from gameplay import constants, render_text
 from narrative import options
 
@@ -8,40 +8,54 @@ OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]
 CONTENT_START_FLAG = constants.TEXT_FLAGS["CONTENT_START_FLAG"]
 
 
-def play_dialogues_from_file(file_path):
-    parsed_dialogues = parse_dialogue_file(file_path)
-    render_dialogues(parsed_dialogues)
+# TODO: docstrings and unit tests
+def play_dialogues_from_file_path(file_path):
+    try:
+        with open(file_path, "r") as dialogue_file:
+            parsed_dialogues = parse_dialogue_file(dialogue_file)
+    except OSError:
+        print("No dialogue text file is found")
+    else:
+        render_dialogues(parsed_dialogues)
 
 
-def parse_dialogue_file(file_path):
+def parse_dialogue_file(dialogue_file: TextIO) -> dict:
     """
     Read and convert dialogue text files to dialogue dictionary for rendering
 
-    :param file_path: strings representing path to a dialogue file
+    :param: dialogue_file:
     :return: a dictionary representing information about a dialogue
     """
-    try:
-        with open(file_path, "r") as dialogues:
-            lines = [line.rstrip() for line in dialogues.readlines() if not line.isspace()]
-    except OSError:
-        print("No dialogue text file is found")
-        return
-
+    lines = [line.rstrip() for line in dialogue_file.readlines() if not line.isspace()]
     try:
         dialogues_properties = get_dialogue_file_properties(lines)
         dialogues_content = lines[lines.index(CONTENT_START_FLAG) + 1: -1]
         renderable_dialogues = build_renderable_dialogue_list(dialogues_content)
     except ValueError as e:
         print(f"Something went wrong when parsing dialogue file: {e}")
-        return
+    else:
+        return {
+            "properties": dialogues_properties,
+            "dialogues": renderable_dialogues,
+        }
 
-    return {
-        "properties": dialogues_properties,
-        "dialogues": renderable_dialogues,
-    }
 
-
-def get_dialogue_file_properties(lines):
+def get_dialogue_file_properties(lines: list) -> dict:
+    """
+    Get the properties of a dialogue file.
+    
+    :param lines: A list of strings representing the lines of the dialogue file.
+    :return: A dictionary containing the properties of the dialogue file.
+    >>> demo_lines = [
+    ...     "Title: My Dialogue File",
+    ...     "Author: John Doe",
+    ...     "---",
+    ...     "Line 1",
+    ...     "Line 2",
+    ... ]
+    >>> get_dialogue_file_properties(demo_lines)
+    {'Title': 'My Dialogue File', 'Author': 'John Doe'}
+    """
     if "---" not in lines:
         raise ValueError("Content Start Flag '---' not found in this file.")
     properties_lines = lines[:lines.index(CONTENT_START_FLAG)]
@@ -54,10 +68,9 @@ def get_dialogue_file_properties(lines):
 
 def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     """
-    Render lines one by one
+    Takes a parsed dialogues dictionary and renders the dialogues line by line.
 
-    :param parsed_dialogues_dictionary:
-    :return:
+    :param: parsed_dialogues_dictionary: A dictionary containing the parsed dialogues.
     """
     dialogues_properties = parsed_dialogues_dictionary["properties"]
     parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
@@ -71,11 +84,11 @@ def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
             continue
 
 
-def build_renderable_dialogue_list(dialogue_content):
+def build_renderable_dialogue_list(dialogue_content: list) -> list:
     """
     Build a renderable dialogue list from a list of dialogue content.
 
-    :param dialogue_content: A list of strings representing dialogue content.
+    :param: dialogue_content: A list of strings representing dialogue content.
     :return: A list of renderable dialogue elements.
     >>> demo_dialogue_content = [
     ...     "You slowly come to, a chilling sense of unease creeping over you.",
@@ -119,7 +132,7 @@ def build_renderable_dialogue_list(dialogue_content):
     return renderable_dialogue_list
 
 
-def create_renderable_options(option_lines):
+def create_renderable_options(option_lines: list) -> list:
     """
     Takes a list of option lines and processes them to create a list of renderable options.
 
@@ -141,7 +154,7 @@ def create_renderable_options(option_lines):
     return list_of_options
 
 
-def initialize_each_option(options_list, option_line):
+def initialize_each_option(options_list: list, option_line: str) -> None:
     """
     Initializes each option in the options list based on the option line.
 
@@ -166,7 +179,7 @@ def initialize_each_option(options_list, option_line):
     options_list.append(option)
 
 
-def append_to_last_option(options_list, option_line):
+def append_to_last_option(options_list: list, option_line: str) -> None:
     """
     Appends a dialogue line to the last option in the options list.
 

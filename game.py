@@ -7,45 +7,9 @@ import gameplay.character
 from gameplay.level import play_level
 
 
-# TODO: modify character docstrings in different functions according to new stats schemes
-
-
 # WARNING: sourcing test file for now
 def opening_sequence():
-    narrative.dialogue.play_dialogues_from_file("assets/dialogues/opening.txt")
-
-
-# HACK: mock function
-def mock_scenario_descriptions():
-    """
-    Produce a list of predefined scenario descriptions for the test_game board
-
-    :return: a list containing strings representing scenario descriptions
-    """
-    return [
-        "The Server Room Labyrinth",
-        "The Library of Obsolete Languages",
-        "The Cafeteria of Constant Cravings",
-        "The Printer Paper Jam Dungeon",
-        "The WiFi Woods",
-        "The Echo Hall of Helpdesk Calls",
-        "The Lost USB Mines",
-        "The Classroom of Endless Lectures",
-        "The Firewall Fortress",
-        "The Recursive Room",
-    ]
-
-
-# TODO: add displaying character functionality, change docstring
-
-
-# TODO: Modify control scheme to WASD instead, change docstrings
-
-
-# TODO: Modify control scheme to WASD instead, change docstrings
-
-
-# TODO: modify docstrings
+    narrative.dialogue.play_dialogues_from_file_path("assets/dialogues/opening.txt")
 
 
 def game():
