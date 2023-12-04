@@ -1,3 +1,7 @@
+"""
+This module provides functions for parsing and rendering dialogues from a dialogue text file.
+"""
+
 import itertools
 
 from typing import TextIO
