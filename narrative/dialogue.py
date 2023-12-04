@@ -9,7 +9,6 @@ OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]
 CONTENT_START_FLAG = constants.TEXT_FLAGS["CONTENT_START_FLAG"]
 
 
-# TODO: docstrings and unit tests
 def play_dialogues_from_file_path(file_path: str) -> None:
     """
     Play dialogues from a file.
