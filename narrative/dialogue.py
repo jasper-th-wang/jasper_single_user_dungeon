@@ -10,7 +10,14 @@ CONTENT_START_FLAG = constants.TEXT_FLAGS["CONTENT_START_FLAG"]
 
 
 # TODO: docstrings and unit tests
-def play_dialogues_from_file_path(file_path):
+def play_dialogues_from_file_path(file_path: str) -> None:
+    """
+    Play dialogues from a file.
+
+    :param file_path: The path to the dialogue file.
+    :precondition: file_path should be a valid file path.
+    :postcondition: The parsed dialogues are rendered.
+    """
     try:
         with open(file_path, "r") as dialogue_file:
             parsed_dialogues = parse_dialogue_file(dialogue_file)
@@ -22,10 +29,13 @@ def play_dialogues_from_file_path(file_path):
 
 def parse_dialogue_file(dialogue_file: TextIO) -> dict:
     """
-    Read and convert dialogue text files to dialogue dictionary for rendering
+    Read and convert dialogue text files to dialogue dictionary for rendering.
 
-    :param dialogue_file:
-    :return: a dictionary representing information about a dialogue
+    :param dialogue_file: The file object representing the dialogue text file.
+    :type dialogue_file: TextIO
+    :precondition: dialogue_file should be a file object that is open for reading.
+    :postcondition: A dictionary representing the dialogue information is returned.
+    :return: A dictionary representing information about a dialogue.
     """
     lines = [line.rstrip() for line in dialogue_file.readlines() if not line.isspace()]
     try:
@@ -46,6 +56,8 @@ def get_dialogue_file_properties(lines: list) -> dict:
     Get the properties of a dialogue file.
     
     :param lines: A list of strings representing the lines of the dialogue file.
+    :precondition: lines should be a list of strings representing the lines of the dialogue file.
+    :postcondition: A dictionary containing the properties of the dialogue file is returned.
     :return: A dictionary containing the properties of the dialogue file.
     >>> demo_lines = [
     ...     "Title: My Dialogue File",
@@ -71,6 +83,8 @@ def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     Takes a parsed dialogues dictionary and renders the dialogues line by line.
 
     :param parsed_dialogues_dictionary: A dictionary containing the parsed dialogues.
+    :precondition: parsed_dialogues_dictionary should be non-empty, containing parsed dialogues or options.
+    :postcondition: The dialogues are rendered line by line.
     """
     dialogues_properties = parsed_dialogues_dictionary["properties"]
     parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
