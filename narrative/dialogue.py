@@ -23,7 +23,7 @@ def parse_dialogue_file(dialogue_file: TextIO) -> dict:
     """
     Read and convert dialogue text files to dialogue dictionary for rendering
 
-    :param: dialogue_file:
+    :param dialogue_file:
     :return: a dictionary representing information about a dialogue
     """
     lines = [line.rstrip() for line in dialogue_file.readlines() if not line.isspace()]
@@ -62,7 +62,6 @@ def get_dialogue_file_properties(lines: list) -> dict:
     return {
         prop.strip().split(": ", 1)[0]: prop.strip().split(": ", 1)[1]
         for prop in properties_lines
-        if prop != CONTENT_START_FLAG
     }
 
 
@@ -70,7 +69,7 @@ def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     """
     Takes a parsed dialogues dictionary and renders the dialogues line by line.
 
-    :param: parsed_dialogues_dictionary: A dictionary containing the parsed dialogues.
+    :param parsed_dialogues_dictionary: A dictionary containing the parsed dialogues.
     """
     dialogues_properties = parsed_dialogues_dictionary["properties"]
     parsed_dialogues_list = parsed_dialogues_dictionary["dialogues"]
@@ -78,6 +77,7 @@ def render_dialogues(parsed_dialogues_dictionary: dict) -> None:
     for dialogue_item in parsed_dialogues_list:
         if isinstance(dialogue_item, str):
             render_text.print_text_line(dialogue_item)
+            #TODO: if it's about stats, process it here
             continue
         if isinstance(dialogue_item, list):
             options.play_options_interactions(dialogue_item, dialogues_properties["option_type"])
@@ -88,7 +88,7 @@ def build_renderable_dialogue_list(dialogue_content: list) -> list:
     """
     Build a renderable dialogue list from a list of dialogue content.
 
-    :param: dialogue_content: A list of strings representing dialogue content.
+    :param dialogue_content: A list of strings representing dialogue content.
     :return: A list of renderable dialogue elements.
     >>> demo_dialogue_content = [
     ...     "You slowly come to, a chilling sense of unease creeping over you.",
@@ -158,9 +158,9 @@ def initialize_each_option(options_list: list, option_line: str) -> None:
     """
     Initializes each option in the options list based on the option line.
 
-    :param: options_list: A list of dictionaries representing options.
-    :param: option_line: A string representing the option line.
-    :raises: ValueError: If the options list is empty.
+    :param options_list: A list of dictionaries representing options.
+    :param option_line: A string representing the option line.
+    :raises ValueError: If the options list is empty.
     >>> demo_options1 = []
     >>> initialize_each_option(demo_options1, "$Exit")
     >>> demo_options1
@@ -173,9 +173,10 @@ def initialize_each_option(options_list: list, option_line: str) -> None:
     option_name = option_line.replace(OPTION_FLAG, "")
     if not option_name:
         raise ValueError("Option cannot be empty.")
-    terminating = option_name.startswith("$")
-    option_name = option_name[1:] if terminating else option_name
-    option = {"option": option_name, "terminating": terminating, "dialogues": []}
+
+    is_terminating = option_name.startswith("$")
+    option_name = option_name[1:] if is_terminating else option_name
+    option = {"option": option_name, "terminating": is_terminating, "dialogues": []}
     options_list.append(option)
 
 
@@ -183,9 +184,9 @@ def append_to_last_option(options_list: list, option_line: str) -> None:
     """
     Appends a dialogue line to the last option in the options list.
 
-    :param: options_list: A list of dictionaries representing options.
-    :param: option_line: A string representing the dialogue line to append.
-    :raises: ValueError: If the options list is empty.
+    :param options_list: A list of dictionaries representing options.
+    :param option_line: A string representing the dialogue line to append.
+    :raises ValueError: If the options list is empty.
     >>> demo_options1 = [{'option': 'Option 1', 'dialogues': ['Yo']}, {'option': 'Option 2', 'dialogues': []}]
     >>> append_to_last_option(demo_options1, "  Hello!")
     >>> demo_options1
