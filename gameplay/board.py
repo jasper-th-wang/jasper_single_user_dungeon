@@ -4,7 +4,7 @@ ADD A DOCSTRING
 import random
 
 import narrative.dialogue
-from gameplay import render_text
+from game_utils import render_text
 
 
 def get_board_dimensions(board):

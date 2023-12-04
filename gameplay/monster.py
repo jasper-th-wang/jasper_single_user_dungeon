@@ -1,7 +1,6 @@
 import random
 
-from gameplay import render_text
-from gameplay.handle_input import get_valid_user_input
+from game_utils import render_text, handle_input
 
 FURY_INCREMENT = 5
 WISDOM_INCREMENT = 5
@@ -20,7 +19,7 @@ def play_monster_encounter(character):
         f"Enter a number between {lower} and {upper} inclusive to deter the monster, or type '{KILL_MONSTER_OPTION}' to kill the monster"
     )
 
-    guess = get_valid_user_input(upper, KILL_MONSTER_OPTION)
+    guess = handle_input.get_valid_user_input(upper, KILL_MONSTER_OPTION)
 
     if guess == KILL_MONSTER_OPTION:
         kill_monster(character)

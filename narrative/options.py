@@ -3,7 +3,7 @@ TODO: Make elimination and multiple choice into same function
 ADD A DOCSTRING
 """
 import narrative.dialogue
-from gameplay import handle_input
+from game_utils import handle_input
 
 
 def render_options_menu(options_list):

@@ -1,10 +1,8 @@
 from unittest import TestCase
 from narrative.dialogue import get_dialogue_file_properties
 
-import unittest
 
-
-class TestGetDialogueFileProperties(unittest.TestCase):
+class TestGetDialogueFileProperties(TestCase):
 
     def test_handles_input_lines_with_multiple_properties_before_content_start_flag(self):
         lines = [

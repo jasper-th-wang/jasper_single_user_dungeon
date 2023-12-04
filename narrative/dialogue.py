@@ -1,7 +1,8 @@
 import itertools
 
 from typing import TextIO
-from gameplay import constants, render_text
+from gameplay import constants
+from game_utils import render_text
 from narrative import options
 
 OPTION_FLAG = constants.TEXT_FLAGS["OPTION_FLAG"]

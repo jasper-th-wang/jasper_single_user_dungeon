@@ -1,9 +1,10 @@
 import json
 import random
 
-from gameplay import character, board, monster, render_text
+from gameplay import character, board, monster
+from game_utils import render_text
 # TODO: refactor process user action
-from gameplay.handle_input import process_users_action
+from game_utils.handle_input import process_users_action
 
 
 def get_game_level_info(level):
