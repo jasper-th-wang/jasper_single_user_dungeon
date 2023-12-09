@@ -35,7 +35,6 @@ def parse_dialogue_file(dialogue_file: TextIO) -> dict:
     Read and convert dialogue text files to dialogue dictionary for rendering.
 
     :param dialogue_file: The file object representing the dialogue text file.
-    :type dialogue_file: TextIO
     :precondition: dialogue_file should be a file object that is open for reading.
     :postcondition: A dictionary representing the dialogue information is returned.
     :return: A dictionary representing information about a dialogue.
