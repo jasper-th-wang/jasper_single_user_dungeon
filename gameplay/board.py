@@ -149,7 +149,7 @@ def validate_move(rows: int, columns: int, character: dict, direction: str) -> b
     return 0 <= x < columns and 0 <= y < rows
 
 
-def play_dialogues_if_scenario_is_npc(scenario):
+def play_dialogues_if_scenario_is_npc(scenario: dict or str) -> None:
     """
     Plays dialogues from a file if the provided scenario is an NPC.
 

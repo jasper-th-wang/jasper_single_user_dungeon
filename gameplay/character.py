@@ -1,4 +1,4 @@
-def make_character():
+def make_character() -> dict:
     """
     Creates a new character with default attributes.
 
