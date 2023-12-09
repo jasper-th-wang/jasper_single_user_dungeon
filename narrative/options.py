@@ -14,6 +14,7 @@ def render_options_menu(options_list: list) -> None:
     :param options_list: a list containing one or more option dictionaries
     :precondition: options_list must not be empty
     :postcondition: an options menu is printed to the screen, no data is modified
+    :raises ValueError: if options_list is empty
     >>> demo_options_list = [
     ...     {"option": "Option 1", "terminating": False, "dialogues": ["Dialogue line 1"]},
     ...     {"option": "Option 2", "terminating": False, "dialogues": ["Dialogue line 2"]}
@@ -22,6 +23,9 @@ def render_options_menu(options_list: list) -> None:
     1: Option 1
     2: Option 2
     """
+    if not options_list:
+        raise ValueError("Options list must not be empty")
+
     for option_number, option in enumerate(options_list, start=1):
         print(f"{option_number}: {option['option']}")
 

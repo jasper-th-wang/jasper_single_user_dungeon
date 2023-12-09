@@ -32,7 +32,7 @@ class TestInitializeEachOption(TestCase):
 
         initialize_each_option(options_list, option_line)
 
-        self.assertEqual(options_list, expected_options_list)
+        self.assertEqual(expected_options_list, options_list)
 
     def test_append_option_to_list_with_terminating_option(self):
         options_list = [
@@ -48,7 +48,7 @@ class TestInitializeEachOption(TestCase):
             {"option": "Option 2", "terminating": False, "dialogues": []},
             {"option": "Option 3", "terminating": False, "dialogues": []},
         ]
-        self.assertEqual(options_list, expected_options_list)
+        self.assertEqual(expected_options_list, options_list)
 
     def test_raises_value_error_if_option_name_is_empty(self):
         options_list = []

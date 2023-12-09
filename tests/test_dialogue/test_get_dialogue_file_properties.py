@@ -32,7 +32,7 @@ class TestGetDialogueFileProperties(TestCase):
             "title": "Test Dialogue"
         }
         actual = get_dialogue_file_properties(lines)
-        self.assertEqual(actual, expected)
+        self.assertEqual(expected, actual)
 
     def test_handles_input_lines_with_no_properties_before_content_start_flag(self):
         lines = [
@@ -42,7 +42,7 @@ class TestGetDialogueFileProperties(TestCase):
         ]
         expected = {}
         actual = get_dialogue_file_properties(lines)
-        self.assertEqual(actual, expected)
+        self.assertEqual(expected, actual)
 
     def test_raises_value_error_if_content_start_flag_not_found_in_input_lines(self):
         lines = [
