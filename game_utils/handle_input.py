@@ -22,18 +22,23 @@ def process_users_action(game_character):
             return user_choice
 
 
-def get_valid_user_input(number_of_choices=None, valid_characters=None):
+def get_valid_user_input(
+        number_of_choices: int = None, valid_characters: str = None
+) -> int or str or None:
     """
     Get valid user input based on the specified constraints.
 
     :param number_of_choices: The upper bound of the range for validating integer input.
     :param valid_characters: A string representing the set of valid characters to compare against.
     :precondition: number_of_choices should be an integer or None.
-    :precondition: valid_characters should be a list of characters or None.
+    :precondition: valid_characters should be a string of characters or None.
     :postcondition: no data is modified, and the user input is validated as a positive integer within the range or a valid character.
     :return: The valid user input as an integer or uppercase string.
     :raises ValueError: If no choices or valid characters are given for validation.
     """
+    if not (number_of_choices or valid_characters):
+        raise ValueError("No choices or valid characters given for validation")
+
     while True:
         user_input = input("Enter here: ")
 
@@ -57,9 +62,6 @@ def get_valid_user_input(number_of_choices=None, valid_characters=None):
                 f"Invalid entry, please enter one of the following letters or characters: {', '.join(valid_characters)}"
             )
 
-        if not (number_of_choices or valid_characters):
-            raise ValueError("No choices or valid characters given for validation")
-
 
 def validate_integer_input(user_input, number_of_choices):
     """
@@ -79,9 +81,9 @@ def validate_integer_input(user_input, number_of_choices):
     False
     """
     return (
-        number_of_choices
-        and user_input.isdigit()
-        and 1 <= int(user_input) <= number_of_choices
+            number_of_choices
+            and user_input.isdigit()
+            and 1 <= int(user_input) <= number_of_choices
     )
 
 
@@ -102,4 +104,7 @@ def validate_character_input(user_input, valid_characters):
     >>> validate_character_input('A', 'abc')
     True
     """
-    return valid_characters and user_input.upper() in valid_characters.upper()
+    if len(user_input) != 1:
+        return False
+    else:
+        return valid_characters and user_input.upper() in valid_characters.upper()
