@@ -37,8 +37,8 @@ def end_game_message(character: dict or None) -> None:
     """
     if not character:
         print_text_line(
-            "You feel your essence gradually fade away, before you know it, you cease to exist in this realm. "
-            "Please restart the game to try again."
+            "You feel your essence gradually fade away, before you know it, you cease to exist in this realm."
+            "\nPlease restart the game to try again."
         )
     elif character["Wisdom"] > character["Fury"]:
         print_text_line(
