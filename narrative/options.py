@@ -61,9 +61,3 @@ def play_options_interactions(
         if options_list[user_input - 1]["terminating"]:
             break
         options_list.pop(user_input - 1)
-
-    # TODO: Implement stats change after dialogue
-    # TODO: may implement returning stats or wisdom points
-    # TODO:
-    # if regular / argument is last remaining_option type:
-    # return user choice

@@ -8,7 +8,6 @@ from game_utils.render_text import print_text_line
 from gameplay.level import play_level
 
 
-# WARNING: sourcing test file for now
 def opening_sequence(level: int, character: dict) -> None:
     """
     Play the opening sequence of the game.
@@ -53,7 +52,6 @@ def end_game_message(character: dict) -> None:
 
 def main():
     game()
-    # narrative.dialogue.test_main()
 
 
 if __name__ == "__main__":
