@@ -30,7 +30,18 @@ def get_game_level_info(level: int) -> dict or None:
     return level_info
 
 
-def play_level(level: int, game_character: dict) -> dict or None:
+def check_for_monsters():
+    """
+    Determine whether a foe is present
+
+    :postcondition: determine if a foe is present by comparing equality between 0 with generated random integer
+    :return: a Boolean value of True if foe is present, False otherwise
+    """
+    random_number = random.randint(0, 3)
+    return random_number == 0
+
+
+def play_level(level: int, game_character):
     """
     Initialize the game level
     """
@@ -63,14 +74,3 @@ def play_level(level: int, game_character: dict) -> dict or None:
         print("Congrats! You reached the end!")
         # TODO: character = STAT BOOST HELPER(character)
         return game_character
-
-
-def check_for_monsters():
-    """
-    Determine whether a foe is present
-
-    :postcondition: determine if a foe is present by comparing equality between 0 with generated random integer
-    :return: a Boolean value of True if foe is present, False otherwise
-    """
-    random_number = random.randint(0, 3)
-    return random_number == 0

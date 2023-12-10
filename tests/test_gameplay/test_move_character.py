@@ -2,31 +2,23 @@ from unittest import TestCase
 from gameplay.character import move_character
 
 
-class Test(TestCase):
-    def test_moving_character_to_north(self):
-        character = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 3}
-        direction = 1
-        move_character(character, direction)
-        expected = {"X-coordinate": 1, "Y-coordinate": 0, "Current HP": 3}
-        self.assertEqual(expected, character)
+class TestMoveCharacter(TestCase):
+    def test_move_character_north(self):
+        character = {'X-coordinate': 0, 'Y-coordinate': 1}
+        move_character(character, 'W')
+        self.assertEqual({'X-coordinate': 0, 'Y-coordinate': 0}, character)
 
-    def test_moving_character_to_south(self):
-        character = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 3}
-        direction = 2
-        move_character(character, direction)
-        expected = {"X-coordinate": 1, "Y-coordinate": 2, "Current HP": 3}
-        self.assertEqual(expected, character)
+    def test_move_character_south(self):
+        character = {'X-coordinate': 0, 'Y-coordinate': 0}
+        move_character(character, 'S')
+        self.assertEqual({'X-coordinate': 0, 'Y-coordinate': 1}, character)
 
-    def test_moving_character_to_east(self):
-        character = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 3}
-        direction = 3
-        move_character(character, direction)
-        expected = {"X-coordinate": 2, "Y-coordinate": 1, "Current HP": 3}
-        self.assertEqual(expected, character)
+    def test_move_character_east(self):
+        character = {'X-coordinate': 0, 'Y-coordinate': 0}
+        move_character(character, 'D')
+        self.assertEqual({'X-coordinate': 1, 'Y-coordinate': 0}, character)
 
-    def test_moving_character_to_west(self):
-        character = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 3}
-        direction = 4
-        move_character(character, direction)
-        expected = {"X-coordinate": 0, "Y-coordinate": 1, "Current HP": 3}
-        self.assertEqual(expected, character)
+    def test_move_character_west(self):
+        character = {'X-coordinate': 1, 'Y-coordinate': 0}
+        move_character(character, 'A')
+        self.assertEqual({'X-coordinate': 0, 'Y-coordinate': 0}, character)

@@ -1,70 +1,81 @@
 from unittest import TestCase
 from unittest.mock import patch
-
 from gameplay.board import make_board
 
 
-class Test(TestCase):
-    def test_invalid_rows_and_columns(self):
-        expected = None
-        self.assertEqual(expected, make_board(1, 1))
-
-    def test_valid_rows_invalid_columns(self):
-        expected = None
-        self.assertEqual(expected, make_board(3, 1))
-
-    def test_invalid_rows_valid_columns(self):
-        expected = None
-        self.assertEqual(expected, make_board(1, 3))
-
-    @patch('random.randint', side_effect=[0, 5, 3, 9])
-    def test_valid_rows_and_columns(self, _):
-        expected = {
-            (0, 0): "The Server Room Labyrinth",
-            (0, 1): "The Echo Hall of Helpdesk Calls",
-            (1, 0): "The Printer Paper Jam Dungeon",
-            (1, 1): "The Recursive Room"
+class TestMakeBoard(TestCase):
+    @patch('random.randint', return_value=0)
+    def test_no_npcs(self, mock_randint):
+        level_info = {
+            "rows": 2,
+            "columns": 2,
+            "area_descriptions": ["some scene"],
+            "npcs": []
         }
-        self.assertEqual(expected, make_board(2, 2))
-
-    @patch('random.randint', side_effect=[0, 5, 3, 9, 1, 2])
-    def test_asymmetrical_board_row_larger_than_columns(self, _):
-        expected = {
-            (0, 0): "The Server Room Labyrinth",
-            (0, 1): "The Echo Hall of Helpdesk Calls",
-            (0, 2): "The Printer Paper Jam Dungeon",
-            (1, 0): "The Recursive Room",
-            (1, 1): "The Library of Obsolete Languages",
-            (1, 2): "The Cafeteria of Constant Cravings"
+        expected_board = {
+            (0, 0): "some scene",
+            (1, 0): "some scene",
+            (0, 1): "some scene",
+            (1, 1): "some scene"
         }
-        self.assertEqual(expected, make_board(3, 2))
 
-    @patch('random.randint', side_effect=[0, 5, 3, 9, 1, 2])
-    def test_asymmetrical_board_columns_larger_than_rows(self, _):
-        expected = {
-            (0, 0): "The Server Room Labyrinth",
-            (0, 1): "The Echo Hall of Helpdesk Calls",
-            (1, 0): "The Printer Paper Jam Dungeon",
-            (1, 1): "The Recursive Room",
-            (2, 0): "The Library of Obsolete Languages",
-            (2, 1): "The Cafeteria of Constant Cravings"
-        }
-        self.assertEqual(expected, make_board(2, 3))
+        actual_board = make_board(level_info)
+        self.assertEqual(expected_board, actual_board)
 
-    @patch('random.randint', side_effect=[0, 5, 3, 9, 1, 2, 4, 8, 1, 7, 3, 2])
-    def test_more_coordinates_than_predefined_scenario_descriptions(self, _):
-        expected = {
-            (0, 0): "The Server Room Labyrinth",
-            (0, 1): "The Echo Hall of Helpdesk Calls",
-            (0, 2): "The Printer Paper Jam Dungeon",
-            (0, 3): "The Recursive Room",
-            (1, 0): "The Library of Obsolete Languages",
-            (1, 1): "The Cafeteria of Constant Cravings",
-            (1, 2): "The WiFi Woods",
-            (1, 3): "The Firewall Fortress",
-            (2, 0): "The Library of Obsolete Languages",
-            (2, 1): "The Classroom of Endless Lectures",
-            (2, 2): "The Printer Paper Jam Dungeon",
-            (2, 3): "The Cafeteria of Constant Cravings"
+    @patch('random.randint', return_value=0)
+    def test_with_npcs(self, mock_randint):
+        level_info = {
+            "rows": 2,
+            "columns": 2,
+            "area_descriptions": ["some scene"],
+            "npcs": [{"coordinates": [0, 0], "other_info": "npc info"}]
         }
-        self.assertEqual(expected, make_board(4, 3))
+        expected_board = {
+            (0, 0): {"coordinates": [0, 0], "other_info": "npc info"},
+            (1, 0): "some scene",
+            (0, 1): "some scene",
+            (1, 1): "some scene"
+        }
+
+        actual_board = make_board(level_info)
+        self.assertEqual(expected_board, actual_board)
+
+    @patch('random.randint', return_value=0)
+    def test_asymmetrical_board(self, mock_randint):
+        level_info = {
+            "rows": 3,
+            "columns": 2,
+            "area_descriptions": ["some scene"],
+            "npcs": []
+        }
+        expected_board = {
+            (0, 0): "some scene",
+            (1, 0): "some scene",
+            (0, 1): "some scene",
+            (1, 1): "some scene",
+            (0, 2): "some scene",
+            (1, 2): "some scene"
+        }
+
+        actual_board = make_board(level_info)
+        self.assertEqual(expected_board, actual_board)
+
+    def test_invalid_input_not_dict(self):
+        level_info = "not a dictionary"
+        with self.assertRaises(ValueError) as context:
+            make_board(level_info)
+        self.assertEqual("Invalid input: level_info must be a dictionary", str(context.exception))
+
+    def test_invalid_input_missing_keys(self):
+        level_info = {
+            "rows": 2,
+            "columns": 2,
+            "area_descriptions": ["some scene"]
+            # "npcs" key is missing
+        }
+        with self.assertRaises(ValueError) as context:
+            make_board(level_info)
+        self.assertEqual(
+            "Invalid input: level_info must have the keys 'rows', 'columns', 'area_descriptions', and 'npcs'",
+            str(context.exception))
+

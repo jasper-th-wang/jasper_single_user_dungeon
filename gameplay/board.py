@@ -27,10 +27,10 @@ def get_board_dimensions(board: dict) -> tuple:
         raise ValueError("Invalid input: board must be a dictionary")
     if not board:
         raise ValueError("Invalid input: board cannot be empty")
-    if not any(isinstance(coord, tuple) and len(coord) == 2 for coord in board.keys()):
+    if not any(isinstance(coord, tuple) and len(coord) == 2 for coord in board):
         raise ValueError("Invalid input: board keys must be coordinate tuples")
-    max_x_coordinate = max(coord[0] for coord in board.keys())
-    max_y_coordinate = max(coord[1] for coord in board.keys())
+    max_x_coordinate = max(coord[0] for coord in board)
+    max_y_coordinate = max(coord[1] for coord in board)
     return max_x_coordinate, max_y_coordinate
 
 
@@ -105,7 +105,17 @@ def make_board(level_info: dict) -> dict:
     :return: A dictionary representing the game board.
     :precondition: level_info must be a dictionary that has the keys "rows", "columns", "area_descriptions", and "npcs".
     :postcondition: The returned dictionary represents a game board where each cell is either an empty space with a random description, or an NPC.
+    :raises ValueError: If level_info is not a dictionary, or if it does not have the keys "rows", "columns", "area_descriptions", and "npcs".
     """
+    if not isinstance(level_info, dict):
+        raise ValueError("Invalid input: level_info must be a dictionary")
+    if not all(
+        key in level_info for key in ["rows", "columns", "area_descriptions", "npcs"]
+    ):
+        raise ValueError(
+            "Invalid input: level_info must have the keys 'rows', 'columns', 'area_descriptions', and 'npcs'"
+        )
+
     rows = level_info["rows"]
     columns = level_info["columns"]
     scenarios = level_info["area_descriptions"]
@@ -160,6 +170,9 @@ def play_dialogues_if_scenario_is_npc(scenario: dict or str) -> None:
     :precondition: scenario must either be a string or a dictionary.
     :precondition: If scenario is a dictionary, it must have a "dialogue_file_path" key that is a string.
     :postcondition: If scenario is a dictionary, the dialogues from the file specified by "dialogue_file_path" are played.
+    :raises KeyError: If scenario is a dictionary, but does not have a "dialogue_file_path" key.
     """
     if isinstance(scenario, dict):
+        if "dialogue_file_path" not in scenario:
+            raise KeyError("Invalid input: npc must have a dialogue file path")
         narrative.dialogue.play_dialogues_from_file_path(scenario["dialogue_file_path"])
