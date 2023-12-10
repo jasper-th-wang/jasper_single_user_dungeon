@@ -37,7 +37,7 @@ def check_for_monsters():
     :postcondition: determine if a foe is present by comparing equality between 0 with generated random integer
     :return: a Boolean value of True if foe is present, False otherwise
     """
-    random_number = random.randint(0, 3)
+    random_number = random.randint(0, 2)
     return random_number == 0
 
 
@@ -67,16 +67,18 @@ def play_level(level: int, game_character: dict) -> dict or None:
     :return: a game character represented by a dictionary if the character is alive and the goal is reached, None otherwise
     """
     level_info = get_game_level_info(level)
-
     if level_info is None:
         raise ValueError("Invalid input: level_info must be a dictionary")
 
     rows = level_info["rows"]
     columns = level_info["columns"]
-
     game_board = board.make_board(level_info)
     monsters = level_info["monsters"]
+
     game_character["Quest"] = level_info["quest"]
+    game_character["X-coordinate"] = 0
+    game_character["Y-coordinate"] = 0
+
     achieved_goal = False
 
     render_text.print_text_line(level_info.get("entrance_description", ""))
@@ -96,8 +98,4 @@ def play_level(level: int, game_character: dict) -> dict or None:
             color_flag = "!"
             render_text.print_text_line(f"{color_flag}You cannot go here!")
 
-    if not character.is_alive(game_character):
-        print("You feel your essence gradually fade away, before you know it, you cease to exist in this realm.")
-        return None
-    else:
-        return game_character
+    return game_character if character.is_alive(game_character) else None

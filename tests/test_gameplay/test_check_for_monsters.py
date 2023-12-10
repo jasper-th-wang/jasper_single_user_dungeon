@@ -18,8 +18,3 @@ class TestCheckForMonsters(TestCase):
     def test_monster_not_found2(self, mock_randint):
         mock_randint.return_value = 2
         self.assertFalse(check_for_monsters())
-
-    @patch('random.randint', return_value=3)
-    def test_monster_not_found3(self, mock_randint):
-        mock_randint.return_value = 3
-        self.assertFalse(check_for_monsters())

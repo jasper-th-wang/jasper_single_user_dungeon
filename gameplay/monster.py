@@ -4,7 +4,7 @@ from game_utils import render_text, handle_input
 
 FURY_INCREMENT = 5
 WISDOM_INCREMENT = 5
-ESSENCE_DECREMENT = 5
+ESSENCE_DECREMENT = 10
 KILL_MONSTER_OPTION = "K"
 
 
@@ -55,11 +55,11 @@ def determine_guess_range_upper_bound(wisdom_points):
     >>> determine_guess_range_upper_bound(51)
     2
     """
-    if wisdom_points > 100:
+    if wisdom_points > 30:
         return 1
-    elif wisdom_points > 50:
+    elif wisdom_points > 20:
         return 2
-    elif wisdom_points > 30:
+    elif wisdom_points > 10:
         return 3
     else:
         return 5

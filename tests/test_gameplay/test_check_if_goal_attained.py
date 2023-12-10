@@ -5,7 +5,7 @@ from gameplay.character import check_if_goal_attained
 
 class TestCheckIfGoalAttained(TestCase):
     def test_check_if_goal_attained_true(self):
-        character = {'Quest': 'Complete'}
+        character = {'Quest': 'Completed'}
         self.assertTrue(check_if_goal_attained(character))
 
     def test_check_if_goal_attained_false(self):

@@ -28,7 +28,8 @@ class TestRenderDialogues(unittest.TestCase):
             "properties": {"title": "Hello, world!"},
             "dialogues": ["Hello, world!"],
         }
-        render_dialogues(dialogues_dictionary, character={})
+        character = {}
+        render_dialogues(dialogues_dictionary, character)
         mock_print_text_line.assert_called_once_with("Hello, world!")
 
     @patch("narrative.dialogue.options.play_options_interactions")
@@ -37,7 +38,8 @@ class TestRenderDialogues(unittest.TestCase):
             "properties": {"character": {}, "option_type": "type"},
             "dialogues": [["Option 1", "Option 2"]],
         }
-        render_dialogues(dialogues_dictionary, character={})
+        character = {}
+        render_dialogues(dialogues_dictionary, character)
         mock_play_options_interactions.assert_called_once_with(
-            ["Option 1", "Option 2"], "type"
+            ["Option 1", "Option 2"], "type", {}
         )
