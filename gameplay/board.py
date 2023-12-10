@@ -92,7 +92,14 @@ def render_current_location(board: dict, character: dict) -> None:
     character_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     scenario = board[character_coordinates]
 
-    play_dialogues_if_scenario_is_npc(scenario)
+    if isinstance(scenario, dict):
+        play_dialogues_if_scenario_is_npc(scenario, character)
+        board[character_coordinates] = (
+            "The air is thick with the lingering essence of someone who was here, leaving "
+            "behind a haunting, palpable absence."
+        )
+        scenario = board[character_coordinates]
+
     render_ascii_map(board, character_coordinates)
     render_text.print_text_line(scenario)
 
@@ -159,20 +166,20 @@ def validate_move(rows: int, columns: int, character: dict, direction: str) -> b
     return 0 <= x < columns and 0 <= y < rows
 
 
-def play_dialogues_if_scenario_is_npc(scenario: dict or str) -> None:
+def play_dialogues_if_scenario_is_npc(scenario: dict, character: dict) -> None:
     """
     Plays dialogues from a file if the provided scenario is an NPC.
 
-    :param scenario: A scenario, which can either be a description for an empty space, or a dictionary for an NPC.
-                     If it's an NPC, it should have a "dialogue_file_path" key that specifies the path to a file
-                     containing the NPC's dialogues.
-
-    :precondition: scenario must either be a string or a dictionary.
+    :param scenario: A dictionary representing an npc.
+    :param character: A dictionary representing the game character.
+    :precondition: scenario must be a dictionary.
     :precondition: If scenario is a dictionary, it must have a "dialogue_file_path" key that is a string.
-    :postcondition: If scenario is a dictionary, the dialogues from the file specified by "dialogue_file_path" are played.
+    :precondition: character must be a dictionary representing the game character.
+    :postcondition: the dialogues from the file specified by "dialogue_file_path" are played.
     :raises KeyError: If scenario is a dictionary, but does not have a "dialogue_file_path" key.
     """
-    if isinstance(scenario, dict):
-        if "dialogue_file_path" not in scenario:
-            raise KeyError("Invalid input: npc must have a dialogue file path")
-        narrative.dialogue.play_dialogues_from_file_path(scenario["dialogue_file_path"])
+    if "dialogue_file_path" not in scenario:
+        raise KeyError("Invalid input: npc must have a dialogue file path")
+    narrative.dialogue.play_dialogues_from_file_path(
+        scenario["dialogue_file_path"], character
+    )

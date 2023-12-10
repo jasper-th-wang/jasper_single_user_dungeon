@@ -19,6 +19,11 @@ class TestProcessStatsChange(TestCase):
         process_stats_change("++F", character)
         self.assertEqual(character['Fury'], 155)
 
+    def test_change_quest(self):
+        character = {'Essence': 100, 'Max Essence': 100, 'Wisdom': 30, 'Fury': 150, 'Quest': 'Demo Quest'}
+        process_stats_change("++Q", character)
+        self.assertEqual(character['Quest'], "Completed")
+
     def test_no_change(self):
         character = {'Essence': 100, 'Max Essence': 100, 'Wisdom': 30, 'Fury': 150, 'Quest': 'Demo Quest'}
         process_stats_change("++X", character)

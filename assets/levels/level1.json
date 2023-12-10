@@ -9,7 +9,28 @@
       "coordinates": [4, 4]
     }
   ],
-  "monsters": [],
+  "monsters": [
+    {
+      "name": "Bogmire Wraith",
+      "encounter_message": "Out of the eerie mist, the Bogmire Wraith emerges, its ghostly form shifting and shimmering. Eyes glowing like deep swamp lights, it lets out a haunting moan, chilling you to the bone."
+    },
+    {
+      "name": "Mireling Creeper",
+      "encounter_message": "With a sudden rustling in the swamp reeds, the Mireling Creeper slinks forward. Its amphibious eyes glint in the fog, and its elongated limbs move with unsettling agility as it approaches."
+    },
+    {
+      "name": "Swampshade Specter",
+      "encounter_message": "A chilling whisper fills the air as the Swampshade Specter materializes from the swamp fog. Its translucent form floats eerily above the ground, reaching out with tendrils of ghostly mist."
+    },
+    {
+      "name": "Fen Ghoul",
+      "encounter_message": "Lurking in the shadowy undergrowth, the Fen Ghoul reveals itself with a guttural growl. Covered in swamp moss and with eyes like dark pools, it moves towards you with a menacing gait."
+    },
+    {
+      "name": "Marshlight Banshee",
+      "encounter_message": "Suddenly, the swamp falls silent before the ear-piercing wail of the Marshlight Banshee pierces the fog. Gliding over the murky water, its spectral form is illuminated by ghostly blue flames."
+    }
+  ],
   "rows": 5,
   "columns": 5,
   "area_descriptions": [
@@ -20,25 +41,6 @@
     "Twisted, gnarled trees loom overhead, their branches like skeletal hands reaching out through the mist.",
     "The air feels heavy with a sense of sorrow and loss, as if the swamp itself is mourning.",
     "A soft breeze whispers through the reeds, creating a hushed, rustling sound.",
-    "You feel as though you're being watched, though no one else is visible in the fog.",
-    "Shadows move and shift in the corner of your eye, but when you turn to look, there's nothing there.",
-    "The sound of your own voice seems to echo strangely in the swamp, making you feel more alone.",
-    "The light here seems perpetual twilight, neither fully day nor night.",
-    "Occasional fireflies flicker in the distance, their light ephemeral and ghostly.",
-    "Small ripples disturb the water's surface, though you see no cause for them.",
-    "Weeping willows line the swamp, their drooping branches like trails of tears.",
-    "Stones covered in slick moss jut out of the water, slippery and treacherous.",
-    "The occasional croak of a frog reverberates through the silence, a reminder of life in the desolation.",
-    "The fog feels almost tangible, clinging to your skin and clothes.",
-    "Faint sunlight struggles to pierce the fog, casting a dim, otherworldly glow.",
-    "A chill hangs in the air, penetrating and persistent.",
-    "Barely visible footprints in the mud lead to the water’s edge, then disappear.",
-    "Dragonflies dart above the water, their iridescent wings catching the weak light.",
-    "Rotting logs lie half-submerged in the water, homes to unseen creatures.",
-    "The colors of the swamp are muted and subdued, as if washed out by time.",
-    "Everything feels damp and slightly cold to the touch.",
-    "The roots of the trees intertwine, creating a complex network above and below the water.",
-    "The water is dark and opaque, hinting at unknown depths beneath the surface.",
-    "The occasional call of a lone bird cuts through the silence, eerie and haunting."
+    "You feel as though you're being watched, though no one else is visible in the fog."
   ]
 }

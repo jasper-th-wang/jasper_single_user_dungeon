@@ -1,29 +1,29 @@
 title: the Girl
 option_type: multiple_choice
 ---
-Ahead, through the swirling mists, you spot a figure. A girl, wearing a robe that's tattered and torn, squatting down by the water's edge. 
+Ahead, through the swirling mists, you spot a figure. A girl, wearing a robe that's tattered and torn, squatting down by the water's edge.
 
 She seems engrossed in her own world, staring intently at the murky water as if searching for something, or perhaps lost in her own thoughts.
 
--> Approach gently 
-   $"Excuse me," you say, your voice gentle, not wanting to startle her. 
+-> Approach gently
+   $"Excuse me," you say, your voice gentle, not wanting to startle her.
    She turns slowly, her movements deliberate, and you're met with a pair of eyes that seem to hold centuries of sorrow. There's a timeless quality about her, and for a moment, you're struck by the thought that she might have been here for far longer than you can fathom.
    $"Your robe looks like it has seen better days, just like this place," you says softly, trying to initiate a conversation. "I'm lost, trying to find pieces of my past. It seems like you might understand what it's like to be lost, too. Do you mind if I sit with you for a while?"
    ++W
 -> Approach directly
-   Driven by the urgency to reclaim your memories. You walk briskly towards the girl, you call out, 
-   $"Excuse me, I need your help." 
+   Driven by the urgency to reclaim your memories. You walk briskly towards the girl, you call out,
+   $"Excuse me, I need your help."
    Startled, the girl looks up sharply, her eyes wide with surprise. She quickly stands up, taking a step back, clearly caught off guard by your sudden appearance and directness. For a moment, she just stares at you, her expression a mix of caution and curiosity.
    $"I'm sorry if I frightened you," you quickly add, realizing your approach might have been too abrupt. "It's just that I'm in desperate need of answers. I've lost my memories and I'm trying to find someone extremely important to me."
    ++F
 
-The girl listens quietly, her gaze never leaving yours. 
+The girl listens quietly, her gaze never leaving yours.
 
 After a pause, she speaks, her voice a haunting echo that seems to blend with the fog around you.
 
 @"Many come here seeking answers, hoping to reclaim what was lost," she says. "But the swamp... it's a place of forgotten things, of memories and dreams swallowed by time."
 
-Her words send a chill down your spine, but you persist. 
+Her words send a chill down your spine, but you persist.
 
 $"Is there a way to find what I'm looking for? To remember?"
 
@@ -33,7 +33,7 @@ She points to the water.
 
 You lean over the murky water, peering into its depths, hoping for a glimpse into your forgotten past.
 
-The surface is still, almost glass-like, reflecting a distorted image of yourself. 
+The surface is still, almost glass-like, reflecting a distorted image of yourself.
 
 You're so focused on looking for memories that you don't immediately notice the girl's reaction.
 
@@ -51,4 +51,5 @@ $"What's wrong?" you ask, concerned and confused by her reaction.
    ++F
 
 @"You are the reason that I am here, M..."
+++Q
 ===
