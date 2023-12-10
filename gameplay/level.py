@@ -76,7 +76,7 @@ def play_level(level: int, game_character: dict) -> dict or None:
 
     game_board = board.make_board(level_info)
     monsters = level_info["monsters"]
-    character["Quest"] = level_info["quest"]
+    game_character["Quest"] = level_info["quest"]
     achieved_goal = False
 
     render_text.print_text_line(level_info.get("entrance_description", ""))
