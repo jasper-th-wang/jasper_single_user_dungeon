@@ -1,0 +1,22 @@
+title: The Lost Musician
+option_type: multiple_choice
+---
+@"Ah, another wanderer in this realm of shadows. I was once a musician whose melodies could sway the hearts of mortals and gods alike. But now, my lyre is silent, and my songs are forgotten. Perhaps you can help me find a melody once more?"
+
+$"How can I help you find your song?"
+
+@"Answer me this, and perhaps in your wisdom, I might find a hint of the melody that eludes me."
+
+@"In life, I composed many tunes, each a reflection of the world's joys and sorrows. Tell me, what is the true essence of a melody that captures the heart?"
+
+
+-> "It should be simple and pure, easy for all to remember and cherish."
+    @"I guess so..., I felt that's a bit too obvious don't you think?"
+    ++E
+-> "A melody needs to evoke strong emotions, whether joy or sorrow."
+    @"Everyone of my song provokes strong emotions..., but none captures what I truly care about..., what a tragedy..."
+    ++E
+-> "The essence lies in its honesty – it must reflect the genuine feelings of its creator."
+    @"Ah, honesty... Yes, perhaps it was the honesty of my heart that once gave life to my music. You have reminded me of what truly matters. Thank you, wanderer. May your journey be as true as the song you have helped me recall."
+    ++W
+===

@@ -1,0 +1,22 @@
+title: a Reflective Warrior
+option_type: multiple_choice
+---
+@"Hail, traveler. I am but an echo of a warrior long gone, my victories and defeats replaying endlessly in these waters. Tell me, can you discern the true nature of valor?"
+
+$"Ah.. I can try? What weighs upon your spirit?"
+
+@"I have won and lost many battles, yet I cannot escape this cycle. Answer me this, and perhaps I may find a semblance of peace."
+
+@"Throughout my life, I fought for glory, honor, and my homeland. Reflect on this: What is the essence of true valor in battle?"
+
+-> "True valor is achieving victory at all costs, proving one's strength and superiority."
+    @Ah, the path of relentless conquest. Many a warrior has walked it, driven by the thirst for triumph. Yet, in my reflections, I have seen such victories turn hollow, leaving a wake of destruction. Might and dominance often blur the lines of true valor."
+    ++E
+-> "It's about knowing when to fight and when to seek peace, understanding the cost of war."
+    @"Your words strike deeper than any blade. True valor isn't just about battle; it's understanding the impact of our actions and seeking a path of wisdom. You have given me much to ponder, traveler. May your journey be as enlightening as the wisdom you've shared."
+    ++W
+-> "It lies in fighting with honor and integrity, upholding the codes of warfare."
+    @"Indeed, the codes of warfare and honor have guided countless souls in battle. But even the most honorable fight can be marred by the sorrows of war. Remember, valor is not just in the adherence to codes, but in the wisdom to see beyond them...."
+    ++E
+++Q
+===

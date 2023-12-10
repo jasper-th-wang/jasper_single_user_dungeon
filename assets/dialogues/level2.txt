@@ -1,0 +1,83 @@
+title: Mirror World
+option_type: multiple_choice
+---
+Suddenly, you're being pulled down, as if the swamp itself has come alive, grasping at your ankles with cold, wet fingers.
+
+Panic surges through you as you struggle against the swamp's grip, but it's like fighting quicksand; the more you struggle, the faster you sink.
+
+The girl's eyes widen in horror as she reaches out towards you, but she's too far to help.
+
+@"Medusa!" she cries out, her voice filled with a mixture of fear and desperation.
+
+You try to call out, to ask for help, but your words are lost in the gurgling swamp.
+
+The murky water rises up to your waist, then your chest, cold and unyielding. You fight with every ounce of strength you have, but the swamp is relentless.
+
+As you're pulled deeper, the light from the surface begins to fade, and the sounds of the swamp — the croaking of frogs, the whispers of the wind — grow distant.
+
+...
+
+...
+
+$"Ah... Ah...!"
+
+$*Choke Gasp*
+
+...
+
+You wake up suddenly, gasping for air as if you've been submerged underwater.
+
+Your heartbeat pounds in your ears, a rapid drumbeat echoing the turmoil within.
+
+As your consciousness fully returns, you take a moment to observe the world around you. Despite the surreal and ethereal qualities, it bears a striking resemblance to the world you came from. The landscape, the vegetation, the very air feels eerily similar to Sarpedon Island, near Cisthene, where you once dwelled.
+
+You recognize the contours of the land, the familiar bends in the swamp, even the arrangement of the trees and rocks. 
+
+However, everything is infused with a surreal quality, as if you're seeing the world through a different lens.
+
+The air is filled with the scent of wet earth and growing things, a fragrance that is both comforting and strange in this mirrored reality.
+
+You can see paths and trails winding through the swamp, mirroring those in Sarpedon, but here they seem to lead in directions that defy logic, twisting and turning in ways that challenge your understanding of space.
+
+!Tears start to well in your eyes as the floodgates of memory suddenly open. Images, emotions, and sounds rush in with overwhelming intensity.
+
+...
+
+@"Welcome back," a familiar voice sneaks through the haze of your sorrow.
+
+Startled, you look up to see a young boy standing before you.
+
+$"Damion," you whisper, the name coming to you as if from a distant memory.
+
+Damion was a child from your village, known and loved by many. He was famous for his kind heart and bright spirit, but his life was tragically cut short at a young age. His presence here, in the Mirror World, is both comforting and unsettling.
+
+He smiles at you with a wisdom that seems beyond his years. "Yes, it's me," he says. "I'm glad you remember. This place," he gestures around, "is where those who can't move on find themselves. It's a refuge for lost souls."
+
+You look at Damion, his youthful appearance belying the depth of understanding in his eyes. "I didn't realize I was... unable to move on," you admit, the weight of your past still heavy on your heart.
+
+Damion nods empathetically. "It's not easy for any of us. We all have our reasons for lingering. For some, it's unfinished business; for others, it's the inability to let go of our mortal lives."
+
+"So," he lifts you up from the ground, "let me show you around!" He smiles.
+
+As you move through the mirrored version of your once-familiar surroundings, each reflection seems to confront you with another reminder of your deadly legacy.
+
+At the same time, as you encounters various echoes and reflections in the Mirror World, each serves as a reminder of your hatred.
+
+@"What do you think brought you here? What is... making you want to stay..?"
+
+-> The Injustice of Athena's curse
+    $"It's about the unfairness of it all. Athena cursed me, not because of anything I did, but because of her own reasons. How can I accept that? How can I move on knowing that such injustice was done to me?"
+    @Damion looks at you with a solemn expression.
+    @"The gods, in their whims, often forget the lives they toy with. But dwelling on this injustice will keep you bound to it."
+    $"But it's not right," you insist, feeling the sting of those unjust actions all over again. "I was punished for no fault of my own. My entire existence was turned into a nightmare. How do you find peace with such a blatant wrong?"
+    ++F
+-> The guilt of all the deaths that you caused
+    $"Damion," you start, your voice heavy with unshed tears, "I can't move on because of the guilt. The guilt of all those I turned to stone. It haunts me, every face, every life I ended without wanting to."
+    @Damion looks at you with deep understanding.
+    @"It's a heavy burden you carry," he says gently. "You were cursed, forced into a life you never asked for. Those deaths... they were not your doing, not truly. You were a victim as much as they were."
+    ++W
+
+As you step into the town square with Damion, the first thing that captures your attention is the magnificent fountain at its center.
+
+The air is filled with the sounds of the square – the soft murmur of conversation, the gentle splash of the fountain's water, and a faint, haunting melody that seems to drift from nowhere in particular.
+===

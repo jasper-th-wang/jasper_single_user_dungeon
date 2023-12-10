@@ -1,0 +1,19 @@
+title: a Heartbroken Lover
+option_type: multiple_choice
+---
+@"Oh, wandering soul, do you feel the weight of lost love as I do? My heart aches for a beloved I can no longer remember, yet cannot forget. Can you help me understand this torment?"
+
+$"I will try. Perhaps in understanding, you can find peace."
+
+@"I am trapped in this cycle of longing and loss, unable to move on. Tell me, what is the true path to healing a heart that has loved and lost?"
+
+-> "True love never dies. You should hold onto your love and cherish it forever."
+    @"Ah, to cherish it forever... My heart clings to this thought. Yet, is this eternal yearning my tribute to love, or a chain binding me to perpetual grief? True love endures, but must I also endure this unending ache?"
+    ++F
+-> "Embrace your love as a part of your past, and find the strength to forge a new path."
+    @"Embrace the past, yet walk forward... Yes, perhaps my love was a chapter of my story, but not its entirety. Thank you, kind traveler. Your words bring a glimmer of light to my shadowed heart. May your journey be touched with the love and wisdom you've shown me."
+    ++W
+-> "To heal, you must forget the past and erase all traces of the lost love."
+    @"Forget my beloved? Erase all that was? Oh, but how can one erase the sun from their sky? Our love was not a mere trifle to be discarded. Yet, I wonder if clinging to these memories only deepens my sorrow."
+    ++E
+===

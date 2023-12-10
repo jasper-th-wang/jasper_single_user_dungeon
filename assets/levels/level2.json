@@ -1,0 +1,56 @@
+{
+  "level_name": "Mirror World Town Square",
+  "quest": "Guide the Lost Souls",
+  "entrance_description": "As you enter the Mirror World Town Square, you're greeted by a surreal yet familiar scene. The town square, echoing the one from your past life, shimmers with a mystical quality. The central fountain's water flows in graceful arcs, casting prismatic colors onto the cobblestone.",
+  "npcs": [
+    {
+      "name": "Philon, The Lost Musician",
+      "dialogue_file_path": "./assets/dialogues/philon.txt",
+      "coordinates": [4, 0]
+    },
+    {
+      "name": "Aston, a Reflective Warrior",
+      "dialogue_file_path": "./assets/dialogues/aston.txt",
+      "coordinates": [2, 3]
+    },
+    {
+      "name": "Eirene, a Heartbroken Lover",
+      "dialogue_file_path": "./assets/dialogues/eirene.txt",
+      "coordinates": [5, 3]
+    }
+  ],
+  "monsters": [
+    {
+      "name": "Reflection Wraith",
+      "encounter_message": "A shadowy figure emerges from the mirrored surface, its form a distorted echo of your own. The Reflection Wraith moves towards you, its movements an eerie mimicry of life."
+    },
+    {
+      "name": "Spectral Hound",
+      "encounter_message": "From the alleyways, a ghostly hound appears, its eyes glowing with a faint light. It circles you, emitting a low, mournful howl that resonates with the sorrow of the Mirror World."
+    },
+    {
+      "name": "Mirror Shade",
+      "encounter_message": "A flicker in the reflection catches your eye, and you see a Mirror Shade materialize. It's a barely-there presence, a whisper of movement and light, yet its chill is palpable."
+    },
+    {
+      "name": "Eidolon Apparition",
+      "encounter_message": "An ethereal figure floats towards you, its features blurred and shifting. The Eidolon Apparition reaches out, its touch cold and tinged with the sadness of unfulfilled dreams."
+    },
+    {
+      "name": "Lost Echo",
+      "encounter_message": "A sound from behind makes you turn, revealing a Lost Echo. It's a fragment of a soul, repeating a moment from its past over and over, trapped in a cycle of its own making."
+    }
+  ],
+  "rows": 4,
+  "columns": 6,
+  "area_descriptions": [
+    "The cobblestone paths of the town square gleam like polished silver, reflecting the world around them.",
+    "The laughter and chatter of the townspeople are like echoes from another time, both familiar and haunting.",
+    "The scent of phantom flowers and ethereal spices fills the air, a reminder of life's pleasures and pains.",
+    "Shadows play across the buildings, creating patterns that seem to tell their own stories.",
+    "The fountain at the center is a mesmerizing sight, its water a dance of light and color.",
+    "Buildings around the square have a translucent quality, their walls shimmering with memories and dreams.",
+    "A gentle breeze carries whispers of lost loves and forgotten promises."
+  ]
+}
+
