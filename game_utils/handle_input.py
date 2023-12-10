@@ -1,3 +1,7 @@
+"""
+This module handles user input for the game. It contains functions that validate user input and process the user's action.
+"""
+
 from gameplay import character
 
 
@@ -23,7 +27,7 @@ def process_users_action(game_character):
 
 
 def get_valid_user_input(
-        number_of_choices: int = None, valid_characters: str = None
+    number_of_choices: int = None, valid_characters: str = None
 ) -> int or str or None:
     """
     Get valid user input based on the specified constraints.
@@ -81,9 +85,9 @@ def validate_integer_input(user_input, number_of_choices):
     False
     """
     return (
-            number_of_choices
-            and user_input.isdigit()
-            and 1 <= int(user_input) <= number_of_choices
+        number_of_choices
+        and user_input.isdigit()
+        and 1 <= int(user_input) <= number_of_choices
     )
 
 

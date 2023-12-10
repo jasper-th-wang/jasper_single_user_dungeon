@@ -1,7 +1,7 @@
 """
-Jasper Wang
-A01362031
+This module contains the main game functions for this text-based adventure game.
 """
+
 import narrative.dialogue
 import gameplay.character
 from game_utils.render_text import print_text_line

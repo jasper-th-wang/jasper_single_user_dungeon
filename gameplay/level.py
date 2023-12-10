@@ -1,3 +1,7 @@
+"""
+This module contains functions for managing and playing a game level.
+"""
+
 import json
 import random
 

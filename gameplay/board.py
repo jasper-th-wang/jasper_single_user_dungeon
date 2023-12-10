@@ -1,3 +1,7 @@
+"""
+This module contains functions related to the game board.
+"""
+
 import random
 
 import narrative.dialogue

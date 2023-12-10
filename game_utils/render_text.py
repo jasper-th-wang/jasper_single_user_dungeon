@@ -1,3 +1,6 @@
+"""
+This module handles rendering text in the game.
+"""
 import sys
 import time
 

@@ -1,3 +1,7 @@
+"""
+This module contains functions for managing and playing a monster encounter in the game.
+"""
+
 import random
 
 from game_utils import render_text, handle_input

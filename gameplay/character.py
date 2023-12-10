@@ -1,3 +1,8 @@
+"""
+This module contains functions for creating and managing a character in this text-based adventure game.
+"""
+
+
 def make_character() -> dict:
     """
     Creates a new character with default attributes.
