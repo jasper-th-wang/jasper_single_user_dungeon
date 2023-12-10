@@ -104,7 +104,7 @@ def render_current_location(board: dict, character: dict) -> None:
         )
         scenario = board[character_coordinates]
 
-    if character["Quest"] == "Complete":
+    if character["Quest"] == "Completed":
         return
 
     render_ascii_map(board, character_coordinates)
