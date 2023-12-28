@@ -115,12 +115,6 @@ git clone https://github.com/jasper-th-wang/jasper_single_user_dungeon
 cd jasper_single_user_dungeon
 ```
 
-3. Install the dependencies:
-
-```sh
-pip install -r requirements.txt
-```
-
 ### 🤖 Running jasper_single_user_dungeon
 
 ```sh
