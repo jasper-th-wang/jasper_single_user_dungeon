@@ -2,8 +2,8 @@
 This module contains the main game functions for this text-based adventure game.
 """
 
-import narrative.dialogue
 import gameplay.character
+import narrative.dialogue
 from game_utils.render_text import print_text_line
 from gameplay.level import play_level
 
