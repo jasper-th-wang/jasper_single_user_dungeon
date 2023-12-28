@@ -124,7 +124,7 @@ python game.py
 ### 🧪 Tests
 
 ```sh
-pytest
+python -m unittest
 ```
 
 ---
