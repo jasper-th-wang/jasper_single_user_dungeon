@@ -1,8 +1,8 @@
 <div align="center">
 <h1 align="center">
 <br>JASPER_SINGLE_USER_DUNGEON</h1>
-<h3>◦ Navigate Your Narrative with My Single User Dungeon!</h3>
-<h3>◦ Developed with the just plain old Python.</h3>
+<h3>◦ a Simple Text-Based Adventure Game</h3>
+<h3>◦ Developed with Just Plain Old Python.</h3>
 
 <p align="center">
 <img src="https://img.shields.io/badge/Python-3776AB.svg?style=flat-square&logo=Python&logoColor=white" alt="Python" />
@@ -115,12 +115,6 @@ git clone https://github.com/jasper-th-wang/jasper_single_user_dungeon
 cd jasper_single_user_dungeon
 ```
 
-3. Install the dependencies:
-
-```sh
-pip install -r requirements.txt
-```
-
 ### 🤖 Running jasper_single_user_dungeon
 
 ```sh
@@ -130,7 +124,7 @@ python game.py
 ### 🧪 Tests
 
 ```sh
-pytest
+python -m unittest
 ```
 
 ---
