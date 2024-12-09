@@ -1,6 +1,6 @@
 <div align="center">
 <h1 align="center">
-<br>JASPER_SINGLE_USER_DUNGEON</h1>
+<br>Single User Dungeon</h1>
 <h3>◦ a Simple Text-Based Adventure Game</h3>
 <h3>◦ Developed with Just Plain Old Python.</h3>
 
