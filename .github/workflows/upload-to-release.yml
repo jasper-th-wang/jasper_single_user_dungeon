@@ -29,12 +29,3 @@ jobs:
       with:
         title: Release ${{ github.event.inputs.version }}
         tag: ${{ github.event.inputs.version }}
-        body: |
-          ## Changes
-          - Automated release of Python bundle
-          
-          ## Installation
-          1. Download the zip file
-          2. Extract to your desired location
-          3. Run the Python application
-        assets: jasper-single-user-dungeon-${{ github.event.inputs.version }}.zip
