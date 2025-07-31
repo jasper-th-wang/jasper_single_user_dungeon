@@ -23,13 +23,12 @@ jobs:
           "*.so" "*.egg-info*" "*dist*" "*build*" "*.DS_Store*"
     
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+      uses: elgohr/Github-Release-Action@v5
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.event.inputs.version }}
-        release_name: Release ${{ github.event.inputs.version }}
+        title: Release ${{ github.event.inputs.version }}
+        tag: ${{ github.event.inputs.version }}
         body: |
           ## Changes
           - Automated release of Python bundle
@@ -38,15 +37,4 @@ jobs:
           1. Download the zip file
           2. Extract to your desired location
           3. Run the Python application
-        draft: false
-        prerelease: false
-    
-    - name: Upload ZIP to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./jasper-single-user-dungeon-${{ github.event.inputs.version }}.zip
-        asset_name: jasper-single-user-dungeon-${{ github.event.inputs.version }}.zip
-        asset_content_type: application/zip
+        assets: jasper-single-user-dungeon-${{ github.event.inputs.version }}.zip
