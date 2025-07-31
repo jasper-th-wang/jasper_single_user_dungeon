@@ -27,5 +27,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        title: Release ${{ github.event.inputs.version }}
+        title: ${{ github.event.inputs.version }}
         tag: ${{ github.event.inputs.version }}
+
+    - name: Upload ZIP to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./jasper-single-user-dungeon-${{ github.event.inputs.version }}.zip
+        asset_name: jasper-single-user-dungeon-${{ github.event.inputs.version }}.zip
+        asset_content_type: application/zip
