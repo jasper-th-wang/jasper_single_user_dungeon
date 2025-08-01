@@ -6,6 +6,11 @@ import time
 
 from gameplay.constants import TEXT_COLORS
 
+def busy_sleep(duration):
+    """A busy-wait alternative to time.sleep()"""
+    start_time = time.time()
+    while time.time() - start_time < duration:
+        pass  # Just burn CPU cycles
 
 def print_text_line(text):
     """
@@ -18,7 +23,7 @@ def print_text_line(text):
     text = process_text_color(text)
     print_with_typewritter_effect(text)
     delay_duration = calculate_delay_duration_in_seconds(text)
-    time.sleep(delay_duration)
+    busy_sleep(delay_duration)
 
 
 def process_text_color(text):
@@ -59,8 +64,8 @@ def print_with_typewritter_effect(text):
         sys.stdout.write(character)
         sys.stdout.flush()
         if character in [",", "."]:
-            time.sleep(0.15)
-        time.sleep(0.01)
+            busy_sleep(0.15)
+        busy_sleep(0.01)
     print("\n")
 
 
