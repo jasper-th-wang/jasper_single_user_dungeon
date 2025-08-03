@@ -1,34 +1,20 @@
-<div align="center">
-<h1 align="center">
-<br>Single User Dungeon</h1>
-<h3>◦ a Simple Text-Based Adventure Game</h3>
-<h3>◦ Developed with Just Plain Old Python.</h3>
-
-<p align="center">
-<img src="https://img.shields.io/badge/Python-3776AB.svg?style=flat-square&logo=Python&logoColor=white" alt="Python" />
-</p>
-<img src="https://img.shields.io/github/license/jasper-th-wang/jasper_single_user_dungeon?style=flat-square&color=5D6D7E" alt="GitHub license" />
-<img src="https://img.shields.io/github/last-commit/jasper-th-wang/jasper_single_user_dungeon?style=flat-square&color=5D6D7E" alt="git-last-commit" />
-<img src="https://img.shields.io/github/commit-activity/m/jasper-th-wang/jasper_single_user_dungeon?style=flat-square&color=5D6D7E" alt="GitHub commit activity" />
-<img src="https://img.shields.io/github/languages/top/jasper-th-wang/jasper_single_user_dungeon?style=flat-square&color=5D6D7E" alt="GitHub top language" />
-</div>
-
----
-
-## 📖 Table of Contents
-
-- [📖 Table of Contents](#-table-of-contents)
-- [📍 Overview](#-overview)
-- [🚀 Getting Started](#-getting-started)
-  - [🔧 Installation](#-installation)
-  - [🤖 Running jasper_single_user_dungeon](#-running-jasper_single_user_dungeon)
-  - [🧪 Tests](#-tests)
-
----
+# Underworld Single User Dungeon
 
 ## 📍 Overview
 
-My single user dungeon is a text-based adventure game where players embark on a dungeon quest, engage with dynamic dialogues, and make choices that influence the game's narrative and their character's attributes. With each level, players interact with a detailed ASCII map, face monster encounters, and progress through a story-driven experience. Character stats such as Wisdom and Fury evolve based on player decisions, offering a personalized gaming outcome.
+A terminal-based dungeon adventure featuring a **custom text-to-dialogue parser** that transforms structured text files into interactive narrative experiences. The game combines ASCII-rendered maps, character progression mechanics, and branching dialogue trees to create an immersive story-driven experience.
+
+### Core Technical Features
+
+- **Custom Dialogue Parser**: Transforms text files with special syntax (`->` for options, `@` for NPCs, `$` for players) into interactive dialogue trees with branching narratives
+- **Terminal Rendering Engine**: Real-time typewriter effects, color-coded text output, and ASCII map visualization
+- **Dynamic Character System**: Stats (Wisdom, Fury, Essence) that evolve based on player choices throughout the narrative
+- **JSON Configurable Game Worlds**: JSON-based level configuration with procedural monster encounters and goal validation
+- **Elimination-based Dialogue System**: Dynamic option removal where dialogue choices disappear after selection, creating evolving conversation trees that adapt to player decisions
+- **ASCII Map Rendering with Live Updates**: Real-time coordinate-based ASCII visualization system using symbol mapping (`@` for player, `!` for NPCs) with dynamic grid generation
+- **Procedural Scenario Distribution**: Algorithmic environmental generation using dictionary comprehension to randomly distribute narrative descriptions across coordinate-mapped game boards
+
+*The narrative follows an amnesiac soul navigating the underworld, uncovering forgotten memories through encounters with mythological figures like Thanatos, Eirene, and other inhabitants of the realm.*
 
 ---
 
